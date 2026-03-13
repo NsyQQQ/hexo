@@ -1,0 +1,89 @@
+/* 头部高度改成100px */
+#header {
+    height: 100px !important;
+}
+
+#header-inner {
+    height: 100px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+}
+
+/* 确保logo可以点击 */
+#logo-wrap {
+    display: block !important;
+}
+
+#logo {
+    display: inline-block !important;
+    cursor: pointer !important;
+}
+
+/* 关于页面标题字体大小 */
+.article-content h1 {
+    font-size: 1em !important;
+    font-weight: normal !important;
+}
+
+/* 导航链接可点击 */
+.main-nav-link {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 1000 !important;
+}
+
+/* 搜索按钮可点击 */
+.nav-search-btn {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 1000 !important;
+}
+
+#search-form-wrap {
+    z-index: 1001 !important;
+}
+
+/* 搜索结果样式 */
+#search-results-container {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1002;
+    padding: 10px;
+}
+
+.search-result-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item a {
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.search-result-item a:hover {
+    color: #007bff;
+}
+
+.search-result-item p {
+    color: #666;
+    font-size: 12px;
+    margin: 5px 0 0 0;
+}
