@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>游戏开发入门 | 宁尚义的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本文将介绍使用Egret引擎和TypeScript进行游戏开发的基础知识，帮助你快速入门H5游戏开发。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="游戏开发入门">
+<meta property="og:url" content="https://nsyqqq.github.io/hexo/2025/04/10/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="宁尚义的个人博客">
+<meta property="og:description" content="本文将介绍使用Egret引擎和TypeScript进行游戏开发的基础知识，帮助你快速入门H5游戏开发。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-12T12:55:58.650Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Egret">
+<meta property="article:tag" content="TypeScript">
+<meta property="article:tag" content="游戏开发">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/hexo/atom.xml" title="宁尚义的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/hexo/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/hexo/css/style.css">
+
+  
+<link rel="stylesheet" href="/hexo/css/custom.css">
+
+  
+    
+<link rel="stylesheet" href="/hexo/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/hexo/" id="logo">宁尚义的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/hexo/">首页</a>
+        
+          <a class="main-nav-link" href="/hexo/archives">归档</a>
+        
+          <a class="main-nav-link" href="/hexo/portfolio">作品集</a>
+        
+          <a class="main-nav-link" href="/hexo/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/hexo/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://nsyqqq.github.io/hexo"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-游戏开发学习笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo/2025/04/10/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2025-04-09T16:00:00.000Z" itemprop="datePublished">2025-04-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      游戏开发入门
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本文将介绍使用Egret引擎和TypeScript进行游戏开发的基础知识，帮助你快速入门H5游戏开发。</p>
+<span id="more"></span>
+
+<h2 id="一、Egret简介"><a href="#一、Egret简介" class="headerlink" title="一、Egret简介"></a>一、Egret简介</h2><p>Egret（白鹭引擎）是一款成熟的H5游戏开发引擎，具有以下特点：</p>
+<ul>
+<li><strong>跨平台</strong>：支持Web、iOS、Android</li>
+<li><strong>高性能</strong>：基于TypeScript，编译效率高</li>
+<li><strong>生态完善</strong>：丰富的图形特效和音频支持</li>
+<li><strong>商业成熟</strong>：众多商业游戏采用</li>
+</ul>
+<hr>
+<h2 id="二、TypeScript基础"><a href="#二、TypeScript基础" class="headerlink" title="二、TypeScript基础"></a>二、TypeScript基础</h2><p>TypeScript是JavaScript的超集，添加了类型系统和其他特性。</p>
+<h3 id="2-1-基本类型"><a href="#2-1-基本类型" class="headerlink" title="2.1 基本类型"></a>2.1 基本类型</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基础类型</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">name</span>: <span class="built_in">string</span> = <span class="string">&#x27;张三&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="attr">age</span>: <span class="built_in">number</span> = <span class="number">25</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="attr">isDeveloper</span>: <span class="built_in">boolean</span> = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数组</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">skills</span>: <span class="built_in">string</span>[] = [<span class="string">&#x27;TypeScript&#x27;</span>, <span class="string">&#x27;Egret&#x27;</span>];</span><br><span class="line"><span class="keyword">let</span> <span class="attr">numbers</span>: <span class="title class_">Array</span>&lt;<span class="built_in">number</span>&gt; = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 元组</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">person</span>: [<span class="built_in">string</span>, <span class="built_in">number</span>] = [<span class="string">&#x27;李四&#x27;</span>, <span class="number">30</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 枚举</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">Color</span> &#123;</span><br><span class="line">    <span class="title class_">Red</span>,</span><br><span class="line">    <span class="title class_">Green</span>,</span><br><span class="line">    <span class="title class_">Blue</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> <span class="attr">c</span>: <span class="title class_">Color</span> = <span class="title class_">Color</span>.<span class="property">Green</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// any和void</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">anything</span>: <span class="built_in">any</span> = <span class="string">&#x27;任意类型&#x27;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sayHello</span>(<span class="params"></span>): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Hello&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-接口"><a href="#2-2-接口" class="headerlink" title="2.2 接口"></a>2.2 接口</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Player</span> &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line">    <span class="attr">level</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="attr">health</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="title function_">attack</span>(<span class="attr">target</span>: <span class="title class_">Player</span>): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Hero</span> <span class="keyword">implements</span> <span class="title class_">Player</span> &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line">    <span class="attr">level</span>: <span class="built_in">number</span> = <span class="number">1</span>;</span><br><span class="line">    <span class="attr">health</span>: <span class="built_in">number</span> = <span class="number">100</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"><span class="attr">name</span>: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">attack</span>(<span class="attr">target</span>: <span class="title class_">Player</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span> 攻击了 <span class="subst">$&#123;target.name&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-类"><a href="#2-3-类" class="headerlink" title="2.3 类"></a>2.3 类</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GameObject</span> &#123;</span><br><span class="line">    <span class="attr">x</span>: <span class="built_in">number</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="attr">y</span>: <span class="built_in">number</span> = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"><span class="attr">x</span>: <span class="built_in">number</span>, <span class="attr">y</span>: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">x</span> = x;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">y</span> = y;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">moveTo</span>(<span class="attr">x</span>: <span class="built_in">number</span>, <span class="attr">y</span>: <span class="built_in">number</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">x</span> = x;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">y</span> = y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Enemy</span> <span class="keyword">extends</span> <span class="title class_ inherited__">GameObject</span> &#123;</span><br><span class="line">    <span class="attr">hp</span>: <span class="built_in">number</span> = <span class="number">50</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"><span class="attr">x</span>: <span class="built_in">number</span>, <span class="attr">y</span>: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>(x, y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-泛型"><a href="#2-4-泛型" class="headerlink" title="2.4 泛型"></a>2.4 泛型</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 泛型函数</span></span><br><span class="line"><span class="keyword">function</span> identity&lt;T&gt;(<span class="attr">arg</span>: T): T &#123;</span><br><span class="line">    <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> result = identity&lt;<span class="built_in">string</span>&gt;(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 泛型类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Container</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">value</span>: T;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">setValue</span>(<span class="attr">val</span>: T): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = val;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">getValue</span>(): T &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">value</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="三、Egret开发环境搭建"><a href="#三、Egret开发环境搭建" class="headerlink" title="三、Egret开发环境搭建"></a>三、Egret开发环境搭建</h2><h3 id="3-1-安装Egret"><a href="#3-1-安装Egret" class="headerlink" title="3.1 安装Egret"></a>3.1 安装Egret</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装Egret CLI</span></span><br><span class="line">npm install -g egret</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建项目</span></span><br><span class="line">egret create myGame</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行项目</span></span><br><span class="line"><span class="built_in">cd</span> myGame</span><br><span class="line">egret run</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-项目结构"><a href="#3-2-项目结构" class="headerlink" title="3.2 项目结构"></a>3.2 项目结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">myGame/</span><br><span class="line">├── src/</span><br><span class="line">│   └── Main.ts           # 入口文件</span><br><span class="line">├── egretProperties.json   # 项目配置</span><br><span class="line">├── index.html            # 入口HTML</span><br><span class="line">└── manifest.json         # 资源清单</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="四、Egret核心概念"><a href="#四、Egret核心概念" class="headerlink" title="四、Egret核心概念"></a>四、Egret核心概念</h2><h3 id="4-1-显示对象"><a href="#4-1-显示对象" class="headerlink" title="4.1 显示对象"></a>4.1 显示对象</h3><p>Egret使用显示列表来管理所有可见元素：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建显示对象</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">circle</span>: egret.<span class="property">Shape</span> = <span class="keyword">new</span> egret.<span class="title class_">Shape</span>();</span><br><span class="line">circle.<span class="property">graphics</span>.<span class="title function_">beginFill</span>(<span class="number">0xff0000</span>);</span><br><span class="line">circle.<span class="property">graphics</span>.<span class="title function_">drawCircle</span>(<span class="number">100</span>, <span class="number">100</span>, <span class="number">50</span>);</span><br><span class="line">circle.<span class="property">graphics</span>.<span class="title function_">endFill</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加到舞台</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">addChild</span>(circle);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置属性</span></span><br><span class="line">circle.<span class="property">x</span> = <span class="number">200</span>;</span><br><span class="line">circle.<span class="property">y</span> = <span class="number">200</span>;</span><br><span class="line">circle.<span class="property">rotation</span> = <span class="number">45</span>;</span><br><span class="line">circle.<span class="property">scaleX</span> = <span class="number">1.5</span>;</span><br><span class="line">circle.<span class="property">alpha</span> = <span class="number">0.8</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-容器"><a href="#4-2-容器" class="headerlink" title="4.2 容器"></a>4.2 容器</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">container</span>: egret.<span class="property">Container</span> = <span class="keyword">new</span> egret.<span class="title class_">Container</span>();</span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">addChild</span>(container);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加子元素</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">sprite</span>: egret.<span class="property">Sprite</span> = <span class="keyword">new</span> egret.<span class="title class_">Sprite</span>();</span><br><span class="line">container.<span class="title function_">addChild</span>(sprite);</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-文本"><a href="#4-3-文本" class="headerlink" title="4.3 文本"></a>4.3 文本</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建文本</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">textField</span>: egret.<span class="property">TextField</span> = <span class="keyword">new</span> egret.<span class="title class_">TextField</span>();</span><br><span class="line">textField.<span class="property">text</span> = <span class="string">&#x27;Hello Egret!&#x27;</span>;</span><br><span class="line">textField.<span class="property">textColor</span> = <span class="number">0xffffff</span>;</span><br><span class="line">textField.<span class="property">size</span> = <span class="number">24</span>;</span><br><span class="line">textField.<span class="property">x</span> = <span class="number">50</span>;</span><br><span class="line">textField.<span class="property">y</span> = <span class="number">50</span>;</span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">addChild</span>(textField);</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-4-位图"><a href="#4-4-位图" class="headerlink" title="4.4 位图"></a>4.4 位图</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载图片</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">bird</span>: egret.<span class="property">Bitmap</span> = <span class="keyword">new</span> egret.<span class="title class_">Bitmap</span>();</span><br><span class="line">bird.<span class="property">texture</span> = <span class="variable constant_">RES</span>.<span class="title function_">getRes</span>(<span class="string">&#x27;bird_png&#x27;</span>);</span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">addChild</span>(bird);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置锚点</span></span><br><span class="line">bird.<span class="property">anchorX</span> = <span class="number">0.5</span>;</span><br><span class="line">bird.<span class="property">anchorY</span> = <span class="number">0.5</span>;</span><br><span class="line">bird.<span class="property">x</span> = <span class="number">200</span>;</span><br><span class="line">bird.<span class="property">y</span> = <span class="number">200</span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="五、事件系统"><a href="#五、事件系统" class="headerlink" title="五、事件系统"></a>五、事件系统</h2><h3 id="5-1-常用事件"><a href="#5-1-常用事件" class="headerlink" title="5.1 常用事件"></a>5.1 常用事件</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 触摸事件</span></span><br><span class="line"><span class="keyword">let</span> btn = <span class="keyword">new</span> egret.<span class="title class_">Shape</span>();</span><br><span class="line">btn.<span class="property">graphics</span>.<span class="title function_">beginFill</span>(<span class="number">0x00ff00</span>);</span><br><span class="line">btn.<span class="property">graphics</span>.<span class="title function_">drawRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">50</span>);</span><br><span class="line">btn.<span class="property">graphics</span>.<span class="title function_">endFill</span>();</span><br><span class="line"></span><br><span class="line">btn.<span class="property">touchEnabled</span> = <span class="literal">true</span>;</span><br><span class="line">btn.<span class="title function_">addEventListener</span>(egret.<span class="property">TouchEvent</span>.<span class="property">TOUCH_TAP</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;按钮被点击&#x27;</span>);</span><br><span class="line">&#125;, <span class="variable language_">this</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加到舞台</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">addChild</span>(btn);</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-事件类型"><a href="#5-2-事件类型" class="headerlink" title="5.2 事件类型"></a>5.2 事件类型</h3><table>
+<thead>
+<tr>
+<th>事件类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TOUCH_BEGIN</td>
+<td>触摸开始</td>
+</tr>
+<tr>
+<td>TOUCH_MOVE</td>
+<td>触摸移动</td>
+</tr>
+<tr>
+<td>TOUCH_END</td>
+<td>触摸结束</td>
+</tr>
+<tr>
+<td>TOUCH_TAP</td>
+<td>点击</td>
+</tr>
+<tr>
+<td>ADDED_TO_STAGE</td>
+<td>添加到舞台</td>
+</tr>
+<tr>
+<td>REMOVED_FROM_STAGE</td>
+<td>从舞台移除</td>
+</tr>
+<tr>
+<td>ENTER_FRAME</td>
+<td>每帧执行</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="六、动画与缓动"><a href="#六、动画与缓动" class="headerlink" title="六、动画与缓动"></a>六、动画与缓动</h2><h3 id="6-1-帧动画"><a href="#6-1-帧动画" class="headerlink" title="6.1 帧动画"></a>6.1 帧动画</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建动画</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">movieClip</span>: egret.<span class="property">MovieClip</span> = <span class="keyword">new</span> egret.<span class="title class_">MovieClip</span>();</span><br><span class="line">movieClip.<span class="property">sheet</span> = <span class="variable constant_">RES</span>.<span class="title function_">getRes</span>(<span class="string">&#x27;hero_json&#x27;</span>);</span><br><span class="line">movieClip.<span class="property">frameRate</span> = <span class="number">12</span>;</span><br><span class="line">movieClip.<span class="title function_">play</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 播放</span></span><br><span class="line">movieClip.<span class="title function_">gotoAndPlay</span>(<span class="string">&#x27;run&#x27;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 停止</span></span><br><span class="line">movieClip.<span class="title function_">stop</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-缓动动画"><a href="#6-2-缓动动画" class="headerlink" title="6.2 缓动动画"></a>6.2 缓动动画</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用Tween</span></span><br><span class="line">egret.<span class="property">Tween</span>.<span class="title function_">get</span>(ball)</span><br><span class="line">    .<span class="title function_">to</span>(&#123; <span class="attr">x</span>: <span class="number">300</span>, <span class="attr">y</span>: <span class="number">200</span> &#125;, <span class="number">1000</span>, egret.<span class="property">Ease</span>.<span class="property">quadOut</span>)</span><br><span class="line">    .<span class="title function_">to</span>(&#123; <span class="attr">x</span>: <span class="number">100</span>, <span class="attr">y</span>: <span class="number">100</span> &#125;, <span class="number">1000</span>, egret.<span class="property">Ease</span>.<span class="property">quadIn</span>)</span><br><span class="line">    .<span class="title function_">call</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;动画完成&#x27;</span>);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>常用缓动函数：</p>
+<ul>
+<li><code>linear</code> - 线性</li>
+<li><code>quadOut</code> &#x2F; <code>quadIn</code> - 二次缓动</li>
+<li><code>cubicOut</code> &#x2F; <code>cubicIn</code> - 三次缓动</li>
+<li><code>bounceOut</code> - 弹跳效果</li>
+</ul>
+<hr>
+<h2 id="七、资源加载"><a href="#七、资源加载" class="headerlink" title="七、资源加载"></a>七、资源加载</h2><h3 id="7-1-RES资源管理器"><a href="#7-1-RES资源管理器" class="headerlink" title="7.1 RES资源管理器"></a>7.1 RES资源管理器</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配置文件</span></span><br><span class="line"><span class="comment">// manifest.json</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;resources&quot;</span>: [</span><br><span class="line">        &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;bg_jpg&quot;</span>, <span class="string">&quot;url&quot;</span>: <span class="string">&quot;assets/bg.jpg&quot;</span> &#125;,</span><br><span class="line">        &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;hero_png&quot;</span>, <span class="string">&quot;url&quot;</span>: <span class="string">&quot;assets/hero.png&quot;</span> &#125;,</span><br><span class="line">        &#123; <span class="string">&quot;name&quot;</span>: <span class="string">&quot;hero_json&quot;</span>, <span class="string">&quot;url&quot;</span>: <span class="string">&quot;assets/hero.json&quot;</span> &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加载资源</span></span><br><span class="line"><span class="variable constant_">RES</span>.<span class="title function_">addEventListener</span>(<span class="variable constant_">RES</span>.<span class="property">ResourceEvent</span>.<span class="property">COMPLETE</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> bg = <span class="variable constant_">RES</span>.<span class="title function_">getRes</span>(<span class="string">&#x27;bg_jpg&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> bitmap = <span class="keyword">new</span> egret.<span class="title class_">Bitmap</span>(bg);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">addChild</span>(bitmap);</span><br><span class="line">&#125;, <span class="variable language_">this</span>);</span><br><span class="line"><span class="variable constant_">RES</span>.<span class="title function_">loadConfig</span>(<span class="string">&#x27;resource/default.res.json&#x27;</span>, <span class="string">&#x27;resource/&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-2-加载组"><a href="#7-2-加载组" class="headerlink" title="7.2 加载组"></a>7.2 加载组</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 预加载资源组</span></span><br><span class="line"><span class="variable constant_">RES</span>.<span class="title function_">createGroup</span>(<span class="string">&#x27;game&#x27;</span>, [<span class="string">&#x27;hero_png&#x27;</span>, <span class="string">&#x27;bg_jpg&#x27;</span>, <span class="string">&#x27;hero_json&#x27;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="variable constant_">RES</span>.<span class="title function_">loadGroup</span>(<span class="string">&#x27;game&#x27;</span>, <span class="number">0</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;加载进度:&#x27;</span>, event.<span class="property">itemsLoaded</span>, <span class="string">&#x27;/&#x27;</span>, event.<span class="property">itemsTotal</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="八、常用游戏组件"><a href="#八、常用游戏组件" class="headerlink" title="八、常用游戏组件"></a>八、常用游戏组件</h2><h3 id="8-1-按钮"><a href="#8-1-按钮" class="headerlink" title="8.1 按钮"></a>8.1 按钮</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Button</span> <span class="keyword">extends</span> <span class="title class_ inherited__">egret.DisplayObjectContainer</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">bg</span>: egret.<span class="property">Shape</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">label</span>: egret.<span class="property">TextField</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"><span class="attr">text</span>: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">createButton</span>(text);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">createButton</span>(<span class="attr">text</span>: <span class="built_in">string</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="comment">// 背景</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bg</span> = <span class="keyword">new</span> egret.<span class="title class_">Shape</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bg</span>.<span class="property">graphics</span>.<span class="title function_">beginFill</span>(<span class="number">0x4CAF50</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bg</span>.<span class="property">graphics</span>.<span class="title function_">drawRoundRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">120</span>, <span class="number">40</span>, <span class="number">5</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bg</span>.<span class="property">graphics</span>.<span class="title function_">endFill</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">addChild</span>(<span class="variable language_">this</span>.<span class="property">bg</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 文字</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">label</span> = <span class="keyword">new</span> egret.<span class="title class_">TextField</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">label</span>.<span class="property">text</span> = text;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">label</span>.<span class="property">textColor</span> = <span class="number">0xffffff</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">label</span>.<span class="property">size</span> = <span class="number">20</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">label</span>.<span class="property">x</span> = <span class="number">60</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">label</span>.<span class="property">y</span> = <span class="number">20</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">label</span>.<span class="property">anchorX</span> = <span class="number">0.5</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">label</span>.<span class="property">anchorY</span> = <span class="number">0.5</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">addChild</span>(<span class="variable language_">this</span>.<span class="property">label</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 点击效果</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">touchEnabled</span> = <span class="literal">true</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">addEventListener</span>(egret.<span class="property">TouchEvent</span>.<span class="property">TOUCH_BEGIN</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">bg</span>.<span class="property">alpha</span> = <span class="number">0.7</span>;</span><br><span class="line">        &#125;, <span class="variable language_">this</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">addEventListener</span>(egret.<span class="property">TouchEvent</span>.<span class="property">TOUCH_END</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">bg</span>.<span class="property">alpha</span> = <span class="number">1</span>;</span><br><span class="line">        &#125;, <span class="variable language_">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-2-进度条"><a href="#8-2-进度条" class="headerlink" title="8.2 进度条"></a>8.2 进度条</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ProgressBar</span> <span class="keyword">extends</span> <span class="title class_ inherited__">egret.DisplayObjectContainer</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">bar</span>: egret.<span class="property">Shape</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">bg</span>: egret.<span class="property">Shape</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">value</span>: <span class="built_in">number</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">max</span>: <span class="built_in">number</span> = <span class="number">100</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">createBar</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">createBar</span>(): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="comment">// 背景</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bg</span> = <span class="keyword">new</span> egret.<span class="title class_">Shape</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bg</span>.<span class="property">graphics</span>.<span class="title function_">beginFill</span>(<span class="number">0xcccccc</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bg</span>.<span class="property">graphics</span>.<span class="title function_">drawRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">20</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bg</span>.<span class="property">graphics</span>.<span class="title function_">endFill</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">addChild</span>(<span class="variable language_">this</span>.<span class="property">bg</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 进度条</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bar</span> = <span class="keyword">new</span> egret.<span class="title class_">Shape</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bar</span>.<span class="property">graphics</span>.<span class="title function_">beginFill</span>(<span class="number">0x4CAF50</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bar</span>.<span class="property">graphics</span>.<span class="title function_">drawRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">20</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bar</span>.<span class="property">graphics</span>.<span class="title function_">endFill</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">addChild</span>(<span class="variable language_">this</span>.<span class="property">bar</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">setProgress</span>(<span class="attr">value</span>: <span class="built_in">number</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = <span class="title class_">Math</span>.<span class="title function_">min</span>(value, <span class="variable language_">this</span>.<span class="property">max</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bar</span>.<span class="property">graphics</span>.<span class="title function_">clear</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bar</span>.<span class="property">graphics</span>.<span class="title function_">beginFill</span>(<span class="number">0x4CAF50</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bar</span>.<span class="property">graphics</span>.<span class="title function_">drawRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span> * (<span class="variable language_">this</span>.<span class="property">value</span> / <span class="variable language_">this</span>.<span class="property">max</span>), <span class="number">20</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">bar</span>.<span class="property">graphics</span>.<span class="title function_">endFill</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="九、碰撞检测"><a href="#九、碰撞检测" class="headerlink" title="九、碰撞检测"></a>九、碰撞检测</h2><h3 id="9-1-简单的矩形碰撞"><a href="#9-1-简单的矩形碰撞" class="headerlink" title="9.1 简单的矩形碰撞"></a>9.1 简单的矩形碰撞</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">hitTest</span>(<span class="params"><span class="attr">obj1</span>: egret.<span class="title class_">DisplayObject</span>, <span class="attr">obj2</span>: egret.<span class="title class_">DisplayObject</span></span>): <span class="built_in">boolean</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> rect1 = obj1.<span class="title function_">getBounds</span>();</span><br><span class="line">    <span class="keyword">let</span> rect2 = obj2.<span class="title function_">getBounds</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> rect1.<span class="title function_">intersects</span>(rect2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-2-圆形碰撞"><a href="#9-2-圆形碰撞" class="headerlink" title="9.2 圆形碰撞"></a>9.2 圆形碰撞</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">circleHitTest</span>(<span class="params"><span class="attr">x1</span>: <span class="built_in">number</span>, <span class="attr">y1</span>: <span class="built_in">number</span>, <span class="attr">r1</span>: <span class="built_in">number</span>, </span></span><br><span class="line"><span class="params">                      <span class="attr">x2</span>: <span class="built_in">number</span>, <span class="attr">y2</span>: <span class="built_in">number</span>, <span class="attr">r2</span>: <span class="built_in">number</span></span>): <span class="built_in">boolean</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> dx = x2 - x1;</span><br><span class="line">    <span class="keyword">let</span> dy = y2 - y1;</span><br><span class="line">    <span class="keyword">let</span> distance = <span class="title class_">Math</span>.<span class="title function_">sqrt</span>(dx * dx + dy * dy);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> distance &lt; (r1 + r2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="十、声音处理"><a href="#十、声音处理" class="headerlink" title="十、声音处理"></a>十、声音处理</h2><h3 id="10-1-播放音效"><a href="#10-1-播放音效" class="headerlink" title="10.1 播放音效"></a>10.1 播放音效</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载音效</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">sound</span>: egret.<span class="property">Sound</span> = <span class="keyword">new</span> egret.<span class="title class_">Sound</span>();</span><br><span class="line">sound.<span class="title function_">addEventListener</span>(egret.<span class="property">Event</span>.<span class="property">COMPLETE</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> channel = sound.<span class="title function_">play</span>(<span class="number">0</span>, <span class="number">1</span>); <span class="comment">// 播放1次</span></span><br><span class="line">&#125;, <span class="variable language_">this</span>);</span><br><span class="line">sound.<span class="title function_">load</span>(<span class="string">&#x27;resource/sound/click.mp3&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 停止音效</span></span><br><span class="line">channel.<span class="title function_">stop</span>();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="十一、学习路线建议"><a href="#十一、学习路线建议" class="headerlink" title="十一、学习路线建议"></a>十一、学习路线建议</h2><h3 id="阶段一：TypeScript基础（1周）"><a href="#阶段一：TypeScript基础（1周）" class="headerlink" title="阶段一：TypeScript基础（1周）"></a>阶段一：TypeScript基础（1周）</h3><ul>
+<li>TypeScript语法和数据类型</li>
+<li>接口和类的使用</li>
+<li>泛型和模块化</li>
+</ul>
+<h3 id="阶段二：Egret入门（1-2周）"><a href="#阶段二：Egret入门（1-2周）" class="headerlink" title="阶段二：Egret入门（1-2周）"></a>阶段二：Egret入门（1-2周）</h3><ul>
+<li>显示对象和容器</li>
+<li>事件系统</li>
+<li>资源加载</li>
+<li>基础动画</li>
+</ul>
+<h3 id="阶段三：游戏开发（2-3周）"><a href="#阶段三：游戏开发（2-3周）" class="headerlink" title="阶段三：游戏开发（2-3周）"></a>阶段三：游戏开发（2-3周）</h3><ul>
+<li>UI组件开发</li>
+<li>碰撞检测</li>
+<li>音频处理</li>
+<li>完整项目实战</li>
+</ul>
+<hr>
+<h2 id="十二、总结"><a href="#十二、总结" class="headerlink" title="十二、总结"></a>十二、总结</h2><p>使用Egret和TypeScript开发H5游戏是一个不错的选择：</p>
+<ol>
+<li><strong>TypeScript</strong> - 提供类型安全，提高开发效率</li>
+<li><strong>Egret</strong> - 成熟的引擎，文档完善</li>
+<li><strong>跨平台</strong> - 一次开发，多端运行</li>
+<li><strong>社区活跃</strong> - 丰富的教程和资源</li>
+</ol>
+<p>建议多动手实践，从简单的Demo开始，逐步掌握游戏开发的技巧。祝你学习愉快！🎮</p>
+<hr>
+<p><em>本文最后更新于 2025-03-12</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://nsyqqq.github.io/hexo/2025/04/10/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="cuidhssBbk6gKEVYwSOteBHxl" data-title="游戏开发入门" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/hexo/2025/04/11/Laya2D%E5%9F%BA%E7%A1%80%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Laya2D入门
+        
+      </div>
+    </a>
+  
+  
+    <a href="/hexo/2025/03/12/Vue%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Vue基础</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/hexo/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">3D游戏</a> <a href="/hexo/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/hexo/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/hexo/tags/Cocos-Creator/" style="font-size: 12.5px;">Cocos Creator</a> <a href="/hexo/tags/DragonBones/" style="font-size: 10px;">DragonBones</a> <a href="/hexo/tags/Egret/" style="font-size: 10px;">Egret</a> <a href="/hexo/tags/Git/" style="font-size: 10px;">Git</a> <a href="/hexo/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/hexo/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/hexo/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/hexo/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/hexo/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/hexo/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/hexo/tags/Laya/" style="font-size: 10px;">Laya</a> <a href="/hexo/tags/Laya2D/" style="font-size: 12.5px;">Laya2D</a> <a href="/hexo/tags/Laya3D/" style="font-size: 12.5px;">Laya3D</a> <a href="/hexo/tags/SVN/" style="font-size: 10px;">SVN</a> <a href="/hexo/tags/Spine/" style="font-size: 10px;">Spine</a> <a href="/hexo/tags/TypeScript/" style="font-size: 12.5px;">TypeScript</a> <a href="/hexo/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/hexo/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/hexo/tags/%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/" style="font-size: 10px;">代码优化</a> <a href="/hexo/tags/%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" style="font-size: 10px;">入门教程</a> <a href="/hexo/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 17.5px;">前端</a> <a href="/hexo/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 10px;">动画</a> <a href="/hexo/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">开发工具</a> <a href="/hexo/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 12.5px;">性能优化</a> <a href="/hexo/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/hexo/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/hexo/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 20px;">游戏开发</a> <a href="/hexo/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" style="font-size: 10px;">版本控制</a> <a href="/hexo/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/hexo/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" style="font-size: 12.5px;">编程基础</a> <a href="/hexo/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 12.5px;">网络编程</a> <a href="/hexo/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/" style="font-size: 10px;">计算机科学</a> <a href="/hexo/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/hexo/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">软件工程</a> <a href="/hexo/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 15px;">进阶</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2025/02/">二月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/hexo/2025/10/12/%E9%BE%99%E9%AA%A8%E4%B8%8ESpine%E5%8A%A8%E7%94%BB%E6%95%99%E7%A8%8B/">DragonBones和Spine动画介绍</a>
+          </li>
+        
+          <li>
+            <a href="/hexo/2025/10/11/Laya3D%E8%BF%9B%E9%98%B6/">Laya3D进阶</a>
+          </li>
+        
+          <li>
+            <a href="/hexo/2025/10/10/Laya3D%E5%9F%BA%E7%A1%80%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97/">Laya3D入门</a>
+          </li>
+        
+          <li>
+            <a href="/hexo/2025/10/01/Laya%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Laya性能优化</a>
+          </li>
+        
+          <li>
+            <a href="/hexo/2025/06/11/Cocos-Creator-%E8%BF%9B%E9%98%B6/">Cocos Creator 进阶</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/hexo/" class="mobile-nav-link">首页</a>
+  
+    <a href="/hexo/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/hexo/portfolio" class="mobile-nav-link">作品集</a>
+  
+    <a href="/hexo/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/hexo/js/jquery-3.6.4.min.js"></script>
+
+
+
+<script src="/hexo/js/search.js"></script>
+
+
+
+  
+<script src="/hexo/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/hexo/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
