@@ -1,5 +1,5 @@
 ---
-title: Laya2D进阶
+title: Laya2D 进阶教程
 date: 2025-04-12 00:00:00
 tags: [游戏开发, Laya2D, 进阶]
 categories: 技术教程

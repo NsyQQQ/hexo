@@ -1,5 +1,5 @@
 ---
-title: DragonBones和Spine动画介绍
+title: 2D 骨骼动画实战
 date: 2025-10-12 00:00:00
 tags: [游戏开发, 动画, DragonBones, Spine, 性能优化]
 categories: 技术文档

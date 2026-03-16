@@ -1,5 +1,5 @@
 ---
-title: Vue基础
+title: Vue 3 入门指南
 date: 2025-03-12 00:00:00
 tags: [前端, Vue, JavaScript]
 categories: 技术文档

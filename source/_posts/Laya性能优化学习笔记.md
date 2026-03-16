@@ -1,5 +1,5 @@
 ---
-title: Laya性能优化
+title: Laya 性能优化指南
 date: 2025-10-01 00:00:00
 tags: [游戏开发, Laya, 性能优化]
 categories: 学习笔记

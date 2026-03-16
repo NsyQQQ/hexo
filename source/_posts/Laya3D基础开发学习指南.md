@@ -1,5 +1,5 @@
 ---
-title: Laya3D入门
+title: Laya3D 入门指南
 date: 2025-10-10 00:00:00
 tags: [游戏开发, Laya3D, 3D游戏]
 categories: 技术教程

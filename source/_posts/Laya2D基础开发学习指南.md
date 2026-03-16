@@ -1,5 +1,5 @@
 ---
-title: Laya2D入门
+title: Laya2D 入门指南
 date: 2025-04-11 00:00:00
 tags: [游戏开发, Laya2D, TypeScript]
 categories: 技术教程

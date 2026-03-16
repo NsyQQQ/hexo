@@ -1,5 +1,5 @@
 ---
-title: Cocos Creator 进阶
+title: Cocos Creator 进阶教程
 date: 2025-06-11 11:01:00
 categories:
   - 技术教程

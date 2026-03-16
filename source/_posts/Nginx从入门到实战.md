@@ -1,5 +1,5 @@
 ---
-title: Nginx 从入门到实战
+title: Nginx 入门与实战
 date: 2026-01-12 10:00:00
 categories:
   - 技术教程

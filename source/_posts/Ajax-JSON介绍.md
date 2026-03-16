@@ -1,5 +1,5 @@
 ---
-title: Ajax 与 JSON 介绍
+title: Ajax 与 JSON 入门
 date: 2025-03-05 11:20:00
 categories:
   - 技术文档

@@ -1,5 +1,5 @@
 ---
-title: Cocos Creator 入门
+title: Cocos Creator 入门指南
 date: 2025-06-10 11:05:00
 categories:
   - 技术教程

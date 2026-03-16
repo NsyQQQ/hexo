@@ -1,5 +1,5 @@
 ---
-title: Hexo使用教程
+title: Hexo 博客搭建教程
 date: 2025-02-11 00:00:00
 tags: [Hexo, GitHub Pages, 教程]
 categories: 技术教程

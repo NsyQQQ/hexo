@@ -1,5 +1,5 @@
 ---
-title: Shell 脚本
+title: Shell 脚本编程
 date: 2026-01-11 10:00:00
 categories:
   - 技术教程
