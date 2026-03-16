@@ -244,17 +244,24 @@ a[title="知乎"] .fa-user:before {
 .archives {
     display: flex !important;
     flex-wrap: wrap !important;
-    gap: 15px !important;
+    justify-content: flex-start !important;
+    align-content: flex-start !important;
     column-count: unset !important;
 }
 
 .archive-article {
-    flex: 0 0 calc(25% - 15px) !important;
-    width: calc(25% - 15px) !important;
+    flex: 0 0 23% !important;
+    width: 23% !important;
     min-width: 150px !important;
     max-width: none !important;
     break-inside: unset !important;
     box-sizing: border-box !important;
+    margin-right: 1% !important;
+    margin-bottom: 15px !important;
+}
+
+.archive-article:nth-child(4n) {
+    margin-right: 0 !important;
 }
 
 .archive-article-inner {
