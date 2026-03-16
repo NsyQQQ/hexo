@@ -2,7 +2,7 @@
 title: Shell 脚本
 date: 2026-01-11 10:00:00
 categories:
-  - 学习笔记
+  - 技术教程
 tags:
   - Linux
   - Shell

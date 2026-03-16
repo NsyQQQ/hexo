@@ -2,7 +2,7 @@
 title: Linux 基础
 date: 2026-01-10 10:00:00
 categories:
-  - 学习笔记
+  - 技术教程
 tags:
   - Linux
   - 运维
