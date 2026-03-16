@@ -242,15 +242,13 @@ a[title="知乎"] .fa-user:before {
 
 /* 归档页面 - 横向排列 */
 .archives {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: flex-start !important;
-    align-content: flex-start !important;
+    display: block !important;
     column-count: unset !important;
 }
 
 .archive-article {
-    flex: 0 0 23% !important;
+    display: inline-block !important;
+    vertical-align: top !important;
     width: 23% !important;
     min-width: 150px !important;
     max-width: none !important;
