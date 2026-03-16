@@ -249,11 +249,12 @@ a[title="知乎"] .fa-user:before {
 }
 
 .archive-article {
-    flex: 0 0 auto !important;
-    width: auto !important;
-    min-width: 200px !important;
-    max-width: 300px !important;
+    flex: 0 0 calc(25% - 15px) !important;
+    width: calc(25% - 15px) !important;
+    min-width: 150px !important;
+    max-width: none !important;
     break-inside: unset !important;
+    box-sizing: border-box !important;
 }
 
 .archive-article-inner {
