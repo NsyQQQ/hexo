@@ -2,6 +2,7 @@
   height: banner-height
   position: relative
   border-bottom: 1px solid color-border
+  z-index: 1000
   &:before, &:after
     content: ""
     position: absolute
@@ -21,7 +22,7 @@
 
 #header-inner
   position: relative
-  overflow: hidden
+  overflow: visible
 
 #banner
   position: absolute
@@ -72,7 +73,6 @@ $nav-link
   opacity: 0.6
   text-decoration: none
   text-shadow: 0 1px rgba(0, 0, 0, 0.2)
-  transition: opacity 0.2s
   display: block
   padding: 20px 15px
   &:hover
@@ -106,18 +106,14 @@ $nav-link
 
 #search-form-wrap
   position: absolute
-  top: 15px
-  width: 150px
-  height: 30px
-  right: -150px
+  top: 65px
+  width: 200px
+  right: -200px
   opacity: 0
-  transition: 0.2s ease-out
+  z-index: 10001
   &.on
     opacity: 1
     right: 0
-  @media mq-mobile
-    width: 100%
-    right: -100%
 
 .search-form
   position: absolute
@@ -125,7 +121,7 @@ $nav-link
   left: 0
   right: 0
   background: #fff
-  padding: 5px 15px
+  padding: 5px 10px
   border-radius: 15px
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3)
 
@@ -136,9 +132,6 @@ $nav-link
   width: 100%
   font: 13px font-sans
   outline: none
-  &::-webkit-search-results-decoration
-  &::-webkit-search-cancel-button
-    -webkit-appearance: none
 
 .search-form-submit
   position: absolute
@@ -150,5 +143,38 @@ $nav-link
   background: none
   color: #bbb
   cursor: pointer
-  &:hover, &:focus
-    color: #777
+
+#search-results-container
+  position: fixed
+  width: 250px
+  z-index: 10002
+  background: #fff
+  border: 1px solid #ddd
+  border-radius: 4px
+  max-height: 300px
+  overflow-y: auto
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2)
+  opacity: 0
+  visibility: hidden
+  transition: opacity 0.2s, visibility 0.2s
+
+#search-results-container.show
+  opacity: 1
+  visibility: visible
+
+.search-result-item
+  padding: 10px
+  border-bottom: 1px solid #eee
+  &:last-child
+    border-bottom: none
+  a
+    color: #333
+    font-weight: bold
+    text-decoration: none
+    display: block
+    &:hover
+      color: #007bff
+  p
+    color: #666
+    font-size: 12px
+    margin: 5px 0 0 0

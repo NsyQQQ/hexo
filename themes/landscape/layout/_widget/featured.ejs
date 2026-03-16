@@ -1,0 +1,23 @@
+<% 
+  var featuredPosts = site.posts.filter(function(post) {
+    return post.featured === true;
+  });
+  
+  // If no featured posts, show recent posts
+  if (featuredPosts.length === 0) {
+    featuredPosts = site.posts.sort('date', -1).limit(5);
+  }
+%>
+
+<div class="widget-wrap">
+  <h3 class="widget-title">推荐文章</h3>
+  <div class="widget">
+    <ul>
+      <% featuredPosts.each(function(post) { %>
+        <li>
+          <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+</div>

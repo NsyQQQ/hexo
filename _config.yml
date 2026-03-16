@@ -4,12 +4,16 @@
 
 # Site
 title: 宁尚义的个人博客
-subtitle: ''
-description: ''
+description: 宁尚义的个人技术博客，分享前端、游戏开发、运维等技术文章
 keywords:
-author: John Doe
+  - 宁尚义
+  - 博客
+  - 技术
+  - 前端
+  - 运维
+author: 宁尚义
 language: zh-CN
-timezone: ''
+timezone: Asia/Shanghai
 
 # Favicon
 favicon: /favicon.png
@@ -18,6 +22,14 @@ favicon: /favicon.png
 menu:
   首页: /
   归档: /archives
+  作品集: /portfolio
+  关于: /about
+
+# Social links
+social:
+  GitHub: https://github.com/NsyQQQ
+  Email: mailto:1036139994@qq.com
+  CSDN: https://blog.csdn.net/NingQQQ
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -141,3 +153,8 @@ search:
   path: search.json
   field: all
   content: true
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20

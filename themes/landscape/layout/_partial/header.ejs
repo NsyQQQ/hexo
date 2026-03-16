@@ -20,8 +20,9 @@
       </nav>
       <nav id="sub-nav">
         <% if (theme.links) { %>
+          <% var linkTitles = {github: 'GitHub', book: 'CSDN', user: '知乎', weibo: '微博', bilibili: 'bilibili'}; %>
           <% for (const i in theme.links) {%>
-            <a class="nav-icon" href="<%- url_for(theme.links[i]) %>"><span class="fa fa-<%= i %>"></span></a>
+            <a class="nav-icon" href="<%- url_for(theme.links[i]) %>" title="<%= linkTitles[i] || i %>"><span class="fa fa-<%= i %>"></span></a>
           <% } %>
         <% } %>
         <% if (theme.rss){ %>

@@ -1,123 +1,132 @@
-/* 本地搜索功能 */
-(function($){
-  var $searchWrap = $('#search-form-wrap');
-  var $searchInput = $('.search-form-input');
-  var isSearchAnim = false;
-  var searchAnimDuration = 200;
+/* 搜索功能 */
+(function() {
+  var searchWrap = document.getElementById('search-form-wrap');
+  var searchInput = document.querySelector('.search-form-input');
+  var resultsContainer = document.getElementById('search-results-container');
+  var searchForm = document.querySelector('.search-form');
   var searchData = null;
+  var isOpen = false;
 
-  // 加载搜索数据
+  // 阻止表单默认提交
+  if (searchForm) {
+    searchForm.onsubmit = function(e) {
+      e.preventDefault();
+    };
+  }
+
   function loadSearchData() {
     if (!searchData) {
-      $.ajax({
-        url: '/hexo/search.json',
-        dataType: 'json',
-        async: false,
-        success: function(data) {
-          searchData = data;
-        }
-      });
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/hexo/search.json', false);
+      xhr.send();
+      if (xhr.status === 200) {
+        searchData = JSON.parse(xhr.responseText);
+      }
     }
     return searchData;
   }
 
-  // 搜索功能
-  function performSearch(query) {
-    var results = [];
+  function doSearch(query) {
     var data = loadSearchData();
+    if (!data || !query) return [];
     
-    if (!data || !query) return results;
-    
+    var results = [];
     query = query.toLowerCase();
-    
     for (var i = 0; i < data.length; i++) {
       var item = data[i];
       var title = item.title ? item.title.toLowerCase() : '';
       var content = item.content ? item.content.toLowerCase() : '';
       
       if (title.indexOf(query) !== -1 || content.indexOf(query) !== -1) {
-        results.push({
-          title: item.title,
-          url: item.url,
-          content: item.content ? item.content.substring(0, 100) + '...' : ''
-        });
+        results.push(item);
       }
     }
-    
-    return results.slice(0, 10); // 最多显示10条结果
+    return results.slice(0, 10);
   }
 
-  // 显示搜索结果
   function showResults(results) {
+    if (results.length === 0) {
+      resultsContainer.innerHTML = '<div style="padding:10px;color:#666;">没有找到</div>';
+      resultsContainer.classList.remove('show');
+      return;
+    }
+    
     var html = '';
-    if (results.length > 0) {
-      html += '<div class="search-results">';
-      for (var i = 0; i < results.length; i++) {
-        html += '<div class="search-result-item">';
-        html += '<a href="' + results[i].url + '">' + results[i].title + '</a>';
-        html += '<p>' + results[i].content + '</p>';
-        html += '</div>';
+    for (var i = 0; i < results.length; i++) {
+      var url = results[i].url;
+      var title = results[i].title;
+      var content = results[i].content ? results[i].content.substring(0, 80) + '...' : '';
+      html += '<div class="search-result-item">';
+      html += '<a href="' + url + '">' + title + '</a>';
+      if (content) {
+        html += '<p>' + content + '</p>';
       }
       html += '</div>';
-    } else {
-      html = '<p>没有找到相关内容</p>';
     }
     
-    // 创建结果容器
-    var $resultsContainer = $('#search-results-container');
-    if (!$resultsContainer.length) {
-      $resultsContainer = $('<div id="search-results-container"></div>');
-      $searchWrap.append($resultsContainer);
-    }
-    $resultsContainer.html(html);
+    // 先定位再显示
+    var searchInput = document.querySelector('.search-form-input');
+    var rect = searchInput.getBoundingClientRect();
+    resultsContainer.style.top = (rect.bottom + 15) + 'px';
+    resultsContainer.style.left = rect.left + 'px';
+    
+    resultsContainer.innerHTML = html;
+    resultsContainer.classList.add('show');
   }
 
-  // 点击搜索按钮
-  $('.nav-search-btn').on('click', function(){
-    if (isSearchAnim) return;
-    startSearchAnim();
-    $searchWrap.addClass('on');
-    stopSearchAnim(function(){
-      $searchInput.focus();
-      loadSearchData(); // 预加载搜索数据
-    });
-  });
-
-  // 搜索输入
-  $searchInput.on('input', function(){
-    var query = $(this).val();
-    if (query.length > 0) {
-      var results = performSearch(query);
-      showResults(results);
+  // 搜索按钮点击
+  var navBtn = document.querySelector('.nav-search-btn');
+  navBtn.onclick = function(e) {
+    e.stopPropagation();
+    if (isOpen) {
+      isOpen = false;
+      searchWrap.classList.remove('on');
+      resultsContainer.classList.remove('show');
     } else {
-      $('#search-results-container').html('');
+      isOpen = true;
+      searchWrap.classList.add('on');
+      searchInput.focus();
+      // 只在有内容时显示结果
+      if (searchInput.value.length > 0) {
+        var results = doSearch(searchInput.value);
+        showResults(results);
+      }
     }
-  });
-
-  // 失去焦点关闭
-  $searchInput.on('blur', function(){
-    startSearchAnim();
-    $searchWrap.removeClass('on');
-    stopSearchAnim(function(){
-      setTimeout(function(){
-        $('#search-results-container').remove();
-      }, 300);
-    });
-  });
-
-  var startSearchAnim = function(){
-    isSearchAnim = true;
   };
 
-  var stopSearchAnim = function(callback){
-    setTimeout(function(){
-      isSearchAnim = false;
-      callback && callback();
-    }, searchAnimDuration);
+  // 搜索按钮本身也阻止默认行为
+  var submitBtn = document.querySelector('.search-form-submit');
+  if (submitBtn) {
+    submitBtn.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    };
+  }
+
+  // 输入搜索
+  searchInput.oninput = function() {
+    var query = this.value;
+    if (query.length > 0) {
+      var results = doSearch(query);
+      showResults(results);
+      resultsContainer.classList.add('show');
+    } else {
+      resultsContainer.innerHTML = '';
+      resultsContainer.classList.remove('show');
+    }
   };
 
-  // Share
-  $('body').on('click', function(){
-    $('.article-share-box.on').removeClass('on');
-  });
-})(jQuery);
+  // 点击外部关闭
+  document.onclick = function(e) {
+    if (isOpen && !searchWrap.contains(e.target) && !e.target.classList.contains('nav-search-btn')) {
+      isOpen = false;
+      searchWrap.classList.remove('on');
+      resultsContainer.classList.remove('show');
+    }
+  };
+
+  // 搜索框内部点击不关闭
+  searchWrap.onclick = function(e) {
+    e.stopPropagation();
+  };
+})();

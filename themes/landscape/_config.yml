@@ -17,15 +17,17 @@ subtitle:
 # Each name must correspond to the icon name of Fork Awesome
 # https://forkaweso.me/Fork-Awesome/icons/
 links:
-#  github: https://github.com/your_github_account
-#  twitter: https://twitter.com/your_twitter_account
-#  telegram: https://t.me/your_telegram_account
+  github: https://github.com/NsyQQQ
+  book: https://blog.csdn.net/NingQQQ
+  user: https://www.zhihu.com/people/ningq-31
+  weibo: https://weibo.com/u/5642720380
+  bilibili: https://space.bilibili.com/432403089
 
 # ===============
 # Content
 # ===============
 # "Read More" link at the bottom of excerpted articles. `false` to hide the link.
-excerpt_link: Read More
+excerpt_link: 阅读全文
 # Enable fancybox
 fancybox: true
 
@@ -37,7 +39,8 @@ fancybox: true
 # copyright: |-
 #   <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a></br>
 #   All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></br>
-copyright:
+copyright: |-
+  © 2025-2026 宁尚义. All rights reserved.
 
 # ===============
 # Sidebar
@@ -49,6 +52,7 @@ widgets:
 - category
 - tagcloud
 - archive
+- featured
 - recent_posts
 
 # ===============
@@ -79,13 +83,18 @@ fb_app_id:
 disqus_shortname:
 # valine comment system. https://valine.js.org
 valine:
-  enable: false # if you want use valine,please set this value is true
-  appId:  # leancloud application app id
-  appKey:  # leancloud application app key
-  notify: false # valine mail notify (true/false) https://github.com/xCss/Valine/wiki
-  verify: false # valine verify code (true/false)
-  pageSize: 10 # comment list page size
-  avatar: mm # gravatar style https://valine.js.org/#/avatar
-  lang: zh-cn # i18n: zh-cn/en
-  placeholder: Just go go # valine comment input placeholder(like: Please leave your footprints )
-  guest_info: nick,mail,link #valine comment header info
+  enable: true
+  appId: KXoxur5yqjJ4BMJkcRNl87rVX20K9hfe18JlOr9meD2VafQsaA8L4NxLTnCNwFLo
+  appKey: cn-n1
+  notify: false
+  verify: false
+  pageSize: 10
+  avatar: mm
+  lang: zh-cn
+  placeholder: 欢迎留言交流！
+  guest_info: nick,mail,link
+
+# ===============
+# Visit Statistics (不蒜子)
+# ===============
+busuanzi: true

@@ -9,6 +9,19 @@
       <% } %>
       &copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %><br>
       <%= __('powered_by') %> <a href="https://hexo.io/" target="_blank">Hexo</a>
+      <% if (theme.busuanzi){ %>
+        <br>
+        <span id="busuanzi_container_site_uv">
+          访问人数: <span id="busuanzi_value_site_uv"></span>
+        </span>
+        <span id="busuanzi_container_site_pv">
+          总访问量: <span id="busuanzi_value_site_pv"></span>
+        </span>
+      <% } %>
     </div>
   </div>
 </footer>
+
+<% if (theme.busuanzi){ %>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.min.js"></script>
+<% } %>
