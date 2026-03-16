@@ -251,9 +251,13 @@ a[title="知乎"] .fa-user:before {
 .archive-article {
     flex: 0 0 auto !important;
     width: auto !important;
+    min-width: 200px !important;
+    max-width: 300px !important;
     break-inside: unset !important;
 }
 
 .archive-article-inner {
     margin-bottom: 0 !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
 }
