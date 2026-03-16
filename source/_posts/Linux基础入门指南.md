@@ -1,5 +1,5 @@
 ---
-title: Linux 基础入门指南
+title: Linux 基础
 date: 2026-01-10 10:00:00
 categories:
   - 学习笔记
