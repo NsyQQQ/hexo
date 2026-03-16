@@ -239,3 +239,21 @@ a[title="知乎"] .fa-user:before {
 .fa-github:before {
     content: none !important;
 }
+
+/* 归档页面 - 横向排列 */
+.archives {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 15px !important;
+    column-count: unset !important;
+}
+
+.archive-article {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    break-inside: unset !important;
+}
+
+.archive-article-inner {
+    margin-bottom: 0 !important;
+}
