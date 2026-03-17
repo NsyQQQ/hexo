@@ -9,8 +9,8 @@
       <div class="outer">
         <section id="main"><%- body %></section>
         <% if (is_post()) { %>
-        <aside id="sidebar" class="toc-sidebar">
-          <div class="widget-wrap">
+        <aside id="sidebar" class="toc-sidebar" style="position: sticky; top: 0;">
+          <div class="widget-wrap" style="max-height: calc(100vh - 100px); overflow-y: auto;">
             <h3 class="widget-title">文章目录</h3>
             <div class="widget">
               <div class="toc-article">
