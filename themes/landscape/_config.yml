@@ -51,8 +51,8 @@ sidebar: right
 widgets:
 - category
 - tagcloud
-- archive
 - featured
+- archive
 - recent_posts
 
 # ===============

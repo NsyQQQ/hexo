@@ -1,13 +1,8 @@
 ---
-title: Ajax 与 JSON 入门
+title: Ajax 与 JSON 入门指南
 date: 2025-03-05 11:20:00
-categories:
-  - 技术文档
-tags:
-  - Ajax
-  - JSON
-  - 前端
-  - 网络编程
+tags: [Ajax, JSON, 前端, JavaScript, HTTP]
+categories: [技术教程, 前端开发]
 ---
 
 Ajax 和 JSON 是现代 Web 开发中最常用的数据交互技术。Ajax 用于在不刷新页面的情况下与服务器通信，JSON 是轻量级的数据交换格式。本文将详细介绍它们的使用方法。

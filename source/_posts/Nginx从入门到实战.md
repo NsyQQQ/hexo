@@ -1,14 +1,8 @@
 ---
 title: Nginx 入门与实战
 date: 2026-01-12 10:00:00
-categories:
-  - 技术教程
-tags:
-  - Nginx
-  - 服务器
-  - 运维
-  - Web服务器
-  - 入门教程
+tags: [Nginx, 服务器, 运维, Web服务器, 负载均衡]
+categories: [技术教程, 运维]
 ---
 
 Nginx 是一个高性能的 HTTP 和反向代理服务器，被广泛应用于 Web 服务、负载均衡、缓存等领域。本文将详细介绍 Nginx 的安装、配置和实战应用。

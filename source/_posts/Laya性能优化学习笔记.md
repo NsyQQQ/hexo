@@ -3,6 +3,7 @@ title: Laya 性能优化指南
 date: 2025-10-01 00:00:00
 tags: [游戏开发, Laya, 性能优化]
 categories: 学习笔记
+featured: true
 ---
 
 游戏性能优化是开发过程中非常重要的一环。本文将介绍Laya2D和Laya3D开发中的各种性能优化技巧，帮助你打造更流畅的游戏体验。

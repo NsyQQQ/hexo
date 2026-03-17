@@ -1,12 +1,8 @@
 ---
 title: Cocos Creator 入门指南
 date: 2025-06-10 11:05:00
-categories:
-  - 技术教程
-tags:
-  - Cocos Creator
-  - 游戏开发
-  - 入门教程
+tags: [Cocos Creator, 游戏开发, 入门, TypeScript]
+categories: [技术教程, 游戏开发]
 ---
 
 Cocos Creator 是一款面向中小型开发者的国产游戏引擎，采用 TypeScript/JavaScript 作为开发语言，支持一键发布到 Web、iOS、Android、HarmonyOS 等多平台。本文将带领你快速上手 Cocos Creator。

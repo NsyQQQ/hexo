@@ -1,8 +1,9 @@
 ---
 title: 2D 骨骼动画实战
-date: 2025-10-12 00:00:00
+date: 2025-04-15 00:00:00
 tags: [游戏开发, 动画, DragonBones, Spine, 性能优化]
 categories: 技术文档
+featured: true
 ---
 
 DragonBones动画和Spine动画是游戏开发中两种主流的2D骨骼动画技术，相比传统的帧动画，它们更加流畅、省内存，是现代2D游戏开发的首选。本文将详细介绍这两种动画的使用方法和性能优化技巧。

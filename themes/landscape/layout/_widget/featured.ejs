@@ -3,6 +3,9 @@
     return post.featured === true;
   });
   
+  // 按日期降序排列
+  featuredPosts = featuredPosts.sort('date', -1);
+  
   // If no featured posts, show recent posts
   if (featuredPosts.length === 0) {
     featuredPosts = site.posts.sort('date', -1).limit(5);

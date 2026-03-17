@@ -1,14 +1,8 @@
 ---
-title: Shell 脚本编程
+title: Shell 脚本编程入门指南
 date: 2026-01-11 10:00:00
-categories:
-  - 技术教程
-tags:
-  - Linux
-  - Shell
-  - 运维
-  - 脚本
-  - 入门教程
+tags: [Linux, Shell, 运维, 脚本, Bash]
+categories: [技术教程, 运维]
 ---
 
 Shell 脚本是 Linux 运维和自动化任务的核心工具。本文将介绍 Shell 脚本的基础知识和常用语法，帮助你快速掌握脚本编程。

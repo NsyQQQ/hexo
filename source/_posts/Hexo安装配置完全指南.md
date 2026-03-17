@@ -1,8 +1,9 @@
 ---
 title: Hexo 博客搭建教程
-date: 2025-02-11 00:00:00
+date: 2025-01-02 00:00:00
 tags: [Hexo, GitHub Pages, 教程]
 categories: 技术教程
+featured: true
 ---
 
 本文详细介绍Hexo博客框架的安装、配置、日常使用以及部署到GitHub Pages的完整流程。

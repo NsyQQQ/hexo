@@ -1,13 +1,9 @@
 ---
-title: Python 常用标准库详解
+title: Python 常用标准库
 date: 2025-08-10 10:00:00
-categories:
-  - 技术教程
-tags:
-  - Python
-  - 标准库
-  - 编程基础
-  - 后端
+tags: [Python, 标准库, 编程基础, 后端]
+categories: [技术教程, 编程语言]
+---
 ---
 
 Python 标准库是 Python 安装包自带的庞大工具集，包含了处理文本、数据、文件、网络、并发等各种常用功能。本文将详细介绍 Python 最常用的标准库，帮助你提升开发效率。

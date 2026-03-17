@@ -1,14 +1,8 @@
 ---
 title: Docker 入门与实践
 date: 2026-01-13 14:00:00
-categories:
-  - 技术教程
-tags:
-  - Docker
-  - 容器
-  - 运维
-  - DevOps
-  - 入门教程
+tags: [Docker, 容器, 运维, DevOps, 虚拟化]
+categories: [技术教程, 运维]
 ---
 
 Docker 是一个开源的容器化平台，可以帮助开发者打包、部署和运行应用程序。本文将详细介绍 Docker 的基础知识和实战用法。

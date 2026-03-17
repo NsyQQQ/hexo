@@ -1,13 +1,9 @@
 ---
 title: WebSocket 与 HTTP 协议
 date: 2025-04-06 11:15:00
-categories:
-  - 技术文档
-tags:
-  - WebSocket
-  - HTTP
-  - 网络编程
-  - 前端
+tags: [WebSocket, HTTP, 网络协议, 前端, 实时通信]
+categories: [技术教程, 网络]
+---
 ---
 
 在现代 Web 开发中，网络通信是核心能力之一。HTTP 和 WebSocket 是最常用的两种协议，本文将详细介绍它们的概念、使用场景以及代码实现。

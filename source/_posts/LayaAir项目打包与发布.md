@@ -1,14 +1,8 @@
 ---
 title: LayaAir 项目打包与发布
 date: 2025-10-05 10:00:00
-categories:
-  - 技术教程
-tags:
-  - Laya
-  - 游戏开发
-  - 打包
-  - 发布
-  - 版本管理
+tags: [LayaAir, 游戏开发, 打包, 发布, H5]
+categories: [技术教程, 游戏开发]
 ---
 
 LayaAir 引擎提供了强大的项目打包和发布功能，支持多平台发布包括 Web、iOS、Android、Windows、Mac 等平台。本文将详细介绍 LayaAir 项目的打包配置、版本发布和更新流程。

@@ -1,6 +1,8 @@
 ---
 title: Hello World
-date: 2025-02-10 00:00:00
+date: 2025-01-01 00:00:00
+tags: [Hexo, 入门, 博客]
+categories: [技术教程]
 ---
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
