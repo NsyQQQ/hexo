@@ -10,11 +10,43 @@ date: 2025-02-11 00:00:00
 
 这个博客主要用于记录日常学习的技术笔记，涵盖以下领域：
 
-- 前端开发（Vue、React、HTML、CSS、JavaScript）
-- 游戏开发（Laya、Cocos Creator）
-- 版本控制（Git、SVN）
+### 前端开发
+- Vue 基础
+- JavaScript / TypeScript
+- Ajax / JSON
+- Bootstrap
+- jQuery
+- Sass
+- WebSocket
+
+### 游戏开发
+- LayaAir（Laya2D、Laya3D）
+- Cocos Creator
+- DragonBones / Spine 骨骼动画
+- FairyGUI
+- LayaAir Unity Plugin
+- A* 寻路算法
+
+### 后端 & 数据库
+- Python
+- MySQL
+- Redis
+- Nginx
+- Docker
+
+### 工具 & 基础
+- Linux / Shell
+- Git / SVN 版本控制
 - 数据结构与算法
 - 设计模式
+- 面向对象编程
+- 计算机网络
+
+### 其他
+- Hexo 博客搭建
+- Python 爬虫
+- Python 自动化
+- Android 穿山甲广告 SDK
 
 ## 联系我
 
