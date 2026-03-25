@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>棋牌小游戏 - 后端开发详细文档 | 宁尚义的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="后端开发详细文档📡 通信协议WebSocket 消息格式1234567891011121314&#x2F;&#x2F; 客户端 -&gt; 服务器interface WSRequest &#123;  type: string;           &#x2F;&#x2F; 消息类型  data: any;              &#x2F;&#x2F; 消息数据  seq?: number;           &#x2F;&#x2F; 序列号(可选)&#125;&#x2F;&#x2F;">
+<meta property="og:type" content="website">
+<meta property="og:title" content="棋牌小游戏 - 后端开发详细文档">
+<meta property="og:url" content="https://nsyqqq.github.io/hexo/portfolio/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E8%AF%A6%E7%BB%86%E6%96%87%E6%A1%A3.html">
+<meta property="og:site_name" content="宁尚义的个人博客">
+<meta property="og:description" content="后端开发详细文档📡 通信协议WebSocket 消息格式1234567891011121314&#x2F;&#x2F; 客户端 -&gt; 服务器interface WSRequest &#123;  type: string;           &#x2F;&#x2F; 消息类型  data: any;              &#x2F;&#x2F; 消息数据  seq?: number;           &#x2F;&#x2F; 序列号(可选)&#125;&#x2F;&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-25T14:15:00.000Z">
+<meta property="article:modified_time" content="2026-03-25T14:15:58.150Z">
+<meta property="article:author" content="宁尚义">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="宁尚义">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="运维">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/hexo/atom.xml" title="宁尚义的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/hexo/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/hexo/css/style.css">
+
+  
+<link rel="stylesheet" href="/hexo/css/custom.css">
+
+  
+    
+<link rel="stylesheet" href="/hexo/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="search-results-container"></div>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/hexo/" id="logo">宁尚义的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/hexo/">首页</a>
+        
+          <a class="main-nav-link" href="/hexo/archives">归档</a>
+        
+          <a class="main-nav-link" href="/hexo/portfolio">作品集</a>
+        
+          <a class="main-nav-link" href="/hexo/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://github.com/NsyQQQ" title="GitHub"><span class="fa fa-github"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://blog.csdn.net/NingQQQ" title="CSDN"><span class="fa fa-book"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://www.zhihu.com/people/ningq-31" title="知乎"><span class="fa fa-user"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/432403089" title="bilibili"><span class="fa fa-bilibili"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/hexo/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://nsyqqq.github.io/hexo"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="page-" class="h-entry article article-type-page" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <time class="dt-published article-date" datetime="2026-03-25T14:15:00.000Z" itemprop="datePublished">2026-03-25</time>
+
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      棋牌小游戏 - 后端开发详细文档
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="后端开发详细文档"><a href="#后端开发详细文档" class="headerlink" title="后端开发详细文档"></a>后端开发详细文档</h1><h2 id="📡-通信协议"><a href="#📡-通信协议" class="headerlink" title="📡 通信协议"></a>📡 通信协议</h2><h3 id="WebSocket-消息格式"><a href="#WebSocket-消息格式" class="headerlink" title="WebSocket 消息格式"></a>WebSocket 消息格式</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端 -&gt; 服务器</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">WSRequest</span> &#123;</span><br><span class="line">  <span class="attr">type</span>: <span class="built_in">string</span>;           <span class="comment">// 消息类型</span></span><br><span class="line">  <span class="attr">data</span>: <span class="built_in">any</span>;              <span class="comment">// 消息数据</span></span><br><span class="line">  <span class="attr">seq</span>?: <span class="built_in">number</span>;           <span class="comment">// 序列号(可选)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务器 -&gt; 客户端</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">WSResponse</span> &#123;</span><br><span class="line">  <span class="attr">type</span>: <span class="built_in">string</span>;           <span class="comment">// 消息类型</span></span><br><span class="line">  <span class="attr">code</span>: <span class="built_in">number</span>;           <span class="comment">// 状态码 0=成功</span></span><br><span class="line">  <span class="attr">data</span>: <span class="built_in">any</span>;              <span class="comment">// 响应数据</span></span><br><span class="line">  <span class="attr">msg</span>?: <span class="built_in">string</span>;           <span class="comment">// 错误信息</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="消息类型定义"><a href="#消息类型定义" class="headerlink" title="消息类型定义"></a>消息类型定义</h3><table>
+<thead>
+<tr>
+<th>消息类型</th>
+<th>方向</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>heartbeat</code></td>
+<td>双向</td>
+<td>心跳保活</td>
+</tr>
+<tr>
+<td><code>login</code></td>
+<td>C→S</td>
+<td>用户登录</td>
+</tr>
+<tr>
+<td><code>login_result</code></td>
+<td>S→C</td>
+<td>登录结果</td>
+</tr>
+<tr>
+<td><code>create_room</code></td>
+<td>C→S</td>
+<td>创建房间</td>
+</tr>
+<tr>
+<td><code>join_room</code></td>
+<td>C→S</td>
+<td>加入房间</td>
+</tr>
+<tr>
+<td><code>room_info</code></td>
+<td>S→C</td>
+<td>房间信息</td>
+</tr>
+<tr>
+<td><code>player_join</code></td>
+<td>S→C</td>
+<td>玩家加入</td>
+</tr>
+<tr>
+<td><code>player_leave</code></td>
+<td>S→C</td>
+<td>玩家离开</td>
+</tr>
+<tr>
+<td><code>game_start</code></td>
+<td>S→C</td>
+<td>游戏开始</td>
+</tr>
+<tr>
+<td><code>action</code></td>
+<td>C→S</td>
+<td>玩家操作</td>
+</tr>
+<tr>
+<td><code>action_notify</code></td>
+<td>S→C</td>
+<td>操作通知</td>
+</tr>
+<tr>
+<td><code>game_over</code></td>
+<td>S→C</td>
+<td>游戏结束</td>
+</tr>
+<tr>
+<td><code>settle</code></td>
+<td>S→C</td>
+<td>结算</td>
+</tr>
+</tbody></table>
+<h3 id="心跳机制"><a href="#心跳机制" class="headerlink" title="心跳机制"></a>心跳机制</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端: 每30秒发送一次心跳</span></span><br><span class="line">&#123; <span class="attr">type</span>: <span class="string">&#x27;heartbeat&#x27;</span>, <span class="attr">data</span>: &#123; <span class="attr">timestamp</span>: <span class="title class_">Date</span>.<span class="title function_">now</span>() &#125; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务器: 超过60秒未收到心跳则断开连接</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="错误码定义"><a href="#错误码定义" class="headerlink" title="错误码定义"></a>错误码定义</h3><table>
+<thead>
+<tr>
+<th>错误码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>1001</td>
+<td>参数错误</td>
+</tr>
+<tr>
+<td>1002</td>
+<td>令牌无效&#x2F;过期</td>
+</tr>
+<tr>
+<td>1003</td>
+<td>权限不足</td>
+</tr>
+<tr>
+<td>2001</td>
+<td>用户不存在</td>
+</tr>
+<tr>
+<td>2002</td>
+<td>金币不足</td>
+</tr>
+<tr>
+<td>3001</td>
+<td>房间不存在</td>
+</tr>
+<tr>
+<td>3002</td>
+<td>房间已满</td>
+</tr>
+<tr>
+<td>3003</td>
+<td>房间已开始游戏</td>
+</tr>
+<tr>
+<td>3004</td>
+<td>房主不能离开</td>
+</tr>
+<tr>
+<td>4001</td>
+<td>游戏状态错误</td>
+</tr>
+<tr>
+<td>4002</td>
+<td>不是你的回合</td>
+</tr>
+<tr>
+<td>4003</td>
+<td>操作无效</td>
+</tr>
+</tbody></table>
+<h3 id="断线重连"><a href="#断线重连" class="headerlink" title="断线重连"></a>断线重连</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端断线后重新连接</span></span><br><span class="line">&#123; </span><br><span class="line">  <span class="attr">type</span>: <span class="string">&#x27;reconnect&#x27;</span>, </span><br><span class="line">  <span class="attr">data</span>: &#123; </span><br><span class="line">    <span class="attr">userId</span>: <span class="string">&quot;用户ID&quot;</span>,</span><br><span class="line">    <span class="attr">token</span>: <span class="string">&quot;登录令牌&quot;</span></span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🗄️-数据库设计-MySQL-Redis"><a href="#🗄️-数据库设计-MySQL-Redis" class="headerlink" title="🗄️ 数据库设计 (MySQL + Redis)"></a>🗄️ 数据库设计 (MySQL + Redis)</h2><h3 id="MySQL-持久化数据"><a href="#MySQL-持久化数据" class="headerlink" title="MySQL - 持久化数据"></a>MySQL - 持久化数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 用户表</span></span><br><span class="line"><span class="keyword">CREATE TABLE</span> users (</span><br><span class="line">  id <span class="type">BIGINT</span> <span class="keyword">PRIMARY KEY</span> AUTO_INCREMENT,</span><br><span class="line">  openid <span class="type">VARCHAR</span>(<span class="number">64</span>) <span class="keyword">NOT NULL</span> <span class="keyword">UNIQUE</span>,  <span class="comment">-- 微信openid</span></span><br><span class="line">  nickname <span class="type">VARCHAR</span>(<span class="number">64</span>),</span><br><span class="line">  avatar <span class="type">VARCHAR</span>(<span class="number">255</span>),</span><br><span class="line">  gold <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">1000</span>,              <span class="comment">-- 金币</span></span><br><span class="line">  diamond <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,              <span class="comment">-- 钻石</span></span><br><span class="line">  vip_level <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,            <span class="comment">-- VIP等级</span></span><br><span class="line">  create_time <span class="type">TIMESTAMP</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span>,</span><br><span class="line">  update_time <span class="type">TIMESTAMP</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="built_in">CURRENT_TIMESTAMP</span>,</span><br><span class="line">  INDEX idx_openid(openid)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 牌局记录表</span></span><br><span class="line"><span class="keyword">CREATE TABLE</span> game_records (</span><br><span class="line">  id <span class="type">BIGINT</span> <span class="keyword">PRIMARY KEY</span> AUTO_INCREMENT,</span><br><span class="line">  room_id <span class="type">VARCHAR</span>(<span class="number">32</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">  room_type <span class="type">VARCHAR</span>(<span class="number">16</span>) <span class="keyword">NOT NULL</span>,      <span class="comment">-- 房间类型</span></span><br><span class="line">  user_ids JSON,                       <span class="comment">-- 玩家ID列表</span></span><br><span class="line">  winners JSON,                        <span class="comment">-- 赢家ID列表</span></span><br><span class="line">  total_pot <span class="type">INT</span>,                      <span class="comment">-- 总奖池</span></span><br><span class="line">  create_time <span class="type">TIMESTAMP</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span>,</span><br><span class="line">  INDEX idx_room_id(room_id),</span><br><span class="line">  INDEX idx_create_time(create_time)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 用户游戏记录表</span></span><br><span class="line"><span class="keyword">CREATE TABLE</span> user_game_stats (</span><br><span class="line">  id <span class="type">BIGINT</span> <span class="keyword">PRIMARY KEY</span> AUTO_INCREMENT,</span><br><span class="line">  user_id <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,</span><br><span class="line">  game_count <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,           <span class="comment">-- 总游戏局数</span></span><br><span class="line">  win_count <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,            <span class="comment">-- 获胜局数</span></span><br><span class="line">  max_win <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,              <span class="comment">-- 最大赢取</span></span><br><span class="line">  total_gain <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,           <span class="comment">-- 总收益</span></span><br><span class="line">  update_time <span class="type">TIMESTAMP</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="built_in">CURRENT_TIMESTAMP</span>,</span><br><span class="line">  INDEX idx_user_id(user_id)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 金币流水表</span></span><br><span class="line"><span class="keyword">CREATE TABLE</span> gold_logs (</span><br><span class="line">  id <span class="type">BIGINT</span> <span class="keyword">PRIMARY KEY</span> AUTO_INCREMENT,</span><br><span class="line">  user_id <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,</span><br><span class="line">  amount <span class="type">INT</span> <span class="keyword">NOT NULL</span>,                <span class="comment">-- 变动数量(正/负)</span></span><br><span class="line">  reason <span class="type">VARCHAR</span>(<span class="number">32</span>) <span class="keyword">NOT NULL</span>,         <span class="comment">-- 变动原因</span></span><br><span class="line">  balance <span class="type">INT</span> <span class="keyword">NOT NULL</span>,               <span class="comment">-- 变动后余额</span></span><br><span class="line">  create_time <span class="type">TIMESTAMP</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span>,</span><br><span class="line">  INDEX idx_user_id(user_id),</span><br><span class="line">  INDEX idx_create_time(create_time)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Redis-实时数据"><a href="#Redis-实时数据" class="headerlink" title="Redis - 实时数据"></a>Redis - 实时数据</h3><h4 id="1-用户会话"><a href="#1-用户会话" class="headerlink" title="1. 用户会话"></a>1. 用户会话</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># String: 用户会话信息</span><br><span class="line">session:&#123;userId&#125; -&gt; &#123;</span><br><span class="line">  token: &quot;jwt_token&quot;,</span><br><span class="line">  socketId: &quot;websocket_id&quot;,</span><br><span class="line">  roomId: &quot;当前所在房间ID&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># String: 登录令牌</span><br><span class="line">token:&#123;token&#125; -&gt; userId</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-房间信息-实时"><a href="#2-房间信息-实时" class="headerlink" title="2. 房间信息 (实时)"></a>2. 房间信息 (实时)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># Hash: 房间数据</span><br><span class="line">room:&#123;roomId&#125; -&gt; &#123;</span><br><span class="line">  roomId: &quot;房间ID&quot;,</span><br><span class="line">  roomType: &quot;房间类型&quot;,</span><br><span class="line">  maxPlayers: 4,</span><br><span class="line">  currentPlayers: 2,</span><br><span class="line">  status: &quot;waiting|playing|closed&quot;,</span><br><span class="line">  ownerId: &quot;房主ID&quot;,</span><br><span class="line">  bet: 100,</span><br><span class="line">  createTime: 1234567890</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Set: 房间内的玩家</span><br><span class="line">room:&#123;roomId&#125;:players -&gt; [userId1, userId2, ...]</span><br><span class="line"></span><br><span class="line"># List: 房间列表</span><br><span class="line">rooms:list -&gt; [roomId1, roomId2, ...]</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-游戏状态-实时"><a href="#3-游戏状态-实时" class="headerlink" title="3. 游戏状态 (实时)"></a>3. 游戏状态 (实时)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Hash: 游戏进行中的状态</span><br><span class="line">game:&#123;roomId&#125; -&gt; &#123;</span><br><span class="line">  currentRound: 1,</span><br><span class="line">  totalRounds: 10,</span><br><span class="line">  currentPlayerId: &quot;当前行动玩家ID&quot;,</span><br><span class="line">  status: &quot;betting|playing|settling&quot;,</span><br><span class="line">  pot: 400,</span><br><span class="line">  createTime: 1234567890</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># List: 游戏操作历史</span><br><span class="line">game:&#123;roomId&#125;:history -&gt; [action1, action2, ...]</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-玩家房间状态-实时"><a href="#4-玩家房间状态-实时" class="headerlink" title="4. 玩家房间状态 (实时)"></a>4. 玩家房间状态 (实时)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Hash: 玩家房间状态</span><br><span class="line">player:&#123;userId&#125;:room -&gt; &#123;</span><br><span class="line">  roomId: &quot;房间ID&quot;,</span><br><span class="line">  seatIndex: 0,</span><br><span class="line">  gold: 800,</span><br><span class="line">  status: &quot;ready|playing|folded|left&quot;,</span><br><span class="line">  lastAction: &quot;bet|call|raise|fold&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-排行榜-缓存"><a href="#5-排行榜-缓存" class="headerlink" title="5. 排行榜 (缓存)"></a>5. 排行榜 (缓存)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Sorted Set: 金币排行榜</span><br><span class="line">rank:gold -&gt; &#123;</span><br><span class="line">  userId1: 10000,</span><br><span class="line">  userId2: 8000</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># String: 排行榜最后更新时间</span><br><span class="line">rank:gold:update_time -&gt; 1234567890</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据同步策略"><a href="#数据同步策略" class="headerlink" title="数据同步策略"></a>数据同步策略</h3><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>存储</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用户信息</td>
+<td>MySQL</td>
+<td>持久化存储</td>
+</tr>
+<tr>
+<td>金币余额</td>
+<td>MySQL + Redis</td>
+<td>双写，Redis优先</td>
+</tr>
+<tr>
+<td>牌局记录</td>
+<td>MySQL</td>
+<td>持久化存储</td>
+</tr>
+<tr>
+<td>游戏状态</td>
+<td>Redis</td>
+<td>实时内存</td>
+</tr>
+<tr>
+<td>房间状态</td>
+<td>Redis</td>
+<td>实时内存</td>
+</tr>
+<tr>
+<td>排行榜</td>
+<td>Redis</td>
+<td>缓存，定期同步MySQL</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🎮-核心功能模块"><a href="#🎮-核心功能模块" class="headerlink" title="🎮 核心功能模块"></a>🎮 核心功能模块</h2><h3 id="1-登录模块"><a href="#1-登录模块" class="headerlink" title="1. 登录模块"></a>1. 登录模块</h3><p><strong>流程:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">用户打开小程序</span><br><span class="line">    ↓</span><br><span class="line">获取微信授权 code</span><br><span class="line">    ↓</span><br><span class="line">发送给后端验证</span><br><span class="line">    ↓</span><br><span class="line">返回用户信息 + JWT token</span><br><span class="line">    ↓</span><br><span class="line">保存到本地存储</span><br></pre></td></tr></table></figure>
+
+<p><strong>接口:</strong></p>
+<ul>
+<li><code>POST /api/login</code> - 微信登录</li>
+<li><code>POST /api/refresh_token</code> - 刷新令牌</li>
+<li><code>GET /api/user/info</code> - 获取用户信息</li>
+<li><code>POST /api/user/update</code> - 更新用户信息</li>
+</ul>
+<p><strong>请求&#x2F;响应示例:</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// POST /api/login</span></span><br><span class="line"><span class="comment">// Request:</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">code</span>: <span class="string">&quot;微信授权code&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Response:</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">code</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="attr">userId</span>: <span class="number">123</span>,</span><br><span class="line">    <span class="attr">nickname</span>: <span class="string">&quot;玩家昵称&quot;</span>,</span><br><span class="line">    <span class="attr">avatar</span>: <span class="string">&quot;头像URL&quot;</span>,</span><br><span class="line">    <span class="attr">gold</span>: <span class="number">1000</span>,</span><br><span class="line">    <span class="attr">token</span>: <span class="string">&quot;jwt_token&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-房间管理"><a href="#2-房间管理" class="headerlink" title="2. 房间管理"></a>2. 房间管理</h3><p><strong>功能:</strong></p>
+<ul>
+<li>创建房间 (房主)</li>
+<li>加入房间 (普通玩家)</li>
+<li>退出房间</li>
+<li>房主解散房间</li>
+<li>踢人 (房主)</li>
+<li>房间设置 (底注&#x2F;局数)</li>
+</ul>
+<p><strong>状态:</strong></p>
+<ul>
+<li><code>waiting</code> - 等待玩家</li>
+<li><code>ready</code> - 玩家准备</li>
+<li><code>playing</code> -游戏中</li>
+<li><code>closed</code> - 已关闭</li>
+</ul>
+<h3 id="3-游戏逻辑"><a href="#3-游戏逻辑" class="headerlink" title="3. 游戏逻辑"></a>3. 游戏逻辑</h3><p><strong>流程:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">发牌阶段</span><br><span class="line">    ↓</span><br><span class="line">庄家选择(如需要)</span><br><span class="line">    ↓</span><br><span class="line">行动阶段(循环)</span><br><span class="line">    → 玩家操作(bet/call/raise/fold)</span><br><span class="line">    → 检查是否结束</span><br><span class="line">    ↓</span><br><span class="line">结算阶段</span><br><span class="line">    → 计算输赢</span><br><span class="line">    → 更新金币</span><br><span class="line">    → 排行榜更新</span><br></pre></td></tr></table></figure>
+
+<p><strong>操作类型:</strong></p>
+<ul>
+<li><code>bet</code> - 下注</li>
+<li><code>call</code> - 跟注</li>
+<li><code>raise</code> - 加注</li>
+<li><code>fold</code> - 弃牌</li>
+<li><code>check</code> - 看牌</li>
+<li><code>allin</code> - 全下</li>
+</ul>
+<h3 id="4-结算系统"><a href="#4-结算系统" class="headerlink" title="4. 结算系统"></a>4. 结算系统</h3><p><strong>计算:</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获胜判断</span></span><br><span class="line">winner = <span class="title function_">compareHands</span>(player1Cards, player2Cards)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输赢计算</span></span><br><span class="line">winAmount = pot * (winCount / totalPlayers)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 金币更新</span></span><br><span class="line">player.<span class="property">gold</span> += winAmount</span><br><span class="line"></span><br><span class="line"><span class="comment">// 排行榜更新</span></span><br><span class="line"><span class="title function_">zadd</span>(<span class="string">&#x27;rank:gold&#x27;</span>, player.<span class="property">gold</span>, player.<span class="property">userId</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-战绩查询"><a href="#5-战绩查询" class="headerlink" title="5. 战绩查询"></a>5. 战绩查询</h3><p><strong>数据:</strong></p>
+<ul>
+<li>总局数</li>
+<li>胜率</li>
+<li>最大赢取</li>
+<li>当前排名</li>
+</ul>
+<hr>
+<h2 id="🔒-安全考虑"><a href="#🔒-安全考虑" class="headerlink" title="🔒 安全考虑"></a>🔒 安全考虑</h2><h3 id="1-身份验证"><a href="#1-身份验证" class="headerlink" title="1. 身份验证"></a>1. 身份验证</h3><ul>
+<li>JWT Token 验证</li>
+<li>Token 过期时间设置</li>
+<li>敏感操作需要重新验证</li>
+</ul>
+<h3 id="2-数据安全"><a href="#2-数据安全" class="headerlink" title="2. 数据安全"></a>2. 数据安全</h3><ul>
+<li>HTTPS 加密传输</li>
+<li>数据库 SQL 注入防护</li>
+<li>XSS 攻击防护</li>
+</ul>
+<h3 id="3-游戏安全"><a href="#3-游戏安全" class="headerlink" title="3. 游戏安全"></a>3. 游戏安全</h3><ul>
+<li>关键逻辑服务端验证</li>
+<li>禁止客户端发牌&#x2F;结算</li>
+<li>频率限制(防刷)</li>
+</ul>
+<h3 id="4-金钱系统"><a href="#4-金钱系统" class="headerlink" title="4. 金钱系统"></a>4. 金钱系统</h3><ul>
+<li>金币变化需要记录流水</li>
+<li>服务端校验金币余额</li>
+<li>敏感操作日志记录</li>
+</ul>
+<hr>
+<h2 id="⚡-性能优化"><a href="#⚡-性能优化" class="headerlink" title="⚡ 性能优化"></a>⚡ 性能优化</h2><h3 id="1-通信优化"><a href="#1-通信优化" class="headerlink" title="1. 通信优化"></a>1. 通信优化</h3><ul>
+<li>WebSocket 长连接减少 HTTP 请求</li>
+<li>消息压缩(大消息)</li>
+<li>心跳间隔优化</li>
+</ul>
+<h3 id="2-数据库优化"><a href="#2-数据库优化" class="headerlink" title="2. 数据库优化"></a>2. 数据库优化</h3><ul>
+<li>Redis 缓存热点数据</li>
+<li>索引优化</li>
+<li>连接池复用</li>
+</ul>
+<h3 id="3-游戏逻辑优化"><a href="#3-游戏逻辑优化" class="headerlink" title="3. 游戏逻辑优化"></a>3. 游戏逻辑优化</h3><ul>
+<li>状态机管理游戏流程</li>
+<li>对象池复用游戏对象</li>
+<li>帧同步&#x2F;状态同步选择</li>
+</ul>
+<h3 id="4-负载均衡"><a href="#4-负载均衡" class="headerlink" title="4. 负载均衡"></a>4. 负载均衡</h3><ul>
+<li>Nginx WebSocket 负载均衡</li>
+<li>多节点部署</li>
+<li>Redis Cluster</li>
+</ul>
+<hr>
+<p><a href="/hexo/portfolio/">返回项目文档</a></p>
+
+      
+    </div>
+    <footer class="article-footer" style="overflow: hidden;">
+      
+      <span style="float: right;">
+        <a data-url="/hexo/portfolio/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E8%AF%A6%E7%BB%86%E6%96%87%E6%A1%A3.html" data-id="cuidL_WlodJR0LqiZUqtrUQqA" data-title="棋牌小游戏 - 后端开发详细文档" class="article-share-link"><span class="fa fa-share">分享</span></a>
+        
+        
+      </span>
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo/categories/AI/">AI</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/%E5%90%8E%E7%AB%AF/">后端</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/%E8%BF%90%E7%BB%B4/">运维</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/hexo/tags/3D%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">3D游戏</a> <a href="/hexo/tags/AI/" style="font-size: 15px;">AI</a> <a href="/hexo/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/hexo/tags/Android/" style="font-size: 10px;">Android</a> <a href="/hexo/tags/Bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/hexo/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/hexo/tags/Claude/" style="font-size: 10px;">Claude</a> <a href="/hexo/tags/Cocos-Creator/" style="font-size: 12.5px;">Cocos Creator</a> <a href="/hexo/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/hexo/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/hexo/tags/Egret/" style="font-size: 10px;">Egret</a> <a href="/hexo/tags/FairyGUI/" style="font-size: 10px;">FairyGUI</a> <a href="/hexo/tags/Git/" style="font-size: 10px;">Git</a> <a href="/hexo/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/hexo/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/hexo/tags/HTTP/" style="font-size: 12.5px;">HTTP</a> <a href="/hexo/tags/Hexo/" style="font-size: 12.5px;">Hexo</a> <a href="/hexo/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/hexo/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/hexo/tags/Laya/" style="font-size: 10px;">Laya</a> <a href="/hexo/tags/Laya2D/" style="font-size: 12.5px;">Laya2D</a> <a href="/hexo/tags/Laya3D/" style="font-size: 12.5px;">Laya3D</a> <a href="/hexo/tags/LayaAir/" style="font-size: 12.5px;">LayaAir</a> <a href="/hexo/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/hexo/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/hexo/tags/Nginx/" style="font-size: 12.5px;">Nginx</a> <a href="/hexo/tags/OpenClaw/" style="font-size: 10px;">OpenClaw</a> <a href="/hexo/tags/Python/" style="font-size: 15px;">Python</a> <a href="/hexo/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/hexo/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/hexo/tags/SVN/" style="font-size: 10px;">SVN</a> <a href="/hexo/tags/Sass/" style="font-size: 10px;">Sass</a> <a href="/hexo/tags/Shell/" style="font-size: 12.5px;">Shell</a> <a href="/hexo/tags/Spine/" style="font-size: 10px;">Spine</a> <a href="/hexo/tags/TCP-IP/" style="font-size: 10px;">TCP/IP</a> <a href="/hexo/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/hexo/tags/UI/" style="font-size: 10px;">UI</a> <a href="/hexo/tags/Unity/" style="font-size: 10px;">Unity</a> <a href="/hexo/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/hexo/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/hexo/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/hexo/tags/jQuery/" style="font-size: 10px;">jQuery</a> <a href="/hexo/tags/minimax/" style="font-size: 12.5px;">minimax</a> <a href="/hexo/tags/%E5%85%A5%E9%97%A8/" style="font-size: 12.5px;">入门</a> <a href="/hexo/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 17.5px;">前端</a> <a href="/hexo/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 10px;">动画</a> <a href="/hexo/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/hexo/tags/%E5%8F%91%E5%B8%83/" style="font-size: 10px;">发布</a> <a href="/hexo/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">后端</a> <a href="/hexo/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 10px;">命令行</a> <a href="/hexo/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">大模型</a> <a href="/hexo/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/hexo/tags/%E5%AF%BB%E8%B7%AF/" style="font-size: 10px;">寻路</a> <a href="/hexo/tags/%E5%B9%BF%E5%91%8ASDK/" style="font-size: 10px;">广告SDK</a> <a href="/hexo/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 10px;">性能优化</a> <a href="/hexo/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">插件</a> <a href="/hexo/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/hexo/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 12.5px;">数据库</a> <a href="/hexo/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/hexo/tags/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/" style="font-size: 10px;">数据采集</a> <a href="/hexo/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/hexo/tags/%E6%A0%87%E5%87%86%E5%BA%93/" style="font-size: 10px;">标准库</a> <a href="/hexo/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 20px;">游戏开发</a> <a href="/hexo/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;">爬虫</a> <a href="/hexo/tags/%E7%A9%BF%E5%B1%B1%E7%94%B2/" style="font-size: 10px;">穿山甲</a> <a href="/hexo/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">算法</a> <a href="/hexo/tags/%E7%BB%83%E4%B9%A0%E9%A2%98/" style="font-size: 10px;">练习题</a> <a href="/hexo/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">编程</a> <a href="/hexo/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" style="font-size: 17.5px;">编程基础</a> <a href="/hexo/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/hexo/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 15px;">脚本</a> <a href="/hexo/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;">自动化</a> <a href="/hexo/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/hexo/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">软件工程</a> <a href="/hexo/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 15px;">运维</a> <a href="/hexo/tags/%E8%BF%9B%E9%98%B6/" style="font-size: 17.5px;">进阶</a> <a href="/hexo/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 12.5px;">面向对象</a> <a href="/hexo/tags/%E9%A2%84%E5%A4%84%E7%90%86/" style="font-size: 10px;">预处理</a>
+    </div>
+  </div>
+
+
+  
+    
+
+<div class="widget-wrap">
+  <h3 class="widget-title">推荐文章</h3>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/hexo/2026/03/20/Claude-Code-for-VS-Code/">Claude Code for VS Code</a>
+        </li>
+      
+        <li>
+          <a href="/hexo/2026/03/10/openclaw-config-guide/">OpenClaw 配置指南</a>
+        </li>
+      
+        <li>
+          <a href="/hexo/2025/11/01/Laya%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Laya 性能优化指南</a>
+        </li>
+      
+        <li>
+          <a href="/hexo/2025/05/15/%E9%BE%99%E9%AA%A8%E4%B8%8ESpine%E5%8A%A8%E7%94%BB%E6%95%99%E7%A8%8B/">2D 骨骼动画实战</a>
+        </li>
+      
+        <li>
+          <a href="/hexo/2025/01/02/Hexo%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/">Hexo 博客搭建教程</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2026/01/">一月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2025/11/">十一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2025/09/">九月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2025/01/">一月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/hexo/2026/03/20/Claude-Code-for-VS-Code/">Claude Code for VS Code</a>
+          </li>
+        
+          <li>
+            <a href="/hexo/2026/03/15/%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8BCoding-Plan%E5%AF%B9%E6%AF%94/">常用大模型Coding Plan对比</a>
+          </li>
+        
+          <li>
+            <a href="/hexo/2026/03/10/openclaw-config-guide/">OpenClaw 配置指南</a>
+          </li>
+        
+          <li>
+            <a href="/hexo/2026/01/20/Docker%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">Docker 入门与实践</a>
+          </li>
+        
+          <li>
+            <a href="/hexo/2026/01/16/Nginx%E7%BB%83%E4%B9%A0%E9%A2%98/">Nginx 练习题</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        © 2025-2026 宁尚义. All rights reserved.
+      
+      &copy; 2026 宁尚义<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      
+        <br>
+        <span id="busuanzi_container_site_pv">
+          总访问量: <span id="busuanzi_value_site_pv">0</span>
+        </span>
+      
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/busuanzi/2.3/busuanzi.pure.min.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4281d5d8ea7e4e9d8d336c9230dfff9a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/hexo/" class="mobile-nav-link">首页</a>
+  
+    <a href="/hexo/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/hexo/portfolio" class="mobile-nav-link">作品集</a>
+  
+    <a href="/hexo/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/hexo/js/jquery-3.6.4.min.js"></script>
+
+
+
+<script src="/hexo/js/search.js"></script>
+
+
+
+  
+<script src="/hexo/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/hexo/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "KXoxur5yqjJ4BMJkcRNl87rVX20K9hfe18JlOr9meD2VafQsaA8L4NxLTnCNwFLo",
+        appKey: "cn-n1",
+        placeholder: "欢迎留言交流！",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>
