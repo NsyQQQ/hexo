@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>棋牌小游戏 - 后端开发详细文档 | 宁尚义的个人博客</title>
+  <title>棋牌小游戏 - 后端开发 | 宁尚义的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="后端开发详细文档📡 通信协议WebSocket 消息格式1234567891011121314&#x2F;&#x2F; 客户端 -&gt; 服务器interface WSRequest &#123;  type: string;           &#x2F;&#x2F; 消息类型  data: any;              &#x2F;&#x2F; 消息数据  seq?: number;           &#x2F;&#x2F; 序列号(可选)&#125;&#x2F;&#x2F;">
+  <meta name="description" content="后端开发📡 通信协议WebSocket 消息格式1234567891011121314&#x2F;&#x2F; 客户端 -&gt; 服务器interface WSRequest &#123;  type: string;           &#x2F;&#x2F; 消息类型  data: any;              &#x2F;&#x2F; 消息数据  seq?: number;           &#x2F;&#x2F; 序列号(可选)&#125;&#x2F;&#x2F; 服务器">
 <meta property="og:type" content="website">
-<meta property="og:title" content="棋牌小游戏 - 后端开发详细文档">
+<meta property="og:title" content="棋牌小游戏 - 后端开发">
 <meta property="og:url" content="https://nsyqqq.github.io/hexo/portfolio/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E8%AF%A6%E7%BB%86%E6%96%87%E6%A1%A3.html">
 <meta property="og:site_name" content="宁尚义的个人博客">
-<meta property="og:description" content="后端开发详细文档📡 通信协议WebSocket 消息格式1234567891011121314&#x2F;&#x2F; 客户端 -&gt; 服务器interface WSRequest &#123;  type: string;           &#x2F;&#x2F; 消息类型  data: any;              &#x2F;&#x2F; 消息数据  seq?: number;           &#x2F;&#x2F; 序列号(可选)&#125;&#x2F;&#x2F;">
+<meta property="og:description" content="后端开发📡 通信协议WebSocket 消息格式1234567891011121314&#x2F;&#x2F; 客户端 -&gt; 服务器interface WSRequest &#123;  type: string;           &#x2F;&#x2F; 消息类型  data: any;              &#x2F;&#x2F; 消息数据  seq?: number;           &#x2F;&#x2F; 序列号(可选)&#125;&#x2F;&#x2F; 服务器">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-25T14:15:00.000Z">
-<meta property="article:modified_time" content="2026-03-25T14:15:58.150Z">
+<meta property="article:modified_time" content="2026-03-25T14:19:54.779Z">
 <meta property="article:author" content="宁尚义">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="博客">
@@ -110,7 +110,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      棋牌小游戏 - 后端开发详细文档
+      棋牌小游戏 - 后端开发
     </h1>
   
 
@@ -118,7 +118,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="后端开发详细文档"><a href="#后端开发详细文档" class="headerlink" title="后端开发详细文档"></a>后端开发详细文档</h1><h2 id="📡-通信协议"><a href="#📡-通信协议" class="headerlink" title="📡 通信协议"></a>📡 通信协议</h2><h3 id="WebSocket-消息格式"><a href="#WebSocket-消息格式" class="headerlink" title="WebSocket 消息格式"></a>WebSocket 消息格式</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端 -&gt; 服务器</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">WSRequest</span> &#123;</span><br><span class="line">  <span class="attr">type</span>: <span class="built_in">string</span>;           <span class="comment">// 消息类型</span></span><br><span class="line">  <span class="attr">data</span>: <span class="built_in">any</span>;              <span class="comment">// 消息数据</span></span><br><span class="line">  <span class="attr">seq</span>?: <span class="built_in">number</span>;           <span class="comment">// 序列号(可选)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务器 -&gt; 客户端</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">WSResponse</span> &#123;</span><br><span class="line">  <span class="attr">type</span>: <span class="built_in">string</span>;           <span class="comment">// 消息类型</span></span><br><span class="line">  <span class="attr">code</span>: <span class="built_in">number</span>;           <span class="comment">// 状态码 0=成功</span></span><br><span class="line">  <span class="attr">data</span>: <span class="built_in">any</span>;              <span class="comment">// 响应数据</span></span><br><span class="line">  <span class="attr">msg</span>?: <span class="built_in">string</span>;           <span class="comment">// 错误信息</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="后端开发"><a href="#后端开发" class="headerlink" title="后端开发"></a>后端开发</h1><h2 id="📡-通信协议"><a href="#📡-通信协议" class="headerlink" title="📡 通信协议"></a>📡 通信协议</h2><h3 id="WebSocket-消息格式"><a href="#WebSocket-消息格式" class="headerlink" title="WebSocket 消息格式"></a>WebSocket 消息格式</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端 -&gt; 服务器</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">WSRequest</span> &#123;</span><br><span class="line">  <span class="attr">type</span>: <span class="built_in">string</span>;           <span class="comment">// 消息类型</span></span><br><span class="line">  <span class="attr">data</span>: <span class="built_in">any</span>;              <span class="comment">// 消息数据</span></span><br><span class="line">  <span class="attr">seq</span>?: <span class="built_in">number</span>;           <span class="comment">// 序列号(可选)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务器 -&gt; 客户端</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">WSResponse</span> &#123;</span><br><span class="line">  <span class="attr">type</span>: <span class="built_in">string</span>;           <span class="comment">// 消息类型</span></span><br><span class="line">  <span class="attr">code</span>: <span class="built_in">number</span>;           <span class="comment">// 状态码 0=成功</span></span><br><span class="line">  <span class="attr">data</span>: <span class="built_in">any</span>;              <span class="comment">// 响应数据</span></span><br><span class="line">  <span class="attr">msg</span>?: <span class="built_in">string</span>;           <span class="comment">// 错误信息</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="消息类型定义"><a href="#消息类型定义" class="headerlink" title="消息类型定义"></a>消息类型定义</h3><table>
 <thead>
@@ -412,7 +412,7 @@
     <footer class="article-footer" style="overflow: hidden;">
       
       <span style="float: right;">
-        <a data-url="/hexo/portfolio/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E8%AF%A6%E7%BB%86%E6%96%87%E6%A1%A3.html" data-id="cuidL_WlodJR0LqiZUqtrUQqA" data-title="棋牌小游戏 - 后端开发详细文档" class="article-share-link"><span class="fa fa-share">分享</span></a>
+        <a data-url="/hexo/portfolio/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E8%AF%A6%E7%BB%86%E6%96%87%E6%A1%A3.html" data-id="cuidL_WlodJR0LqiZUqtrUQqA" data-title="棋牌小游戏 - 后端开发" class="article-share-link"><span class="fa fa-share">分享</span></a>
         
         
       </span>
