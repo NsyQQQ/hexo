@@ -1,7 +1,7 @@
 ---
 title: FairyGUI 完全指南
-date: 2025-04-20 10:00:00
-tags: [FairyGUI, UI, Unity, 游戏开发, LayaAir]
+date: 2025-05-20 10:00:00
+tags: [FairyGUI, UI, 游戏开发]
 categories: [技术教程, 游戏开发]
 ---
 ---

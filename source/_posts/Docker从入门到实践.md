@@ -1,7 +1,7 @@
 ---
 title: Docker 入门与实践
-date: 2026-01-13 14:00:00
-tags: [Docker, 容器, 运维, DevOps, 虚拟化]
+date: 2026-01-20 14:00:00
+tags: [Docker, 容器]
 categories: [技术教程, 运维]
 ---
 

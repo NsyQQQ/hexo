@@ -1,7 +1,7 @@
 ---
 title: 2D 骨骼动画实战
-date: 2025-04-15 00:00:00
-tags: [游戏开发, 动画, DragonBones, Spine, 性能优化]
+date: 2025-05-15 00:00:00
+tags: [游戏开发, 动画, Spine]
 categories: 技术文档
 featured: true
 ---
@@ -562,4 +562,3 @@ DragonBones和Spine都是优秀的2D骨骼动画解决方案：
 
 ---
 
-*本文最后更新于 2025-10-12*

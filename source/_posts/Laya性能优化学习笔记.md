@@ -1,6 +1,6 @@
 ---
 title: Laya 性能优化指南
-date: 2025-10-01 00:00:00
+date: 2025-11-01 00:00:00
 tags: [游戏开发, Laya, 性能优化]
 categories: 学习笔记
 featured: true
@@ -555,4 +555,3 @@ Config.designHeight = 1334;
 
 ---
 
-*本文最后更新于 2025-04-10*

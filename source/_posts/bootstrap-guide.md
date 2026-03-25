@@ -1,7 +1,7 @@
 ---
 title: Bootstrap 5 完全指南
 date: 2025-03-11 10:00:00
-tags: [Bootstrap, CSS, 前端, 响应式, UI框架]
+tags: [Bootstrap, CSS]
 categories: [技术教程, 前端开发]
 ---
 ---

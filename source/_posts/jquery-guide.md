@@ -1,7 +1,7 @@
 ---
 title: jQuery 完全指南
 date: 2025-03-10 10:00:00
-tags: [jQuery, JavaScript, 前端, DOM, AJAX]
+tags: [jQuery, JavaScript, 前端]
 categories: [技术教程, 前端开发]
 ---
 ---

@@ -1,7 +1,7 @@
 ---
 title: Laya2D 入门指南
-date: 2025-04-11 00:00:00
-tags: [游戏开发, Laya2D, TypeScript]
+date: 2025-05-11 00:00:00
+tags: [游戏开发, Laya2D]
 categories: 技术教程
 ---
 
@@ -627,4 +627,3 @@ Laya2D是一个功能强大的HTML5游戏引擎：
 
 ---
 
-*本文最后更新于 2025-04-10*

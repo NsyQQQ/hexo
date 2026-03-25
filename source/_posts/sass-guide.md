@@ -1,7 +1,7 @@
 ---
 title: Sass 完全指南
 date: 2025-03-04 10:00:00
-tags: [Sass, CSS, 前端, 预处理, Less]
+tags: [Sass, CSS, 前端, 预处理]
 categories: [技术教程, 前端开发]
 ---
 ---

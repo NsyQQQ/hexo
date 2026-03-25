@@ -1,7 +1,7 @@
 ---
 title: Python 爬虫库
-date: 2025-08-11 10:00:00
-tags: [Python, 爬虫, Requests, Scrapy, BeautifulSoup, 数据采集]
+date: 2025-09-11 10:00:00
+tags: [Python, 爬虫, 数据采集]
 categories: [技术教程, 编程语言]
 ---
 

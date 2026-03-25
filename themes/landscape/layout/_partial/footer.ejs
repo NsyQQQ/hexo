@@ -11,10 +11,7 @@
       <%= __('powered_by') %> <a href="https://hexo.io/" target="_blank">Hexo</a>
       <% if (theme.busuanzi){ %>
         <br>
-        <span id="busuanzi_container_site_uv" style="display: inline;">
-          访问人数: <span id="busuanzi_value_site_uv">0</span>
-        </span>
-        <span id="busuanzi_container_site_pv" style="display: inline; margin-left: 15px;">
+        <span id="busuanzi_container_site_pv">
           总访问量: <span id="busuanzi_value_site_pv">0</span>
         </span>
       <% } %>
@@ -23,19 +20,15 @@
 </footer>
 
 <% if (theme.busuanzi){ %>
+<script src="https://cdn.bootcdn.net/ajax/libs/busuanzi/2.3/busuanzi.pure.min.js"></script>
+<% } %>
+
 <script>
+var _hmt = _hmt || [];
 (function() {
-  var bp = document.createElement('script');
-  bp.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.min.js';
-  bp.async = true;
-  bp.onload = function() {
-    // 确保脚本加载后重新计数
-    if (typeof busuanziCallback !== 'undefined') {
-      busuanziCallback();
-    }
-  };
-  var s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(bp, s);
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4281d5d8ea7e4e9d8d336c9230dfff9a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
 })();
 </script>
-<% } %>

@@ -26,6 +26,7 @@ date: 2025-02-11 00:00:00
 - FairyGUI
 - LayaAir Unity Plugin
 - A* 寻路算法
+- 微信小游戏
 
 ### 后端 & 数据库
 - Python
@@ -33,6 +34,7 @@ date: 2025-02-11 00:00:00
 - Redis
 - Nginx
 - Docker
+- Node.js
 
 ### 工具 & 基础
 - Linux / Shell
@@ -47,6 +49,13 @@ date: 2025-02-11 00:00:00
 - Python 爬虫
 - Python 自动化
 - Android 穿山甲广告 SDK
+
+## 项目经验
+
+### 棋牌小游戏
+基于微信小游戏的棋牌项目，使用 Cocos2d + Node.js + MySQL + Redis 技术栈。
+
+[查看项目文档 »](/hexo/portfolio/)
 
 ## 联系我
 

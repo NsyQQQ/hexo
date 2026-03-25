@@ -1,8 +1,8 @@
 ---
 title: SVN 和 Git 版本控制入门
-date: 2025-04-05 11:24:00
-tags: [Git, SVN, 版本控制, GitHub, 开发工具]
-categories: [技术教程, 开发工具]
+date: 2025-05-05 11:24:00
+tags: [Git, SVN]
+categories: [技术教程, 游戏开发]
 ---
 ---
 

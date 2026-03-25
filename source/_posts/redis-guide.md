@@ -1,8 +1,8 @@
 ---
 title: Redis 完全指南
-date: 2025-08-06 10:00:00
-tags: [Redis, 数据库, NoSQL, 缓存, 内存数据库]
-categories: [技术教程, 数据库]
+date: 2025-09-06 10:00:00
+tags: [Redis, 数据库]
+categories: [技术教程, 后端]
 ---
 ---
 

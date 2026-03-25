@@ -1,8 +1,8 @@
 ---
 title: 穿山甲广告 SDK 接入指南
-date: 2025-06-15 10:00:00
-tags: [Android, 穿山甲, 广告SDK, 字节跳动, 变现]
-categories: [技术教程, 移动开发]
+date: 2025-07-15 10:00:00
+tags: [Android, 穿山甲, 广告SDK]
+categories: [技术教程, 游戏开发]
 ---
 ---
 

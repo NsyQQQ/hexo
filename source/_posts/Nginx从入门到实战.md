@@ -1,7 +1,7 @@
 ---
 title: Nginx 入门与实战
-date: 2026-01-12 10:00:00
-tags: [Nginx, 服务器, 运维, Web服务器, 负载均衡]
+date: 2026-01-15 10:00:00
+tags: [Nginx, 服务器]
 categories: [技术教程, 运维]
 ---
 

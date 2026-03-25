@@ -1,8 +1,8 @@
 ---
 title: MySQL 完全指南
-date: 2025-08-05 10:00:00
-tags: [MySQL, 数据库, SQL, 后端, RDBMS]
-categories: [技术教程, 数据库]
+date: 2025-09-05 10:00:00
+tags: [MySQL, 数据库, SQL]
+categories: [技术教程, 后端]
 ---
 ---
 

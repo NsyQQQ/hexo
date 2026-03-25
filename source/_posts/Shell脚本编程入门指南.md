@@ -1,7 +1,7 @@
 ---
 title: Shell 脚本编程入门指南
-date: 2026-01-11 10:00:00
-tags: [Linux, Shell, 运维, 脚本, Bash]
+date: 2026-01-10 10:00:00
+tags: [Linux, Shell, 脚本]
 categories: [技术教程, 运维]
 ---
 

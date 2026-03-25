@@ -1,7 +1,7 @@
 ---
 title: Vue 3 入门指南
 date: 2025-03-12 00:00:00
-tags: [前端, Vue, JavaScript]
+tags: [Vue, 前端, JavaScript, DOM]
 categories: 技术文档
 ---
 
@@ -450,4 +450,3 @@ Vue.js是一个易学易用的前端框架，建议：
 
 ---
 
-*本文最后更新于 2025-03-11*

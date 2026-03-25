@@ -1,7 +1,7 @@
 ---
 title: LayaAir 项目打包与发布
-date: 2025-10-05 10:00:00
-tags: [LayaAir, 游戏开发, 打包, 发布, H5]
+date: 2025-11-05 10:00:00
+tags: [LayaAir, 游戏开发, 发布]
 categories: [技术教程, 游戏开发]
 ---
 

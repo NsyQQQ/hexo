@@ -1,8 +1,8 @@
 ---
 title: WebSocket 与 HTTP 协议
-date: 2025-04-06 11:15:00
-tags: [WebSocket, HTTP, 网络协议, 前端, 实时通信]
-categories: [技术教程, 网络]
+date: 2025-05-06 11:15:00
+tags: [WebSocket, HTTP]
+categories: [技术教程, 前端开发]
 ---
 ---
 

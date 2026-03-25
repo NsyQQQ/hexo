@@ -1,7 +1,7 @@
 ---
 title: A* 寻路算法
-date: 2025-10-15 10:00:00
-tags: [算法, A*, 寻路, TypeScript, LayaAir, 游戏开发]
+date: 2025-11-15 10:00:00
+tags: [算法, 寻路]
 categories: [技术教程, 游戏开发]
 ---
 
