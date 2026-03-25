@@ -14,7 +14,7 @@
 <meta property="og:description" content="📋 项目概述 项目类型: 微信小游戏 游戏类型: 棋牌 前端: Cocos2d 后端: Node.js 数据库: Redis 部署: Docker + Nginx   🏗️ 系统架构12345678910┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐│   微信小程序    │────▶│   Nginx">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-25T09:24:00.000Z">
-<meta property="article:modified_time" content="2026-03-25T09:32:35.952Z">
+<meta property="article:modified_time" content="2026-03-25T13:44:14.567Z">
 <meta property="article:author" content="宁尚义">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="博客">
@@ -130,7 +130,7 @@
 <h2 id="🏗️-系统架构"><a href="#🏗️-系统架构" class="headerlink" title="🏗️ 系统架构"></a>🏗️ 系统架构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐</span><br><span class="line">│   微信小程序    │────▶│   Nginx         │────▶│   Node.js       │</span><br><span class="line">│   (客户端)      │     │   (反向代理)     │     │   (游戏服务器)   │</span><br><span class="line">└─────────────────┘     └─────────────────┘     └─────────────────┘</span><br><span class="line">                                                        │</span><br><span class="line">                                                        ▼</span><br><span class="line">                                                ┌─────────────────┐</span><br><span class="line">                                                │   Redis         │</span><br><span class="line">                                                │   (数据存储)     │</span><br><span class="line">                                                └─────────────────┘</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="📁-目录结构"><a href="#📁-目录结构" class="headerlink" title="📁 目录结构"></a>📁 目录结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">project/</span><br><span class="line">├── client/                 # Cocos2d 客户端</span><br><span class="line">│   ├── assets/</span><br><span class="line">│   ├── scenes/</span><br><span class="line">│   ├── scripts/</span><br><span class="line">│   └── build/              # 构建输出</span><br><span class="line">│</span><br><span class="line">├── server/                  # Node.js 后端</span><br><span class="line">│   ├── src/</span><br><span class="line">│   │   ├── config/         # 配置文件</span><br><span class="line">│   │   ├── controllers/    # 控制器</span><br><span class="line">│   │   ├── services/       # 业务逻辑</span><br><span class="line">│   │   ├── models/         # 数据模型</span><br><span class="line">│   │   ├── middleware/     # 中间件</span><br><span class="line">│   │   └── utils/          # 工具函数</span><br><span class="line">│   ├── docker/             # Docker 相关文件</span><br><span class="line">│   └── package.json</span><br><span class="line">│</span><br><span class="line">├── nginx/                   # Nginx 配置</span><br><span class="line">│   └── conf.d/</span><br><span class="line">│</span><br><span class="line">└── docs/                    # 项目文档</span><br><span class="line">    ├── README.md</span><br><span class="line">    ├── deployment.md</span><br><span class="line">    └── api.md</span><br></pre></td></tr></table></figure>
+<h2 id="📁-目录结构"><a href="#📁-目录结构" class="headerlink" title="📁 目录结构"></a>📁 目录结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">project/</span><br><span class="line">├── client/                 # Cocos2d 客户端</span><br><span class="line">│   ├── assets/</span><br><span class="line">│   ├── scenes/</span><br><span class="line">│   ├── scripts/</span><br><span class="line">│   └── build/              # 构建输出</span><br><span class="line">│</span><br><span class="line">├── server/                  # Node.js 后端</span><br><span class="line">│   ├── src/</span><br><span class="line">│   │   ├── config/         # 配置文件</span><br><span class="line">│   │   ├── controllers/    # 控制器</span><br><span class="line">│   │   ├── services/       # 业务逻辑</span><br><span class="line">│   │   ├── models/          # 数据模型</span><br><span class="line">│   │   ├── middleware/      # 中间件</span><br><span class="line">│   │   ├── utils/           # 工具函数</span><br><span class="line">│   │   └── websocket/       # WebSocket 处理</span><br><span class="line">│   ├── docker/             # Docker 相关文件</span><br><span class="line">│   └── package.json</span><br><span class="line">│</span><br><span class="line">├── nginx/                   # Nginx 配置</span><br><span class="line">│   └── conf.d/</span><br><span class="line">│</span><br><span class="line">└── docs/                    # 项目文档</span><br><span class="line">    ├── README.md</span><br><span class="line">    ├── deployment.md</span><br><span class="line">    └── api.md</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h2 id="🔧-技术栈"><a href="#🔧-技术栈" class="headerlink" title="🔧 技术栈"></a>🔧 技术栈</h2><table>
@@ -150,11 +150,11 @@
 </tr>
 <tr>
 <td>后端</td>
-<td>Node.js + Express&#x2F;Koa</td>
+<td>Node.js + Express + Socket.io</td>
 </tr>
 <tr>
 <td>通信</td>
-<td>WebSocket (Socket.io)</td>
+<td>WebSocket</td>
 </tr>
 <tr>
 <td>数据库</td>
@@ -162,7 +162,7 @@
 </tr>
 <tr>
 <td>部署</td>
-<td>Docker</td>
+<td>Docker + Docker Compose</td>
 </tr>
 <tr>
 <td>Web服务器</td>
@@ -170,11 +170,159 @@
 </tr>
 </tbody></table>
 <hr>
+<h2 id="🗄️-数据库设计-Redis"><a href="#🗄️-数据库设计-Redis" class="headerlink" title="🗄️ 数据库设计 (Redis)"></a>🗄️ 数据库设计 (Redis)</h2><h3 id="1-用户信息"><a href="#1-用户信息" class="headerlink" title="1. 用户信息"></a>1. 用户信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Hash: 用户基本信息</span><br><span class="line">user:&#123;userId&#125; -&gt; &#123;</span><br><span class="line">  nickname: &quot;玩家昵称&quot;,</span><br><span class="line">  avatar: &quot;头像URL&quot;,</span><br><span class="line">  gold: 1000,        # 金币</span><br><span class="line">  diamond: 0,         # 钻石</span><br><span class="line">  createTime: 1234567890,</span><br><span class="line">  lastLoginTime: 1234567890</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Set: 用户ID列表</span><br><span class="line">user:ids -&gt; [1, 2, 3, ...]</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-房间信息"><a href="#2-房间信息" class="headerlink" title="2. 房间信息"></a>2. 房间信息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># Hash: 房间数据</span><br><span class="line">room:&#123;roomId&#125; -&gt; &#123;</span><br><span class="line">  roomId: &quot;房间ID&quot;,</span><br><span class="line">  roomType: &quot;房间类型(初级/中级/高级)&quot;,</span><br><span class="line">  maxPlayers: 4,           # 最大玩家数</span><br><span class="line">  currentPlayers: 2,       # 当前玩家数</span><br><span class="line">  status: &quot;waiting|playing|closed&quot;,</span><br><span class="line">  ownerId: &quot;房主ID&quot;,</span><br><span class="line">  bet: 100,                # 底注</span><br><span class="line">  createTime: 1234567890</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Set: 房间内的玩家</span><br><span class="line">room:&#123;roomId&#125;:players -&gt; [userId1, userId2, ...]</span><br><span class="line"></span><br><span class="line"># List: 房间列表(有序)</span><br><span class="line">rooms:list -&gt; [roomId1, roomId2, ...]</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-游戏状态"><a href="#3-游戏状态" class="headerlink" title="3. 游戏状态"></a>3. 游戏状态</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># Hash: 游戏进行中的状态</span><br><span class="line">game:&#123;roomId&#125; -&gt; &#123;</span><br><span class="line">  roomId: &quot;房间ID&quot;,</span><br><span class="line">  currentRound: 1,         # 当前回合</span><br><span class="line">  totalRounds: 10,         # 总回合数</span><br><span class="line">  currentPlayerId: &quot;当前行动玩家ID&quot;,</span><br><span class="line">  status: &quot;betting|playing|settling&quot;,</span><br><span class="line">  pot: 400,               # 奖池</span><br><span class="line">  createTime: 1234567890</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># List: 游戏操作历史</span><br><span class="line">game:&#123;roomId&#125;:history -&gt; [action1, action2, ...]</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-玩家在房间中的状态"><a href="#4-玩家在房间中的状态" class="headerlink" title="4. 玩家在房间中的状态"></a>4. 玩家在房间中的状态</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Hash: 玩家房间状态</span><br><span class="line">player:&#123;userId&#125;:room -&gt; &#123;</span><br><span class="line">  roomId: &quot;房间ID&quot;,</span><br><span class="line">  seatIndex: 0,           # 座位号(0-3)</span><br><span class="line">  gold: 800,              # 当前金币</span><br><span class="line">  status: &quot;ready|playing|folded|left&quot;,</span><br><span class="line">  lastAction: &quot;bet|call|raise|fold&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-排行榜"><a href="#5-排行榜" class="headerlink" title="5. 排行榜"></a>5. 排行榜</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Sorted Set: 金币排行榜</span><br><span class="line">rank:gold -&gt; &#123;</span><br><span class="line">  userId1: 10000,</span><br><span class="line">  userId2: 8000,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="📡-通信协议"><a href="#📡-通信协议" class="headerlink" title="📡 通信协议"></a>📡 通信协议</h2><h3 id="WebSocket-消息格式"><a href="#WebSocket-消息格式" class="headerlink" title="WebSocket 消息格式"></a>WebSocket 消息格式</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端 -&gt; 服务器</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">WSRequest</span> &#123;</span><br><span class="line">  <span class="attr">type</span>: <span class="built_in">string</span>;           <span class="comment">// 消息类型</span></span><br><span class="line">  <span class="attr">data</span>: <span class="built_in">any</span>;              <span class="comment">// 消息数据</span></span><br><span class="line">  <span class="attr">seq</span>?: <span class="built_in">number</span>;           <span class="comment">// 序列号(可选)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务器 -&gt; 客户端</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">WSResponse</span> &#123;</span><br><span class="line">  <span class="attr">type</span>: <span class="built_in">string</span>;           <span class="comment">// 消息类型</span></span><br><span class="line">  <span class="attr">code</span>: <span class="built_in">number</span>;           <span class="comment">// 状态码 0=成功</span></span><br><span class="line">  <span class="attr">data</span>: <span class="built_in">any</span>;              <span class="comment">// 响应数据</span></span><br><span class="line">  <span class="attr">msg</span>?: <span class="built_in">string</span>;           <span class="comment">// 错误信息</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="消息类型定义"><a href="#消息类型定义" class="headerlink" title="消息类型定义"></a>消息类型定义</h3><table>
+<thead>
+<tr>
+<th>消息类型</th>
+<th>方向</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>heartbeat</code></td>
+<td>双向</td>
+<td>心跳保活</td>
+</tr>
+<tr>
+<td><code>login</code></td>
+<td>C→S</td>
+<td>用户登录</td>
+</tr>
+<tr>
+<td><code>login_result</code></td>
+<td>S→C</td>
+<td>登录结果</td>
+</tr>
+<tr>
+<td><code>create_room</code></td>
+<td>C→S</td>
+<td>创建房间</td>
+</tr>
+<tr>
+<td><code>join_room</code></td>
+<td>C→S</td>
+<td>加入房间</td>
+</tr>
+<tr>
+<td><code>room_info</code></td>
+<td>S→C</td>
+<td>房间信息</td>
+</tr>
+<tr>
+<td><code>player_join</code></td>
+<td>S→C</td>
+<td>玩家加入</td>
+</tr>
+<tr>
+<td><code>player_leave</code></td>
+<td>S→C</td>
+<td>玩家离开</td>
+</tr>
+<tr>
+<td><code>game_start</code></td>
+<td>S→C</td>
+<td>游戏开始</td>
+</tr>
+<tr>
+<td><code>action</code></td>
+<td>C→S</td>
+<td>玩家操作</td>
+</tr>
+<tr>
+<td><code>action_notify</code></td>
+<td>S→C</td>
+<td>操作通知</td>
+</tr>
+<tr>
+<td><code>game_over</code></td>
+<td>S→C</td>
+<td>游戏结束</td>
+</tr>
+<tr>
+<td><code>settle</code></td>
+<td>S→C</td>
+<td>结算</td>
+</tr>
+</tbody></table>
+<h3 id="心跳机制"><a href="#心跳机制" class="headerlink" title="心跳机制"></a>心跳机制</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端: 每30秒发送一次心跳</span></span><br><span class="line">&#123; <span class="attr">type</span>: <span class="string">&#x27;heartbeat&#x27;</span>, <span class="attr">data</span>: &#123; <span class="attr">timestamp</span>: <span class="title class_">Date</span>.<span class="title function_">now</span>() &#125; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务器: 超过60秒未收到心跳则断开连接</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="断线重连"><a href="#断线重连" class="headerlink" title="断线重连"></a>断线重连</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端断线后重新连接</span></span><br><span class="line">&#123; </span><br><span class="line">  <span class="attr">type</span>: <span class="string">&#x27;reconnect&#x27;</span>, </span><br><span class="line">  <span class="attr">data</span>: &#123; </span><br><span class="line">    <span class="attr">userId</span>: <span class="string">&quot;用户ID&quot;</span>,</span><br><span class="line">    <span class="attr">token</span>: <span class="string">&quot;登录令牌&quot;</span></span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🎮-核心功能模块"><a href="#🎮-核心功能模块" class="headerlink" title="🎮 核心功能模块"></a>🎮 核心功能模块</h2><h3 id="1-登录模块"><a href="#1-登录模块" class="headerlink" title="1. 登录模块"></a>1. 登录模块</h3><p><strong>流程:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">用户打开小程序</span><br><span class="line">    ↓</span><br><span class="line">获取微信授权 code</span><br><span class="line">    ↓</span><br><span class="line">发送给后端验证</span><br><span class="line">    ↓</span><br><span class="line">返回用户信息 + JWT token</span><br><span class="line">    ↓</span><br><span class="line">保存到本地存储</span><br></pre></td></tr></table></figure>
+
+<p><strong>接口:</strong></p>
+<ul>
+<li><code>POST /api/login</code> - 微信登录</li>
+<li><code>POST /api/refresh_token</code> - 刷新令牌</li>
+</ul>
+<h3 id="2-匹配系统"><a href="#2-匹配系统" class="headerlink" title="2. 匹配系统"></a>2. 匹配系统</h3><p><strong>流程:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">点击匹配按钮</span><br><span class="line">    ↓</span><br><span class="line">发送匹配请求</span><br><span class="line">    ↓</span><br><span class="line">等待其他玩家(超时取消)</span><br><span class="line">    ↓</span><br><span class="line">匹配成功 -&gt; 进入房间</span><br><span class="line">    ↓</span><br><span class="line">匹配失败 -&gt; 继续等待/取消</span><br></pre></td></tr></table></figure>
+
+<p><strong>消息:</strong></p>
+<ul>
+<li><code>match_start</code> - 开始匹配</li>
+<li><code>match_success</code> - 匹配成功</li>
+<li><code>match_cancel</code> - 取消匹配</li>
+</ul>
+<h3 id="3-房间管理"><a href="#3-房间管理" class="headerlink" title="3. 房间管理"></a>3. 房间管理</h3><p><strong>功能:</strong></p>
+<ul>
+<li>创建房间 (房主)</li>
+<li>加入房间 (普通玩家)</li>
+<li>退出房间</li>
+<li>房主解散房间</li>
+<li>踢人 (房主)</li>
+<li>房间设置 (底注&#x2F;局数)</li>
+</ul>
+<p><strong>状态:</strong></p>
+<ul>
+<li><code>waiting</code> - 等待玩家</li>
+<li><code>ready</code> - 玩家准备</li>
+<li><code>playing</code> -游戏中</li>
+<li><code>closed</code> - 已关闭</li>
+</ul>
+<h3 id="4-游戏逻辑"><a href="#4-游戏逻辑" class="headerlink" title="4. 游戏逻辑"></a>4. 游戏逻辑</h3><p><strong>流程:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">发牌阶段</span><br><span class="line">    ↓</span><br><span class="line">庄家选择(如需要)</span><br><span class="line">    ↓</span><br><span class="line">行动阶段(循环)</span><br><span class="line">    → 玩家操作(bet/call/raise/fold)</span><br><span class="line">    → 检查是否结束</span><br><span class="line">    ↓</span><br><span class="line">结算阶段</span><br><span class="line">    → 计算输赢</span><br><span class="line">    → 更新金币</span><br><span class="line">    → 排行榜更新</span><br></pre></td></tr></table></figure>
+
+<p><strong>操作类型:</strong></p>
+<ul>
+<li><code>bet</code> - 下注</li>
+<li><code>call</code> - 跟注</li>
+<li><code>raise</code> - 加注</li>
+<li><code>fold</code> - 弃牌</li>
+<li><code>check</code> - 看牌</li>
+<li><code>allin</code> - 全下</li>
+</ul>
+<h3 id="5-结算系统"><a href="#5-结算系统" class="headerlink" title="5. 结算系统"></a>5. 结算系统</h3><p><strong>计算:</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获胜判断</span></span><br><span class="line">winner = <span class="title function_">compareHands</span>(player1Cards, player2Cards)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输赢计算</span></span><br><span class="line">winAmount = pot * (winCount / totalPlayers)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 金币更新</span></span><br><span class="line">player.<span class="property">gold</span> += winAmount</span><br><span class="line"></span><br><span class="line"><span class="comment">// 排行榜更新</span></span><br><span class="line"><span class="title function_">zadd</span>(<span class="string">&#x27;rank:gold&#x27;</span>, player.<span class="property">gold</span>, player.<span class="property">userId</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-战绩查询"><a href="#6-战绩查询" class="headerlink" title="6. 战绩查询"></a>6. 战绩查询</h3><p><strong>数据:</strong></p>
+<ul>
+<li>总局数</li>
+<li>胜率</li>
+<li>最大赢取</li>
+<li>当前排名</li>
+</ul>
+<hr>
 <h2 id="🚀-开发流程"><a href="#🚀-开发流程" class="headerlink" title="🚀 开发流程"></a>🚀 开发流程</h2><h3 id="1-环境准备"><a href="#1-环境准备" class="headerlink" title="1. 环境准备"></a>1. 环境准备</h3><ul>
 <li><input disabled="" type="checkbox"> 安装 Cocos Creator</li>
 <li><input disabled="" type="checkbox"> 安装 Node.js (v18+)</li>
 <li><input disabled="" type="checkbox"> 安装 Redis</li>
-<li><input disabled="" type="checkbox"> 安装 Docker</li>
+<li><input disabled="" type="checkbox"> 安装 Docker + Docker Compose</li>
 </ul>
 <h3 id="2-后端开发"><a href="#2-后端开发" class="headerlink" title="2. 后端开发"></a>2. 后端开发</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> server</span><br><span class="line">npm install</span><br><span class="line">npm run dev    <span class="comment"># 开发模式</span></span><br><span class="line">npm run build  <span class="comment"># 生产构建</span></span><br></pre></td></tr></table></figure>
 
@@ -183,19 +331,14 @@
 <h3 id="4-部署"><a href="#4-部署" class="headerlink" title="4. 部署"></a>4. 部署</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Docker 部署</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="📝-文档清单"><a href="#📝-文档清单" class="headerlink" title="📝 文档清单"></a>📝 文档清单</h2><ul>
-<li><input disabled="" type="checkbox"> README.md - 项目简介</li>
-<li><input disabled="" type="checkbox"> deployment.md - 部署文档</li>
-<li><input disabled="" type="checkbox"> api.md - 接口文档</li>
-<li><input disabled="" type="checkbox"> database.md - 数据库设计</li>
-<li><input disabled="" type="checkbox"> protocol.md - 通信协议</li>
-<li><input disabled="" type="checkbox"> dev-guide.md - 开发指南</li>
+<h2 id="📝-微信小游戏配置"><a href="#📝-微信小游戏配置" class="headerlink" title="📝 微信小游戏配置"></a>📝 微信小游戏配置</h2><ul>
+<li><strong>AppID</strong>: 在微信公众平台申请</li>
+<li><strong>服务器域名</strong>: 配置域名白名单<ul>
+<li>request 域名</li>
+<li>socket 域名</li>
 </ul>
-<hr>
-<h2 id="🔐-微信小游戏配置"><a href="#🔐-微信小游戏配置" class="headerlink" title="🔐 微信小游戏配置"></a>🔐 微信小游戏配置</h2><ul>
-<li>AppID</li>
-<li>服务器域名配置</li>
-<li>业务域名</li>
+</li>
+<li><strong>业务域名</strong>: HTTPS 域名</li>
 </ul>
 <hr>
 <p><em>持续更新中…</em></p>
