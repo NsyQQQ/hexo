@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html class="post">
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Redis 完全指南 | 宁尚义的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Redis（Remote Dictionary Server）是一个开源的、基于内存的数据结构存储系统，常用作数据库、缓存和消息队列。它支持多种数据结构，如字符串、哈希表、列表、集合、有序集合等，被誉为”瑞士军刀”般的全能型数据库。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 完全指南">
+<meta property="og:url" content="https://nsyqqq.github.io/hexo/2025/09/06/redis-guide/index.html">
+<meta property="og:site_name" content="宁尚义的个人博客">
+<meta property="og:description" content="Redis（Remote Dictionary Server）是一个开源的、基于内存的数据结构存储系统，常用作数据库、缓存和消息队列。它支持多种数据结构，如字符串、哈希表、列表、集合、有序集合等，被誉为”瑞士军刀”般的全能型数据库。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-06T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-25T13:16:32.631Z">
+<meta property="article:author" content="宁尚义">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/hexo/atom.xml" title="宁尚义的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/hexo/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/hexo/css/style.css">
+
+  
+<link rel="stylesheet" href="/hexo/css/custom.css">
+
+  
+    
+<link rel="stylesheet" href="/hexo/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="search-results-container"></div>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/hexo/" id="logo">宁尚义的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/hexo/">首页</a>
+        
+          <a class="main-nav-link" href="/hexo/archives">归档</a>
+        
+          <a class="main-nav-link" href="/hexo/portfolio">作品集</a>
+        
+          <a class="main-nav-link" href="/hexo/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://github.com/NsyQQQ" title="GitHub"><span class="fa fa-github"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://blog.csdn.net/NingQQQ" title="CSDN"><span class="fa fa-book"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://www.zhihu.com/people/ningq-31" title="知乎"><span class="fa fa-user"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/432403089" title="bilibili"><span class="fa fa-bilibili"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/hexo/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://nsyqqq.github.io/hexo"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-redis-guide" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <time class="dt-published article-date" datetime="2025-09-06T02:00:00.000Z" itemprop="datePublished">2025-09-06</time>
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a>►<a class="article-category-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/%E5%90%8E%E7%AB%AF/">后端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Redis 完全指南
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>Redis（Remote Dictionary Server）是一个开源的、基于内存的数据结构存储系统，常用作数据库、缓存和消息队列。它支持多种数据结构，如字符串、哈希表、列表、集合、有序集合等，被誉为”瑞士军刀”般的全能型数据库。</p>
+<span id="more"></span>
+
+<h2 id="一、Redis-简介"><a href="#一、Redis-简介" class="headerlink" title="一、Redis 简介"></a>一、Redis 简介</h2><h3 id="什么是-Redis？"><a href="#什么是-Redis？" class="headerlink" title="什么是 Redis？"></a>什么是 Redis？</h3><p>Redis 是由 Salvatore Sanfilippo 于 2009 年创建的分布式内存数据库，采用 <strong>C 语言</strong> 开发。其核心特点是<strong>高性能</strong>和<strong>丰富的数据结构</strong>。</p>
+<p><strong>核心特性：</strong></p>
+<ul>
+<li>内存存储，性能极高</li>
+<li>丰富的数据结构</li>
+<li>持久化支持</li>
+<li>主从复制</li>
+<li>集群支持</li>
+<li>发布&#x2F;订阅</li>
+<li>事务支持</li>
+<li>Lua 脚本</li>
+</ul>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>命令前缀</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String</td>
+<td>SET&#x2F;GET</td>
+<td>缓存、计数器、分布式锁</td>
+</tr>
+<tr>
+<td>Hash</td>
+<td>HSET&#x2F;HGET</td>
+<td>存储对象</td>
+</tr>
+<tr>
+<td>List</td>
+<td>LPUSH&#x2F;RPOP</td>
+<td>消息队列、排行榜</td>
+</tr>
+<tr>
+<td>Set</td>
+<td>SADD&#x2F;SMEMBERS</td>
+<td>标签、好友关系</td>
+</tr>
+<tr>
+<td>ZSet</td>
+<td>ZADD&#x2F;ZRANGE</td>
+<td>排行榜、有序消息</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、安装与配置"><a href="#二、安装与配置" class="headerlink" title="二、安装与配置"></a>二、安装与配置</h2><h3 id="1-Linux-安装（Ubuntu-Debian）"><a href="#1-Linux-安装（Ubuntu-Debian）" class="headerlink" title="1. Linux 安装（Ubuntu&#x2F;Debian）"></a>1. Linux 安装（Ubuntu&#x2F;Debian）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 Redis</span></span><br><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install redis-server</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动服务</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl start redis-server</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> redis-server</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试连接</span></span><br><span class="line">redis-cli ping</span><br><span class="line"><span class="comment"># 返回 PONG 表示成功</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Linux-安装（CentOS-RHEL）"><a href="#2-Linux-安装（CentOS-RHEL）" class="headerlink" title="2. Linux 安装（CentOS&#x2F;RHEL）"></a>2. Linux 安装（CentOS&#x2F;RHEL）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启用 EPEL 仓库</span></span><br><span class="line"><span class="built_in">sudo</span> yum install epel-release</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 Redis</span></span><br><span class="line"><span class="built_in">sudo</span> yum install redis</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动服务</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl start redis</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> redis</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Docker-安装"><a href="#3-Docker-安装" class="headerlink" title="3. Docker 安装"></a>3. Docker 安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取镜像</span></span><br><span class="line">docker pull redis:7.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">  --name redis \</span><br><span class="line">  -p 6379:6379 \</span><br><span class="line">  -v redis_data:/data \</span><br><span class="line">  redis:7.0 \</span><br><span class="line">  redis-server --appendonly <span class="built_in">yes</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 连接 Redis</span></span><br><span class="line">docker <span class="built_in">exec</span> -it redis redis-cli</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-配置文件"><a href="#4-配置文件" class="headerlink" title="4. 配置文件"></a>4. 配置文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># redis.conf 核心配置</span><br><span class="line"></span><br><span class="line"># 绑定地址</span><br><span class="line">bind 127.0.0.1</span><br><span class="line"></span><br><span class="line"># 端口</span><br><span class="line">port 6379</span><br><span class="line"></span><br><span class="line"># 密码认证</span><br><span class="line">requirepass your_password</span><br><span class="line"></span><br><span class="line"># 持久化目录</span><br><span class="line">dir /var/lib/redis</span><br><span class="line"></span><br><span class="line"># 持久化模式</span><br><span class="line">appendonly yes</span><br><span class="line">appendfsync everysec</span><br><span class="line"></span><br><span class="line"># 内存限制</span><br><span class="line">maxmemory 2gb</span><br><span class="line">maxmemory-policy allkeys-lru</span><br><span class="line"></span><br><span class="line"># 日志</span><br><span class="line">logfile /var/log/redis/redis.log</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="三、基础操作"><a href="#三、基础操作" class="headerlink" title="三、基础操作"></a>三、基础操作</h2><h3 id="1-连接-Redis"><a href="#1-连接-Redis" class="headerlink" title="1. 连接 Redis"></a>1. 连接 Redis</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 本地连接</span></span><br><span class="line">redis-cli</span><br><span class="line"></span><br><span class="line"><span class="comment"># 远程连接</span></span><br><span class="line">redis-cli -h host -p 6379 -a password</span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择数据库（默认 0-15）</span></span><br><span class="line">redis-cli -n 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-String-操作"><a href="#2-String-操作" class="headerlink" title="2. String 操作"></a>2. String 操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置/获取</span></span><br><span class="line">SET name <span class="string">&quot;zhangsan&quot;</span></span><br><span class="line">GET name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量操作</span></span><br><span class="line">MSET key1 <span class="string">&quot;value1&quot;</span> key2 <span class="string">&quot;value2&quot;</span></span><br><span class="line">MGET key1 key2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置过期时间</span></span><br><span class="line">SETEX token 3600 <span class="string">&quot;abc&quot;</span>  <span class="comment"># 3600秒后过期</span></span><br><span class="line">SET name <span class="string">&quot;value&quot;</span> EX 3600</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计数器</span></span><br><span class="line">SET count 0</span><br><span class="line">INCR count        <span class="comment"># +1</span></span><br><span class="line">DECR count        <span class="comment"># -1</span></span><br><span class="line">INCRBY count 10   <span class="comment"># +10</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 追加</span></span><br><span class="line">APPEND name <span class="string">&quot;_suffix&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 字符串长度</span></span><br><span class="line">STRLEN name</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Hash-操作"><a href="#3-Hash-操作" class="headerlink" title="3. Hash 操作"></a>3. Hash 操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置/获取</span></span><br><span class="line">HSET user:1 name <span class="string">&quot;zhangsan&quot;</span></span><br><span class="line">HSET user:1 age 25</span><br><span class="line">HGET user:1 name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量设置</span></span><br><span class="line">HMSET user:1 name <span class="string">&quot;zhangsan&quot;</span> age 25 city <span class="string">&quot;Beijing&quot;</span></span><br><span class="line">HMGET user:1 name age</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取所有</span></span><br><span class="line">HGETALL user:1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 字段操作</span></span><br><span class="line">HEXISTS user:1 name     <span class="comment"># 检查字段是否存在</span></span><br><span class="line">HINCRBY user:1 age 1   <span class="comment"># 数字递增</span></span><br><span class="line">HDEL user:1 age         <span class="comment"># 删除字段</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取所有字段/值</span></span><br><span class="line">HKEYS user:1</span><br><span class="line">HVALS user:1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 字段数量</span></span><br><span class="line">HLEN user:1</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-List-操作"><a href="#4-List-操作" class="headerlink" title="4. List 操作"></a>4. List 操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加元素</span></span><br><span class="line">LPUSH tasks <span class="string">&quot;task1&quot;</span>     <span class="comment"># 头部添加</span></span><br><span class="line">RPUSH tasks <span class="string">&quot;task2&quot;</span>     <span class="comment"># 尾部添加</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取元素</span></span><br><span class="line">LRANGE tasks 0 -1      <span class="comment"># 获取所有</span></span><br><span class="line">LINDEX tasks 0          <span class="comment"># 获取指定索引</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 弹出元素</span></span><br><span class="line">LPOP tasks              <span class="comment"># 头部弹出</span></span><br><span class="line">RPOP tasks              <span class="comment"># 尾部弹出</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 列表长度</span></span><br><span class="line">LLEN tasks</span><br><span class="line"></span><br><span class="line"><span class="comment"># 截断列表</span></span><br><span class="line">LTRIM tasks 0 9        <span class="comment"># 只保留前10个</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-Set-操作"><a href="#5-Set-操作" class="headerlink" title="5. Set 操作"></a>5. Set 操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加/获取</span></span><br><span class="line">SADD tags <span class="string">&quot;python&quot;</span> <span class="string">&quot;java&quot;</span> <span class="string">&quot;redis&quot;</span></span><br><span class="line">SMEMBERS tags</span><br><span class="line"></span><br><span class="line"><span class="comment"># 判断是否存在</span></span><br><span class="line">SISMEMBER tags <span class="string">&quot;python&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 集合操作</span></span><br><span class="line">SADD set1 <span class="string">&quot;a&quot;</span> <span class="string">&quot;b&quot;</span> <span class="string">&quot;c&quot;</span></span><br><span class="line">SADD set2 <span class="string">&quot;b&quot;</span> <span class="string">&quot;c&quot;</span> <span class="string">&quot;d&quot;</span></span><br><span class="line"></span><br><span class="line">SINTER set1 set2        <span class="comment"># 交集</span></span><br><span class="line">SUNION set1 set2       <span class="comment"># 并集</span></span><br><span class="line">SDIFF set1 set2        <span class="comment"># 差集</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机元素</span></span><br><span class="line">SRANDMEMBER tags 2     <span class="comment"># 随机获取2个（不删除）</span></span><br><span class="line">SPOP tags              <span class="comment"># 随机弹出（删除）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 集合大小</span></span><br><span class="line">SCARD tags</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-ZSet-操作"><a href="#6-ZSet-操作" class="headerlink" title="6. ZSet 操作"></a>6. ZSet 操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加元素（带分数）</span></span><br><span class="line">ZADD leaderboard 100 <span class="string">&quot;zhangsan&quot;</span></span><br><span class="line">ZADD leaderboard 90 <span class="string">&quot;lisi&quot;</span></span><br><span class="line">ZADD leaderboard 80 <span class="string">&quot;wangwu&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取排名</span></span><br><span class="line">ZRANK leaderboard <span class="string">&quot;zhangsan&quot;</span>    <span class="comment"># 升序排名（0开始）</span></span><br><span class="line">ZREVRANK leaderboard <span class="string">&quot;zhangsan&quot;</span> <span class="comment"># 降序排名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取分数</span></span><br><span class="line">ZSCORE leaderboard <span class="string">&quot;zhangsan&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 范围查询</span></span><br><span class="line">ZRANGE leaderboard 0 -1         <span class="comment"># 升序</span></span><br><span class="line">ZREVRANGE leaderboard 0 -1      <span class="comment"># 降序</span></span><br><span class="line">ZRANGE leaderboard 0 -1 WITHSCORES  <span class="comment"># 带分数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 分数范围</span></span><br><span class="line">ZRANGEBYSCORE leaderboard 80 100</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数量</span></span><br><span class="line">ZCARD leaderboard</span><br><span class="line">ZCOUNT leaderboard 80 100</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="四、键操作"><a href="#四、键操作" class="headerlink" title="四、键操作"></a>四、键操作</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看键</span></span><br><span class="line">KEYS pattern           <span class="comment"># 模式匹配（生产环境慎用）</span></span><br><span class="line">SCAN 0 MATCH pattern   <span class="comment"># 渐进式扫描</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 键类型</span></span><br><span class="line">TYPE key</span><br><span class="line"></span><br><span class="line"><span class="comment"># 键是否存在</span></span><br><span class="line">EXISTS key</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除键</span></span><br><span class="line">DEL key</span><br><span class="line">UNLINK key            <span class="comment"># 异步删除</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 过期时间</span></span><br><span class="line">EXPIRE key 3600      <span class="comment"># 设置过期（秒）</span></span><br><span class="line">PEXPIRE key 3600000  <span class="comment"># 毫秒</span></span><br><span class="line">TTL key               <span class="comment"># 查看剩余时间（秒）</span></span><br><span class="line">PTTL key              <span class="comment"># 毫秒</span></span><br><span class="line">PERSIST key           <span class="comment"># 移除过期时间</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命名</span></span><br><span class="line">RENAME key newkey</span><br><span class="line">RENAMENX key newkey   <span class="comment"># 仅当不存在时重命名</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="五、发布-订阅"><a href="#五、发布-订阅" class="headerlink" title="五、发布&#x2F;订阅"></a>五、发布&#x2F;订阅</h2><h3 id="1-基本发布-订阅"><a href="#1-基本发布-订阅" class="headerlink" title="1. 基本发布&#x2F;订阅"></a>1. 基本发布&#x2F;订阅</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 订阅者</span></span><br><span class="line">SUBSCRIBE channel1</span><br><span class="line">PSUBSCRIBE pattern*    <span class="comment"># 模式订阅</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 发布者</span></span><br><span class="line">PUBLISH channel1 <span class="string">&quot;message&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-PHP-示例"><a href="#2-PHP-示例" class="headerlink" title="2. PHP 示例"></a>2. PHP 示例</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 订阅</span></span><br><span class="line"><span class="variable">$redis</span> = <span class="keyword">new</span> <span class="title class_">Redis</span>();</span><br><span class="line"><span class="variable">$redis</span>-&gt;<span class="title function_ invoke__">connect</span>(<span class="string">&#x27;127.0.0.1&#x27;</span>, <span class="number">6379</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$redis</span>-&gt;<span class="title function_ invoke__">subscribe</span>([<span class="string">&#x27;channel1&#x27;</span>], function (<span class="variable">$redis</span>, <span class="variable">$channel</span>, <span class="variable">$message</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;收到消息: <span class="subst">$message</span>\n&quot;</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发布</span></span><br><span class="line"><span class="variable">$redis</span>-&gt;<span class="title function_ invoke__">publish</span>(<span class="string">&#x27;channel1&#x27;</span>, <span class="string">&#x27;Hello World&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="六、事务"><a href="#六、事务" class="headerlink" title="六、事务"></a>六、事务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开启事务</span></span><br><span class="line">MULTI</span><br><span class="line"></span><br><span class="line"><span class="comment"># 命令入队</span></span><br><span class="line">SET key1 <span class="string">&quot;value1&quot;</span></span><br><span class="line">SET key2 <span class="string">&quot;value2&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行事务</span></span><br><span class="line">EXEC</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消事务</span></span><br><span class="line">DISCARD</span><br></pre></td></tr></table></figure>
+
+<p><strong>事务特点：</strong></p>
+<ul>
+<li>原子执行</li>
+<li>不支持回滚（与 MySQL 不同）</li>
+<li>不保证隔离性</li>
+</ul>
+<h3 id="Watch-实现乐观锁"><a href="#Watch-实现乐观锁" class="headerlink" title="Watch 实现乐观锁"></a>Watch 实现乐观锁</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">WATCH key</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在其他客户端修改 key 后，EXEC 会失败</span></span><br><span class="line">MULTI</span><br><span class="line">SET key <span class="string">&quot;newvalue&quot;</span></span><br><span class="line">EXEC</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="七、Lua-脚本"><a href="#七、Lua-脚本" class="headerlink" title="七、Lua 脚本"></a>七、Lua 脚本</h2><h3 id="1-基本使用"><a href="#1-基本使用" class="headerlink" title="1. 基本使用"></a>1. 基本使用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 执行 Lua 脚本</span></span><br><span class="line">EVAL <span class="string">&quot;return &#x27;hello&#x27;&quot;</span> 0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用参数</span></span><br><span class="line">EVAL <span class="string">&quot;return KEYS[1]&quot;</span> 1 mykey</span><br><span class="line"></span><br><span class="line"><span class="comment"># 脚本缓存</span></span><br><span class="line">SCRIPT LOAD <span class="string">&quot;return &#x27;hello&#x27;&quot;</span></span><br><span class="line">EVALSHA <span class="string">&quot;script_hash&quot;</span> 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-分布式锁"><a href="#2-分布式锁" class="headerlink" title="2. 分布式锁"></a>2. 分布式锁</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 获取锁</span></span><br><span class="line"><span class="keyword">local</span> lockKey = <span class="string">&quot;lock:&quot;</span> .. KEYS[<span class="number">1</span>]</span><br><span class="line"><span class="keyword">local</span> lockValue = ARGV[<span class="number">1</span>]</span><br><span class="line"><span class="keyword">local</span> expireTime = <span class="built_in">tonumber</span>(ARGV[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> redis.call(<span class="string">&#x27;setnx&#x27;</span>, lockKey, lockValue) == <span class="number">1</span> <span class="keyword">then</span></span><br><span class="line">    redis.call(<span class="string">&#x27;pexpire&#x27;</span>, lockKey, expireTime)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="八、持久化"><a href="#八、持久化" class="headerlink" title="八、持久化"></a>八、持久化</h2><h3 id="1-RDB-快照"><a href="#1-RDB-快照" class="headerlink" title="1. RDB 快照"></a>1. RDB 快照</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 配置</span><br><span class="line">save 900 1      # 900秒内至少1个key变化</span><br><span class="line">save 300 10     # 300秒内至少10个key变化</span><br><span class="line">save 60 10000   # 60秒内至少10000个key变化</span><br><span class="line"></span><br><span class="line"># 手动触发</span><br><span class="line">BGSAVE           # 后台异步保存</span><br><span class="line">SAVE             # 同步保存（阻塞）</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-AOF-日志"><a href="#2-AOF-日志" class="headerlink" title="2. AOF 日志"></a>2. AOF 日志</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 开启</span><br><span class="line">appendonly yes</span><br><span class="line"></span><br><span class="line"># 同步策略</span><br><span class="line">appendfsync always    # 每次写入</span><br><span class="line">appendfsync everysec  # 每秒（推荐）</span><br><span class="line">appendfsync no        # 依赖系统</span><br><span class="line"></span><br><span class="line"># 重写</span><br><span class="line">auto-aof-rewrite-percentage 100</span><br><span class="line">auto-aof-rewrite-min-size 64mb</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="九、集群与高可用"><a href="#九、集群与高可用" class="headerlink" title="九、集群与高可用"></a>九、集群与高可用</h2><h3 id="1-主从复制"><a href="#1-主从复制" class="headerlink" title="1. 主从复制"></a>1. 主从复制</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 从节点配置</span><br><span class="line">replicaof 192.168.1.1 6379</span><br><span class="line"></span><br><span class="line"># 或使用命令</span><br><span class="line">REPLICAOF 192.168.1.1 6379</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看复制状态</span></span><br><span class="line">INFO replication</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-哨兵模式"><a href="#2-哨兵模式" class="headerlink" title="2. 哨兵模式"></a>2. 哨兵模式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># sentinel.conf</span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6379 2</span><br><span class="line">sentinel down-after-milliseconds mymaster 5000</span><br><span class="line">sentinel failover-timeout mymaster 60000</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动哨兵</span></span><br><span class="line">redis-sentinel /path/to/sentinel.conf</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Redis-Cluster"><a href="#3-Redis-Cluster" class="headerlink" title="3. Redis Cluster"></a>3. Redis Cluster</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建集群（6个节点）</span></span><br><span class="line">redis-cli --cluster create 127.0.0.1:7001 127.0.0.1:7002 \</span><br><span class="line">  127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005 127.0.0.1:7006 \</span><br><span class="line">  --cluster-replicas 1</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="十、PHP-Node-js-Python-使用"><a href="#十、PHP-Node-js-Python-使用" class="headerlink" title="十、PHP&#x2F;Node.js&#x2F;Python 使用"></a>十、PHP&#x2F;Node.js&#x2F;Python 使用</h2><h3 id="1-PHP-predis"><a href="#1-PHP-predis" class="headerlink" title="1. PHP (predis)"></a>1. PHP (predis)</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">composer <span class="keyword">require</span> predis/predis</span><br><span class="line"></span><br><span class="line"><span class="variable">$client</span> = <span class="keyword">new</span> <span class="title class_">Predis\Client</span>([</span><br><span class="line">    <span class="string">&#x27;scheme&#x27;</span> =&gt; <span class="string">&#x27;tcp&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;host&#x27;</span>   =&gt; <span class="string">&#x27;127.0.0.1&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;port&#x27;</span>   =&gt; <span class="number">6379</span>,</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="variable">$client</span>-&gt;<span class="title function_ invoke__">set</span>(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;zhangsan&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$client</span>-&gt;<span class="title function_ invoke__">get</span>(<span class="string">&#x27;name&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$client</span>-&gt;<span class="title function_ invoke__">hmset</span>(<span class="string">&#x27;user:1&#x27;</span>, [</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span> =&gt; <span class="string">&#x27;zhangsan&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;age&#x27;</span> =&gt; <span class="number">25</span></span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Node-js-ioredis"><a href="#2-Node-js-ioredis" class="headerlink" title="2. Node.js (ioredis)"></a>2. Node.js (ioredis)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Redis</span> = <span class="built_in">require</span>(<span class="string">&#x27;ioredis&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> redis = <span class="keyword">new</span> <span class="title class_">Redis</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">await</span> redis.<span class="title function_">set</span>(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;zhangsan&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">await</span> redis.<span class="title function_">get</span>(<span class="string">&#x27;name&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">await</span> redis.<span class="title function_">hmset</span>(<span class="string">&#x27;user:1&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;zhangsan&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">25</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Python-redis-py"><a href="#3-Python-redis-py" class="headerlink" title="3. Python (redis-py)"></a>3. Python (redis-py)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> redis</span><br><span class="line"></span><br><span class="line">r = redis.Redis(host=<span class="string">&#x27;localhost&#x27;</span>, port=<span class="number">6379</span>, decode_responses=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">r.<span class="built_in">set</span>(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;zhangsan&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(r.get(<span class="string">&#x27;name&#x27;</span>))</span><br><span class="line"></span><br><span class="line">r.hmset(<span class="string">&#x27;user:1&#x27;</span>, &#123;</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;zhangsan&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;age&#x27;</span>: <span class="number">25</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="十一、应用场景"><a href="#十一、应用场景" class="headerlink" title="十一、应用场景"></a>十一、应用场景</h2><h3 id="1-缓存"><a href="#1-缓存" class="headerlink" title="1. 缓存"></a>1. 缓存</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 缓存示例</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_user</span>(<span class="params">user_id</span>):</span><br><span class="line">    cache_key = <span class="string">f&quot;user:<span class="subst">&#123;user_id&#125;</span>&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 先查缓存</span></span><br><span class="line">    user = redis.get(cache_key)</span><br><span class="line">    <span class="keyword">if</span> user:</span><br><span class="line">        <span class="keyword">return</span> json.loads(user)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 查数据库</span></span><br><span class="line">    user = db.query(<span class="string">f&quot;SELECT * FROM users WHERE id = <span class="subst">&#123;user_id&#125;</span>&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 存入缓存</span></span><br><span class="line">    redis.setex(cache_key, <span class="number">3600</span>, json.dumps(user))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> user</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-分布式锁-1"><a href="#2-分布式锁-1" class="headerlink" title="2. 分布式锁"></a>2. 分布式锁</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取锁</span></span><br><span class="line">lock_key = <span class="string">&quot;lock:order&quot;</span></span><br><span class="line">lock_value = <span class="built_in">str</span>(uuid.uuid4())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> redis.<span class="built_in">set</span>(lock_key, lock_value, nx=<span class="literal">True</span>, ex=<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 执行业务逻辑</span></span><br><span class="line">        create_order()</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        <span class="comment"># 释放锁（使用 Lua 确保原子性）</span></span><br><span class="line">        lua_script = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        if redis.call(&quot;get&quot;, KEYS[1]) == ARGV[1] then</span></span><br><span class="line"><span class="string">            return redis.call(&quot;del&quot;, KEYS[1])</span></span><br><span class="line"><span class="string">        else</span></span><br><span class="line"><span class="string">            return 0</span></span><br><span class="line"><span class="string">        end</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        redis.<span class="built_in">eval</span>(lua_script, <span class="number">1</span>, lock_key, lock_value)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-消息队列"><a href="#3-消息队列" class="headerlink" title="3. 消息队列"></a>3. 消息队列</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生产者</span></span><br><span class="line">redis.lpush(<span class="string">&#x27;queue:tasks&#x27;</span>, json.dumps(&#123;<span class="string">&#x27;task&#x27;</span>: <span class="string">&#x27;send_email&#x27;</span>, <span class="string">&#x27;to&#x27;</span>: <span class="string">&#x27;user@example.com&#x27;</span>&#125;))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 消费者</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    task = redis.brpop(<span class="string">&#x27;queue:tasks&#x27;</span>, timeout=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> task:</span><br><span class="line">        process_task(json.loads(task[<span class="number">1</span>]))</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-限流"><a href="#4-限流" class="headerlink" title="4. 限流"></a>4. 限流</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 滑动窗口限流</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_allowed</span>(<span class="params">user_id, limit=<span class="number">100</span>, window=<span class="number">60</span></span>):</span><br><span class="line">    key = <span class="string">f&quot;rate_limit:<span class="subst">&#123;user_id&#125;</span>&quot;</span></span><br><span class="line">    now = time.time()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 移除窗口外的记录</span></span><br><span class="line">    redis.zremrangebyscore(key, <span class="number">0</span>, now - window)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 检查数量</span></span><br><span class="line">    count = redis.zcard(key)</span><br><span class="line">    <span class="keyword">if</span> count &gt;= limit:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 添加新请求</span></span><br><span class="line">    redis.zadd(key, &#123;<span class="built_in">str</span>(now): now&#125;)</span><br><span class="line">    redis.expire(key, window)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-排行榜"><a href="#5-排行榜" class="headerlink" title="5. 排行榜"></a>5. 排行榜</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加分数</span></span><br><span class="line">redis.zadd(<span class="string">&#x27;leaderboard&#x27;</span>, &#123;<span class="string">&#x27;user1&#x27;</span>: <span class="number">100</span>, <span class="string">&#x27;user2&#x27;</span>: <span class="number">90</span>, <span class="string">&#x27;user3&#x27;</span>: <span class="number">80</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取TOP10</span></span><br><span class="line">redis.zrevrange(<span class="string">&#x27;leaderboard&#x27;</span>, <span class="number">0</span>, <span class="number">9</span>, withscores=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用户排名</span></span><br><span class="line">redis.zrevrank(<span class="string">&#x27;leaderboard&#x27;</span>, <span class="string">&#x27;user1&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="十二、内存优化"><a href="#十二、内存优化" class="headerlink" title="十二、内存优化"></a>十二、内存优化</h2><h3 id="1-内存淘汰策略"><a href="#1-内存淘汰策略" class="headerlink" title="1. 内存淘汰策略"></a>1. 内存淘汰策略</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 配置</span><br><span class="line">maxmemory-policy allkeys-lru</span><br><span class="line"></span><br><span class="line"># 策略说明</span><br><span class="line"># noeviction        - 不淘汰（默认）</span><br><span class="line"># volatile-lru      - 已设置过期key的LRU</span><br><span class="line"># allkeys-lru       - 所有key的LRU</span><br><span class="line"># volatile-random   - 已设置过期key随机</span><br><span class="line"># allkeys-random    - 所有key随机</span><br><span class="line"># volatile-ttl      - 已设置过期key的TTL</span><br><span class="line"># volatile-lfu      - 已设置过期key的LFU</span><br><span class="line"># allkeys-lfu       - 所有key的LFU</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-内存优化技巧"><a href="#2-内存优化技巧" class="headerlink" title="2. 内存优化技巧"></a>2. 内存优化技巧</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 Hash 存储对象</span></span><br><span class="line"><span class="comment"># 差: SET user:1:name &quot;zhangsan&quot;</span></span><br><span class="line"><span class="comment">#     SET user:1:age 25</span></span><br><span class="line"><span class="comment"># 好: HSET user:1 name &quot;zhangsan&quot; age 25</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用压缩列表</span></span><br><span class="line"><span class="comment"># 配置 hash-max-ziplist-entries 512</span></span><br><span class="line"><span class="comment"># 配置 hash-max-ziplist-value 64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 Bitmap</span></span><br><span class="line">SETBIT online:2025-08-06 123456789 1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 HyperLogLog</span></span><br><span class="line">PFADD page:views <span class="string">&quot;page1&quot;</span> <span class="string">&quot;page2&quot;</span> <span class="string">&quot;page1&quot;</span></span><br><span class="line">PFCOUNT page:views</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="十三、性能优化"><a href="#十三、性能优化" class="headerlink" title="十三、性能优化"></a>十三、性能优化</h2><h3 id="1-慢查询分析"><a href="#1-慢查询分析" class="headerlink" title="1. 慢查询分析"></a>1. 慢查询分析</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开启慢查询日志</span></span><br><span class="line">slowlog-log-slower-than 10000   <span class="comment"># 10毫秒</span></span><br><span class="line">slowlog-max-len 128             <span class="comment"># 保存128条</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看慢查询</span></span><br><span class="line">SLOWLOG GET</span><br><span class="line">SLOWLOG LEN</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-管道（Pipeline）"><a href="#2-管道（Pipeline）" class="headerlink" title="2. 管道（Pipeline）"></a>2. 管道（Pipeline）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 普通方式（多次网络往返）</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">    r.<span class="built_in">set</span>(<span class="string">f&quot;key<span class="subst">&#123;i&#125;</span>&quot;</span>, i)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 管道方式（一次网络往返）</span></span><br><span class="line">pipe = r.pipeline()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">    pipe.<span class="built_in">set</span>(<span class="string">f&quot;key<span class="subst">&#123;i&#125;</span>&quot;</span>, i)</span><br><span class="line">pipe.execute()</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-集群连接池"><a href="#3-集群连接池" class="headerlink" title="3. 集群连接池"></a>3. 集群连接池</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python 连接池</span></span><br><span class="line">pool = redis.ConnectionPool(</span><br><span class="line">    max_connections=<span class="number">50</span>,</span><br><span class="line">    host=<span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">    port=<span class="number">6379</span></span><br><span class="line">)</span><br><span class="line">r = redis.Redis(connection_pool=pool)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="十四、常见问题"><a href="#十四、常见问题" class="headerlink" title="十四、常见问题"></a>十四、常见问题</h2><h3 id="1-OOM（内存不足）"><a href="#1-OOM（内存不足）" class="headerlink" title="1. OOM（内存不足）"></a>1. OOM（内存不足）</h3><p><strong>解决：</strong></p>
+<ul>
+<li>增加内存</li>
+<li>设置过期时间</li>
+<li>使用淘汰策略</li>
+<li>优化数据结构</li>
+</ul>
+<h3 id="2-阻塞"><a href="#2-阻塞" class="headerlink" title="2. 阻塞"></a>2. 阻塞</h3><p><strong>原因：</strong></p>
+<ul>
+<li>BGREWRITEAOF</li>
+<li>BGSAVE</li>
+<li>大 Key 操作</li>
+</ul>
+<p><strong>解决：</strong></p>
+<ul>
+<li>使用 SCAN 替代 KEYS</li>
+<li>拆分大 Key</li>
+<li>使用 UNLINK 异步删除</li>
+</ul>
+<h3 id="3-持久化失败"><a href="#3-持久化失败" class="headerlink" title="3. 持久化失败"></a>3. 持久化失败</h3><p><strong>解决：</strong></p>
+<ul>
+<li>检查磁盘空间</li>
+<li>检查权限</li>
+<li>调整 AOF 重写配置</li>
+</ul>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Redis 作为高性能的内存数据库，在现代架构中扮演着重要角色。本文涵盖了：</p>
+<ul>
+<li>Redis 简介与数据结构</li>
+<li>安装与配置</li>
+<li>基础操作（String、Hash、List、Set、ZSet）</li>
+<li>发布&#x2F;订阅与事务</li>
+<li>Lua 脚本编程</li>
+<li>持久化机制（RDB、AOF）</li>
+<li>集群与高可用（主从、哨兵、Cluster）</li>
+<li>多语言客户端使用</li>
+<li>核心应用场景（缓存、锁、队列、限流、排行）</li>
+<li>内存与性能优化</li>
+</ul>
+<p>Redis 是后端开发的必备技能，掌握它能大幅提升系统性能！</p>
+<p>Happy Redis! 🚀</p>
+<hr>
+<p><em>有问题欢迎评论区留言～</em></p>
+
+      
+    </div>
+    <footer class="article-footer" style="overflow: hidden;">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/Redis/" rel="tag">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+      <span style="float: right;">
+        <a data-url="/hexo/2025/09/06/redis-guide/" data-id="cuidbeWdP9FFIVc5nqj_AHT2p" data-title="Redis 完全指南" class="article-share-link"><span class="fa fa-share">分享</span></a>
+        
+        
+          <a href="/hexo/2025/09/06/redis-guide/#comments" class="article-comment-link" style="margin-left: 20px; display: inline-flex; align-items: center; gap: 5px;">
+            <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/hexo/2025/09/06/redis-guide/" itemprop="commentCount"></span>
+            <span>留言</span>
+          </a>
+        
+      </span>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/hexo/2025/09/10/Python%E5%B8%B8%E7%94%A8%E6%A0%87%E5%87%86%E5%BA%93%E8%AF%A6%E8%A7%A3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Python 常用标准库
+        
+      </div>
+    </a>
+  
+  
+    <a href="/hexo/2025/09/05/mysql-guide/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">MySQL 完全指南</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+
+
+
+
+<!-- 文章目录已移至 layout.ejs 中的正确位置 -->
+
+</section>
+        
+        <aside id="sidebar" class="toc-sidebar" style="position: sticky; top: 0;">
+          <div class="widget-wrap" style="max-height: calc(100vh - 100px); overflow-y: auto;">
+            <h3 class="widget-title">文章目录</h3>
+            <div class="widget">
+              <div class="toc-article">
+                <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81Redis-%E7%AE%80%E4%BB%8B"><span class="toc-list-text">一、Redis 简介</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Redis%EF%BC%9F"><span class="toc-list-text">什么是 Redis？</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-list-text">数据结构</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-list-text">二、安装与配置</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-Linux-%E5%AE%89%E8%A3%85%EF%BC%88Ubuntu-Debian%EF%BC%89"><span class="toc-list-text">1. Linux 安装（Ubuntu&#x2F;Debian）</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-Linux-%E5%AE%89%E8%A3%85%EF%BC%88CentOS-RHEL%EF%BC%89"><span class="toc-list-text">2. Linux 安装（CentOS&#x2F;RHEL）</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-Docker-%E5%AE%89%E8%A3%85"><span class="toc-list-text">3. Docker 安装</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#4-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-list-text">4. 配置文件</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="toc-list-text">三、基础操作</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E8%BF%9E%E6%8E%A5-Redis"><span class="toc-list-text">1. 连接 Redis</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-String-%E6%93%8D%E4%BD%9C"><span class="toc-list-text">2. String 操作</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-Hash-%E6%93%8D%E4%BD%9C"><span class="toc-list-text">3. Hash 操作</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#4-List-%E6%93%8D%E4%BD%9C"><span class="toc-list-text">4. List 操作</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#5-Set-%E6%93%8D%E4%BD%9C"><span class="toc-list-text">5. Set 操作</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#6-ZSet-%E6%93%8D%E4%BD%9C"><span class="toc-list-text">6. ZSet 操作</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E9%94%AE%E6%93%8D%E4%BD%9C"><span class="toc-list-text">四、键操作</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85"><span class="toc-list-text">五、发布&#x2F;订阅</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E5%9F%BA%E6%9C%AC%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85"><span class="toc-list-text">1. 基本发布&#x2F;订阅</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-PHP-%E7%A4%BA%E4%BE%8B"><span class="toc-list-text">2. PHP 示例</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E4%BA%8B%E5%8A%A1"><span class="toc-list-text">六、事务</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#Watch-%E5%AE%9E%E7%8E%B0%E4%B9%90%E8%A7%82%E9%94%81"><span class="toc-list-text">Watch 实现乐观锁</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%83%E3%80%81Lua-%E8%84%9A%E6%9C%AC"><span class="toc-list-text">七、Lua 脚本</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-list-text">1. 基本使用</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="toc-list-text">2. 分布式锁</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AB%E3%80%81%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-list-text">八、持久化</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-RDB-%E5%BF%AB%E7%85%A7"><span class="toc-list-text">1. RDB 快照</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-AOF-%E6%97%A5%E5%BF%97"><span class="toc-list-text">2. AOF 日志</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B9%9D%E3%80%81%E9%9B%86%E7%BE%A4%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="toc-list-text">九、集群与高可用</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-list-text">1. 主从复制</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F"><span class="toc-list-text">2. 哨兵模式</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-Redis-Cluster"><span class="toc-list-text">3. Redis Cluster</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8D%81%E3%80%81PHP-Node-js-Python-%E4%BD%BF%E7%94%A8"><span class="toc-list-text">十、PHP&#x2F;Node.js&#x2F;Python 使用</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-PHP-predis"><span class="toc-list-text">1. PHP (predis)</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-Node-js-ioredis"><span class="toc-list-text">2. Node.js (ioredis)</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-Python-redis-py"><span class="toc-list-text">3. Python (redis-py)</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-list-text">十一、应用场景</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E7%BC%93%E5%AD%98"><span class="toc-list-text">1. 缓存</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81-1"><span class="toc-list-text">2. 分布式锁</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="toc-list-text">3. 消息队列</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#4-%E9%99%90%E6%B5%81"><span class="toc-list-text">4. 限流</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#5-%E6%8E%92%E8%A1%8C%E6%A6%9C"><span class="toc-list-text">5. 排行榜</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96"><span class="toc-list-text">十二、内存优化</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5"><span class="toc-list-text">1. 内存淘汰策略</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7"><span class="toc-list-text">2. 内存优化技巧</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8D%81%E4%B8%89%E3%80%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-list-text">十三、性能优化</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E6%85%A2%E6%9F%A5%E8%AF%A2%E5%88%86%E6%9E%90"><span class="toc-list-text">1. 慢查询分析</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E7%AE%A1%E9%81%93%EF%BC%88Pipeline%EF%BC%89"><span class="toc-list-text">2. 管道（Pipeline）</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="toc-list-text">3. 集群连接池</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8D%81%E5%9B%9B%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-list-text">十四、常见问题</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-OOM%EF%BC%88%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%EF%BC%89"><span class="toc-list-text">1. OOM（内存不足）</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E9%98%BB%E5%A1%9E"><span class="toc-list-text">2. 阻塞</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-%E6%8C%81%E4%B9%85%E5%8C%96%E5%A4%B1%E8%B4%A5"><span class="toc-list-text">3. 持久化失败</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-list-text">总结</span></a></li></ol>
+              </div>
+            </div>
+          </div>
+        </aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        © 2025-2026 宁尚义. All rights reserved.
+      
+      &copy; 2026 宁尚义<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      
+        <br>
+        <span id="busuanzi_container_site_pv">
+          总访问量: <span id="busuanzi_value_site_pv">0</span>
+        </span>
+      
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/busuanzi/2.3/busuanzi.pure.min.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4281d5d8ea7e4e9d8d336c9230dfff9a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/hexo/" class="mobile-nav-link">首页</a>
+  
+    <a href="/hexo/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/hexo/portfolio" class="mobile-nav-link">作品集</a>
+  
+    <a href="/hexo/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/hexo/js/jquery-3.6.4.min.js"></script>
+
+
+
+<script src="/hexo/js/search.js"></script>
+
+
+
+  
+<script src="/hexo/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/hexo/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "KXoxur5yqjJ4BMJkcRNl87rVX20K9hfe18JlOr9meD2VafQsaA8L4NxLTnCNwFLo",
+        appKey: "cn-n1",
+        placeholder: "欢迎留言交流！",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>

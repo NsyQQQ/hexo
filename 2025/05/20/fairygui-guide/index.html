@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html class="post">
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>FairyGUI 完全指南 | 宁尚义的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="FairyGUI 是一款强大的跨引擎 UI 框架，支持 Unity、Cocos2d-x、LayaAir、Egret 等主流游戏引擎。它以其高效的编辑器、丰富的组件库和优秀的性能著称，是游戏开发者构建游戏界面的首选工具。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FairyGUI 完全指南">
+<meta property="og:url" content="https://nsyqqq.github.io/hexo/2025/05/20/fairygui-guide/index.html">
+<meta property="og:site_name" content="宁尚义的个人博客">
+<meta property="og:description" content="FairyGUI 是一款强大的跨引擎 UI 框架，支持 Unity、Cocos2d-x、LayaAir、Egret 等主流游戏引擎。它以其高效的编辑器、丰富的组件库和优秀的性能著称，是游戏开发者构建游戏界面的首选工具。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-05-20T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-25T09:48:01.015Z">
+<meta property="article:author" content="宁尚义">
+<meta property="article:tag" content="FairyGUI">
+<meta property="article:tag" content="UI">
+<meta property="article:tag" content="游戏开发">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/hexo/atom.xml" title="宁尚义的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/hexo/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/hexo/css/style.css">
+
+  
+<link rel="stylesheet" href="/hexo/css/custom.css">
+
+  
+    
+<link rel="stylesheet" href="/hexo/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="search-results-container"></div>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/hexo/" id="logo">宁尚义的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/hexo/">首页</a>
+        
+          <a class="main-nav-link" href="/hexo/archives">归档</a>
+        
+          <a class="main-nav-link" href="/hexo/portfolio">作品集</a>
+        
+          <a class="main-nav-link" href="/hexo/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://github.com/NsyQQQ" title="GitHub"><span class="fa fa-github"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://blog.csdn.net/NingQQQ" title="CSDN"><span class="fa fa-book"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://www.zhihu.com/people/ningq-31" title="知乎"><span class="fa fa-user"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/432403089" title="bilibili"><span class="fa fa-bilibili"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/hexo/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://nsyqqq.github.io/hexo"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-fairygui-guide" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <time class="dt-published article-date" datetime="2025-05-20T02:00:00.000Z" itemprop="datePublished">2025-05-20</time>
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a>►<a class="article-category-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      FairyGUI 完全指南
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>FairyGUI 是一款强大的跨引擎 UI 框架，支持 Unity、Cocos2d-x、LayaAir、Egret 等主流游戏引擎。它以其高效的编辑器、丰富的组件库和优秀的性能著称，是游戏开发者构建游戏界面的首选工具。</p>
+<span id="more"></span>
+
+<h2 id="一、FairyGUI-简介"><a href="#一、FairyGUI-简介" class="headerlink" title="一、FairyGUI 简介"></a>一、FairyGUI 简介</h2><h3 id="什么是-FairyGUI？"><a href="#什么是-FairyGUI？" class="headerlink" title="什么是 FairyGUI？"></a>什么是 FairyGUI？</h3><p>FairyGUI 是由资深游戏开发者打造的 UI 解决方案，提供了：</p>
+<ul>
+<li><strong>可视化编辑器</strong>：像编辑网页一样编辑游戏 UI</li>
+<li><strong>丰富的组件库</strong>：按钮、列表、滚动、弹窗等常用组件</li>
+<li><strong>完整的解决方案</strong>：从设计到开发的完整工作流</li>
+<li><strong>高性能</strong>：针对游戏场景深度优化</li>
+</ul>
+<h3 id="支持的引擎"><a href="#支持的引擎" class="headerlink" title="支持的引擎"></a>支持的引擎</h3><table>
+<thead>
+<tr>
+<th>引擎</th>
+<th>支持版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Unity</td>
+<td>2017+</td>
+</tr>
+<tr>
+<td>Cocos2d-x</td>
+<td>3.x</td>
+</tr>
+<tr>
+<td>LayaAir</td>
+<td>2.x &#x2F; 3.x</td>
+</tr>
+<tr>
+<td>Egret</td>
+<td>3.x &#x2F; 4.x</td>
+</tr>
+<tr>
+<td>Cocos Creator</td>
+<td>2.x &#x2F; 3.x</td>
+</tr>
+</tbody></table>
+<h3 id="版本对比"><a href="#版本对比" class="headerlink" title="版本对比"></a>版本对比</h3><table>
+<thead>
+<tr>
+<th>版本</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>专业版</td>
+<td>完整功能，支持所有特性</td>
+</tr>
+<tr>
+<td>基础版</td>
+<td>免费版，功能有限</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、编辑器使用"><a href="#二、编辑器使用" class="headerlink" title="二、编辑器使用"></a>二、编辑器使用</h2><h3 id="1-安装编辑器"><a href="#1-安装编辑器" class="headerlink" title="1. 安装编辑器"></a>1. 安装编辑器</h3><p>下载 FairyGUI Editor：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.fairygui.com/</span><br></pre></td></tr></table></figure>
+
+<p>安装后启动编辑器。</p>
+<h3 id="2-创建项目"><a href="#2-创建项目" class="headerlink" title="2. 创建项目"></a>2. 创建项目</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File -&gt; New Project</span><br></pre></td></tr></table></figure>
+
+<p>设置：</p>
+<ul>
+<li>项目名称</li>
+<li>项目路径</li>
+<li>目标引擎</li>
+<li>分辨率设置</li>
+</ul>
+<h3 id="3-编辑器界面"><a href="#3-编辑器界面" class="headerlink" title="3. 编辑器界面"></a>3. 编辑器界面</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────┐</span><br><span class="line">│  菜单栏                              │</span><br><span class="line">├─────────┬───────────────┬───────────┤</span><br><span class="line">│  组件库  │    编辑区      │  属性面板  │</span><br><span class="line">│         │               │           │</span><br><span class="line">│         │               │           │</span><br><span class="line">├─────────┴───────────────┴───────────┤</span><br><span class="line">│  资源管理 / 动画编辑 / 输出设置       │</span><br><span class="line">└─────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-基础操作"><a href="#4-基础操作" class="headerlink" title="4. 基础操作"></a>4. 基础操作</h3><p><strong>创建组件：</strong></p>
+<ul>
+<li>从组件库拖拽到编辑区</li>
+<li>右键 -&gt; 创建 -&gt; 选择组件类型</li>
+</ul>
+<p><strong>层级管理：</strong></p>
+<ul>
+<li>调整显示顺序</li>
+<li>父子关系设置</li>
+<li>组件编组</li>
+</ul>
+<p><strong>对齐与分布：</strong></p>
+<ul>
+<li>左对齐、居中对齐、右对齐</li>
+<li>顶部、垂直、底部对齐</li>
+<li>水平、垂直分布</li>
+</ul>
+<hr>
+<h2 id="三、核心组件"><a href="#三、核心组件" class="headerlink" title="三、核心组件"></a>三、核心组件</h2><h3 id="1-基本组件"><a href="#1-基本组件" class="headerlink" title="1. 基本组件"></a>1. 基本组件</h3><p><strong>图片（Image）</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置图片</span></span><br><span class="line">GImage image = contentPane.GetChild(<span class="string">&quot;n1&quot;</span>).asImage;</span><br><span class="line"><span class="comment">// 设置九宫</span></span><br><span class="line">image.fillMethod = FillMethod.Rotated;</span><br><span class="line"><span class="comment">// 设置颜色</span></span><br><span class="line">image.color = <span class="keyword">new</span> Color(<span class="number">1</span>, <span class="number">0.5</span>, <span class="number">0.5</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>文本（Text）</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GTextField text = contentPane.GetChild(<span class="string">&quot;n1&quot;</span>).asTextField;</span><br><span class="line"><span class="comment">// 设置文本</span></span><br><span class="line">text.text = <span class="string">&quot;Hello FairyGUI&quot;</span>;</span><br><span class="line"><span class="comment">// 设置字体</span></span><br><span class="line">text.font = <span class="string">&quot;SimHei&quot;</span>;</span><br><span class="line"><span class="comment">// 设置字号</span></span><br><span class="line">text.fontSize = <span class="number">24</span>;</span><br><span class="line"><span class="comment">// 设置颜色</span></span><br><span class="line">text.color = <span class="keyword">new</span> Color(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>输入框（Input）</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GTextInput input = contentPane.GetChild(<span class="string">&quot;n1&quot;</span>).asTextInput;</span><br><span class="line"><span class="comment">// 设置提示文字</span></span><br><span class="line">input.promptText = <span class="string">&quot;请输入...&quot;</span>;</span><br><span class="line"><span class="comment">// 限制输入类型</span></span><br><span class="line">input.restrict = <span class="string">&quot;0-9&quot;</span>;</span><br><span class="line"><span class="comment">// 最大字符数</span></span><br><span class="line">input.maxLength = <span class="number">10</span>;</span><br><span class="line"><span class="comment">// 密码模式</span></span><br><span class="line">input.password = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-按钮组件"><a href="#2-按钮组件" class="headerlink" title="2. 按钮组件"></a>2. 按钮组件</h3><p><strong>普通按钮</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GButton btn = contentPane.GetChild(<span class="string">&quot;n1&quot;</span>).asButton;</span><br><span class="line"><span class="comment">// 设置点击事件</span></span><br><span class="line">btn.onClick.Add(() =&gt; &#123;</span><br><span class="line">    Debug.Log(<span class="string">&quot;点击了按钮&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置按钮状态</span></span><br><span class="line">btn.selected = <span class="literal">true</span>; <span class="comment">// 设置选中状态</span></span><br><span class="line">btn.disabled = <span class="literal">true</span>; <span class="comment">// 禁用按钮</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>单选按钮 &#x2F; 复选框</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GButton radio = contentPane.GetChild(<span class="string">&quot;n1&quot;</span>).asButton;</span><br><span class="line"><span class="comment">// 单选模式</span></span><br><span class="line">radio.<span class="keyword">group</span> = <span class="string">&quot;group1&quot;</span>;</span><br><span class="line"><span class="comment">// 选中状态</span></span><br><span class="line">radio.selected = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-容器组件"><a href="#3-容器组件" class="headerlink" title="3. 容器组件"></a>3. 容器组件</h3><p><strong>列表（List）</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GList list = contentPane.GetChild(<span class="string">&quot;n1&quot;</span>).asList;</span><br><span class="line"><span class="comment">// 设置列表项模板</span></span><br><span class="line">list.itemRenderer = RenderListItem;</span><br><span class="line"><span class="comment">// 设置虚拟列表（高性能）</span></span><br><span class="line">list.SetVirtual();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 刷新列表</span></span><br><span class="line">list.RefreshVirtualList();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加列表项</span></span><br><span class="line">list.AddItem(<span class="keyword">new</span> ListItemData());</span><br></pre></td></tr></table></figure>
+
+<p><strong>滚动容器（ScrollPane）</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GComponent scrollView = contentPane.GetChild(<span class="string">&quot;n1&quot;</span>).asCom;</span><br><span class="line">ScrollPane scroll = scrollView.scrollPane;</span><br><span class="line"><span class="comment">// 设置滚动模式</span></span><br><span class="line">scroll.scrollStep = <span class="number">50</span>;</span><br><span class="line"><span class="comment">// 设置弹性</span></span><br><span class="line">scroll.bounceEffect = <span class="literal">true</span>;</span><br><span class="line"><span class="comment">// 监听滚动位置</span></span><br><span class="line">scroll.onScroll.Add(OnScroll);</span><br></pre></td></tr></table></figure>
+
+<p><strong>标签页（Tab）</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GTab tab = contentPane.GetChild(<span class="string">&quot;n1&quot;</span>).asTab;</span><br><span class="line"><span class="comment">// 切换事件</span></span><br><span class="line">tab.onTabChanged.Add(OnTabChanged);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代码切换</span></span><br><span class="line">tab.selectedIndex = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-弹窗与对话框"><a href="#4-弹窗与对话框" class="headerlink" title="4. 弹窗与对话框"></a>4. 弹窗与对话框</h3><p><strong>提示框（Toast）</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 显示提示</span></span><br><span class="line">Toast.Show(<span class="string">&quot;操作成功&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 带图标的提示</span></span><br><span class="line">Toast.ShowSuccess(<span class="string">&quot;保存成功&quot;</span>);</span><br><span class="line">Toast.ShowError(<span class="string">&quot;保存失败&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>确认对话框</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Confirm.Show(<span class="string">&quot;确定要退出吗？&quot;</span>, () =&gt; &#123;</span><br><span class="line">    Debug.Log(<span class="string">&quot;确认&quot;</span>);</span><br><span class="line">&#125;, () =&gt; &#123;</span><br><span class="line">    Debug.Log(<span class="string">&quot;取消&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>加载弹窗</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 显示加载中</span></span><br><span class="line">Progress.Show(<span class="string">&quot;加载中...&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新进度</span></span><br><span class="line">Progress.Update(<span class="number">50</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 隐藏</span></span><br><span class="line">Progress.Hide();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="四、布局系统"><a href="#四、布局系统" class="headerlink" title="四、布局系统"></a>四、布局系统</h2><h3 id="1-基础布局"><a href="#1-基础布局" class="headerlink" title="1. 基础布局"></a>1. 基础布局</h3><p><strong>水平布局</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// GComponent 设置水平布局</span></span><br><span class="line">container.layoutType = LayoutType.Horizontal;</span><br><span class="line"><span class="comment">// 间距</span></span><br><span class="line">container.space = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>垂直布局</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">container.layoutType = LayoutType.Vertical;</span><br><span class="line"><span class="comment">// 间距</span></span><br><span class="line">container.space = <span class="number">10</span>;</span><br><span class="line"><span class="comment">// 边距</span></span><br><span class="line">container.padding.top = <span class="number">10</span>;</span><br><span class="line">container.padding.bottom = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>网格布局</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">container.layoutType = LayoutType.Grid;</span><br><span class="line"><span class="comment">// 列数</span></span><br><span class="line">container.columns = <span class="number">3</span>;</span><br><span class="line"><span class="comment">// 间距</span></span><br><span class="line">container.spaceX = <span class="number">10</span>;</span><br><span class="line">container.spaceY = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-弹性布局"><a href="#2-弹性布局" class="headerlink" title="2. 弹性布局"></a>2. 弹性布局</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父容器</span></span><br><span class="line">container.layoutType = LayoutType.Horizontal;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子元素设置权重</span></span><br><span class="line">child1.flex = <span class="string">&quot;1&quot;</span>;</span><br><span class="line">child2.flex = <span class="string">&quot;2&quot;</span>; <span class="comment">// 2倍宽度</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-相对定位"><a href="#3-相对定位" class="headerlink" title="3. 相对定位"></a>3. 相对定位</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置相对父容器的位置</span></span><br><span class="line">relation.target = parent;</span><br><span class="line">relation.type = RelationType.Right_Center;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对齐方式</span></span><br><span class="line">relation.<span class="keyword">add</span>(RelationType.Right_Center);</span><br><span class="line">relation.<span class="keyword">add</span>(RelationType.Middle_Middle);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="五、动画系统"><a href="#五、动画系统" class="headerlink" title="五、动画系统"></a>五、动画系统</h2><h3 id="1-编辑器动画"><a href="#1-编辑器动画" class="headerlink" title="1. 编辑器动画"></a>1. 编辑器动画</h3><p>在 FairyGUI Editor 中：</p>
+<ol>
+<li>选中组件</li>
+<li>打开动画编辑器</li>
+<li>添加关键帧</li>
+<li>设置缓动函数</li>
+</ol>
+<p><strong>支持的动画类型：</strong></p>
+<ul>
+<li>位移</li>
+<li>缩放</li>
+<li>旋转</li>
+<li>透明度</li>
+<li>颜色</li>
+</ul>
+<p><strong>缓动函数：</strong></p>
+<ul>
+<li>Linear</li>
+<li>Sine</li>
+<li>Quad</li>
+<li>Cubic</li>
+<li>Bounce</li>
+<li>Back</li>
+<li>Elastic</li>
+</ul>
+<h3 id="2-代码播放动画"><a href="#2-代码播放动画" class="headerlink" title="2. 代码播放动画"></a>2. 代码播放动画</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取动画组件</span></span><br><span class="line">GLoader loader = contentPane.GetChild(<span class="string">&quot;n1&quot;</span>).asLoader;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 播放 SWF 动画</span></span><br><span class="line">loader.url = <span class="string">&quot;ui://PackageName/Animation01&quot;</span>;</span><br><span class="line">loader.playing = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听动画完成</span></span><br><span class="line">loader.onPlayEnd.Add(() =&gt; &#123;</span><br><span class="line">    Debug.Log(<span class="string">&quot;动画播放完成&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 控制播放</span></span><br><span class="line">loader.frame = <span class="number">0</span>;</span><br><span class="line">loader.playing = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-过渡效果（Transition）"><a href="#3-过渡效果（Transition）" class="headerlink" title="3. 过渡效果（Transition）"></a>3. 过渡效果（Transition）</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取过渡</span></span><br><span class="line">Transition trans = contentPane.GetTransition(<span class="string">&quot;t1&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 播放</span></span><br><span class="line">trans.Play();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 倒放</span></span><br><span class="line">trans.PlayReverse();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 停止</span></span><br><span class="line">trans.Stop();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置参数</span></span><br><span class="line">trans.timeScale = <span class="number">2</span>; <span class="comment">// 2倍速</span></span><br><span class="line">trans.repeat = <span class="number">0</span>;    <span class="comment">// 无限循环</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="六、交互系统"><a href="#六、交互系统" class="headerlink" title="六、交互系统"></a>六、交互系统</h2><h3 id="1-事件系统"><a href="#1-事件系统" class="headerlink" title="1. 事件系统"></a>1. 事件系统</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 点击事件</span></span><br><span class="line">button.onClick.Add(OnClick);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 长按事件</span></span><br><span class="line">button.onLongPress.Add(OnLongPress);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 拖拽事件</span></span><br><span class="line"><span class="built_in">object</span>.draggable = <span class="literal">true</span>;</span><br><span class="line"><span class="built_in">object</span>.onDragStart.Add(OnDragStart);</span><br><span class="line"><span class="built_in">object</span>.onDragMove.Add(OnDragMove);</span><br><span class="line"><span class="built_in">object</span>.onDragEnd.Add(OnDragEnd);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 鼠标事件</span></span><br><span class="line">component.onMouseOver.Add(OnMouseOver);</span><br><span class="line">component.onMouseOut.Add(OnMouseOut);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 滚动事件</span></span><br><span class="line">scrollPane.onScroll.Add(OnScroll);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-手势识别"><a href="#2-手势识别" class="headerlink" title="2. 手势识别"></a>2. 手势识别</h3><p><strong>双击</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">component.onDoubleClick.Add(OnDoubleClick);</span><br></pre></td></tr></table></figure>
+
+<p><strong>缩放</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 启用缩放手势</span></span><br><span class="line">Gestures.EnablePinch(component);</span><br><span class="line">Gestures.OnPinch.Add(OnPinch);</span><br></pre></td></tr></table></figure>
+
+<p><strong>滑动</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Gestures.EnableSwipe(component);</span><br><span class="line">Gestures.OnSwipe.Add(OnSwipe);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="七、在-Unity-中使用"><a href="#七、在-Unity-中使用" class="headerlink" title="七、在 Unity 中使用"></a>七、在 Unity 中使用</h2><h3 id="1-安装-FairyGUI-for-Unity"><a href="#1-安装-FairyGUI-for-Unity" class="headerlink" title="1. 安装 FairyGUI for Unity"></a>1. 安装 FairyGUI for Unity</h3><p>在 Unity Package Manager 中导入 FairyGUI 插件。</p>
+<h3 id="2-创建-UI"><a href="#2-创建-UI" class="headerlink" title="2. 创建 UI"></a>2. 创建 UI</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建 UI 面板</span></span><br><span class="line">UIPanel panel = gameObject.AddComponent&lt;UIPanel&gt;();</span><br><span class="line">panel.packageName = <span class="string">&quot;MyPackage&quot;</span>;</span><br><span class="line">panel.componentName = <span class="string">&quot;MainView&quot;</span>;</span><br><span class="line">panel.Create();</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-代码交互"><a href="#3-代码交互" class="headerlink" title="3. 代码交互"></a>3. 代码交互</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> FairyGUI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MainPanel</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> GComponent contentPane;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span> &#123;</span><br><span class="line">        <span class="comment">// 获取面板</span></span><br><span class="line">        contentPane = GetComponent&lt;UIPanel&gt;().ui;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 获取组件</span></span><br><span class="line">        GButton btn = contentPane.GetChild(<span class="string">&quot;btn_start&quot;</span>).asButton;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 绑定事件</span></span><br><span class="line">        btn.onClick.Add(OnStartClick);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnStartClick</span>()</span> &#123;</span><br><span class="line">        Debug.Log(<span class="string">&quot;开始游戏&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-资源管理"><a href="#4-资源管理" class="headerlink" title="4. 资源管理"></a>4. 资源管理</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 动态加载 UI</span></span><br><span class="line">UIPackage.AddPackage(<span class="string">&quot;ui/MyPackage&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加载组件</span></span><br><span class="line">GComponent com = UIPackage.CreateObject(<span class="string">&quot;MyPackage&quot;</span>, <span class="string">&quot;ComponentName&quot;</span>).asCom;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 卸载资源</span></span><br><span class="line">UIPackage.RemovePackage(<span class="string">&quot;MyPackage&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="八、性能优化"><a href="#八、性能优化" class="headerlink" title="八、性能优化"></a>八、性能优化</h2><h3 id="1-渲染优化"><a href="#1-渲染优化" class="headerlink" title="1. 渲染优化"></a>1. 渲染优化</h3><p><strong>使用对象池</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 列表虚拟化</span></span><br><span class="line">list.SetVirtual();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象池</span></span><br><span class="line">GObject obj = ObjectPool.GetObject(<span class="string">&quot;PrefabName&quot;</span>);</span><br><span class="line">ObjectPool.ReturnObject(obj);</span><br></pre></td></tr></table></figure>
+
+<p><strong>减少 Draw Call</strong></p>
+<ul>
+<li>合并小纹理为 Atlas</li>
+<li>使用统一材质的组件</li>
+</ul>
+<h3 id="2-内存优化"><a href="#2-内存优化" class="headerlink" title="2. 内存优化"></a>2. 内存优化</h3><p><strong>资源卸载</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定时卸载未使用的资源</span></span><br><span class="line">Resources.UnloadUnusedAssets();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 强制卸载</span></span><br><span class="line">Resources.UnloadAsset(obj);</span><br></pre></td></tr></table></figure>
+
+<p><strong>及时释放</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组件销毁时释放</span></span><br><span class="line">component.Dispose();</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-脚本优化"><a href="#3-脚本优化" class="headerlink" title="3. 脚本优化"></a>3. 脚本优化</h3><p><strong>缓存组件引用</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不推荐：每次都查找</span></span><br><span class="line">contentPane.GetChild(<span class="string">&quot;btn&quot;</span>).asButton.onClick.Add(...);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 推荐：缓存引用</span></span><br><span class="line"><span class="keyword">private</span> GButton btn;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span> &#123;</span><br><span class="line">    btn = contentPane.GetChild(<span class="string">&quot;btn&quot;</span>).asButton;</span><br><span class="line">    btn.onClick.Add(OnClick);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="九、常见问题"><a href="#九、常见问题" class="headerlink" title="九、常见问题"></a>九、常见问题</h2><h3 id="1-文字显示模糊"><a href="#1-文字显示模糊" class="headerlink" title="1. 文字显示模糊"></a>1. 文字显示模糊</h3><p><strong>解决方案：</strong></p>
+<ul>
+<li>使用合适的字号（不要太小）</li>
+<li>调整 Canvas 渲染器的 DPI</li>
+<li>检查 CanvasScaler 设置</li>
+</ul>
+<h3 id="2-事件穿透"><a href="#2-事件穿透" class="headerlink" title="2. 事件穿透"></a>2. 事件穿透</h3><p><strong>解决方案：</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 阻止事件穿透</span></span><br><span class="line">component.touchable = <span class="literal">false</span>;</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">component.FitMargin = <span class="keyword">new</span> Margin(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-适配问题"><a href="#3-适配问题" class="headerlink" title="3. 适配问题"></a>3. 适配问题</h3><p><strong>解决方案：</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置 UI 适配</span></span><br><span class="line">GRoot.inst.SetContentScaleFit(StageScaleMode.SHOW_ALL);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">GRoot.inst.SetContentScaleFit(StageScaleMode.FIT_WIDTH);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="十、最佳实践"><a href="#十、最佳实践" class="headerlink" title="十、最佳实践"></a>十、最佳实践</h2><h3 id="1-项目结构"><a href="#1-项目结构" class="headerlink" title="1. 项目结构"></a>1. 项目结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Assets/</span><br><span class="line">├── FairyGUI/</span><br><span class="line">│   └── SDK 文件</span><br><span class="line">├── UI/</span><br><span class="line">│   ├── Packages/         # UI 包</span><br><span class="line">│   ├── Atlas/           # 图集</span><br><span class="line">│   └── Fonts/           # 字体</span><br><span class="line">├── Prefabs/             # 预制体</span><br><span class="line">└── Scripts/             # 脚本</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-命名规范"><a href="#2-命名规范" class="headerlink" title="2. 命名规范"></a>2. 命名规范</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Package: MyGame</span><br><span class="line">├── Common               # 通用组件</span><br><span class="line">│   ├── Button          # 按钮</span><br><span class="line">│   ├── ProgressBar     # 进度条</span><br><span class="line">│   └── Toast           # 提示</span><br><span class="line">├── Main                # 主界面</span><br><span class="line">│   ├── MainMenu        # 主菜单</span><br><span class="line">│   └── GameUI          # 游戏界面</span><br><span class="line">└── Dialog              # 对话框</span><br><span class="line">    └── Confirm         # 确认框</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-工作流"><a href="#3-工作流" class="headerlink" title="3. 工作流"></a>3. 工作流</h3><ol>
+<li>UI 设计师在 FairyGUI Editor 中设计界面</li>
+<li>导出 UI 包到项目</li>
+<li>开发者加载并绑定逻辑</li>
+<li>测试和调整</li>
+</ol>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>FairyGUI 为游戏 UI 开发提供了完整的解决方案，其核心优势包括：</p>
+<ul>
+<li>可视化编辑器，所见即所得</li>
+<li>丰富的组件库，开箱即用</li>
+<li>优秀的性能，适合移动端</li>
+<li>跨引擎支持，迁移成本低</li>
+</ul>
+<p>掌握 FairyGUI 能大幅提升 UI 开发效率，是游戏开发者的必备技能。</p>
+<p>Happy UI Development! 🎨</p>
+<hr>
+<p><em>有问题欢迎评论区留言～</em></p>
+
+      
+    </div>
+    <footer class="article-footer" style="overflow: hidden;">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/FairyGUI/" rel="tag">FairyGUI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/UI/" rel="tag">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" rel="tag">游戏开发</a></li></ul>
+
+      <span style="float: right;">
+        <a data-url="/hexo/2025/05/20/fairygui-guide/" data-id="cuidwOIfJGDdRhUjtibb3qH9R" data-title="FairyGUI 完全指南" class="article-share-link"><span class="fa fa-share">分享</span></a>
+        
+        
+          <a href="/hexo/2025/05/20/fairygui-guide/#comments" class="article-comment-link" style="margin-left: 20px; display: inline-flex; align-items: center; gap: 5px;">
+            <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/hexo/2025/05/20/fairygui-guide/" itemprop="commentCount"></span>
+            <span>留言</span>
+          </a>
+        
+      </span>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/hexo/2025/07/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          数据结构与算法入门指南
+        
+      </div>
+    </a>
+  
+  
+    <a href="/hexo/2025/05/15/%E9%BE%99%E9%AA%A8%E4%B8%8ESpine%E5%8A%A8%E7%94%BB%E6%95%99%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">2D 骨骼动画实战</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+
+
+
+
+<!-- 文章目录已移至 layout.ejs 中的正确位置 -->
+
+</section>
+        
+        <aside id="sidebar" class="toc-sidebar" style="position: sticky; top: 0;">
+          <div class="widget-wrap" style="max-height: calc(100vh - 100px); overflow-y: auto;">
+            <h3 class="widget-title">文章目录</h3>
+            <div class="widget">
+              <div class="toc-article">
+                <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81FairyGUI-%E7%AE%80%E4%BB%8B"><span class="toc-list-text">一、FairyGUI 简介</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-FairyGUI%EF%BC%9F"><span class="toc-list-text">什么是 FairyGUI？</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%94%AF%E6%8C%81%E7%9A%84%E5%BC%95%E6%93%8E"><span class="toc-list-text">支持的引擎</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E7%89%88%E6%9C%AC%E5%AF%B9%E6%AF%94"><span class="toc-list-text">版本对比</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E7%BC%96%E8%BE%91%E5%99%A8%E4%BD%BF%E7%94%A8"><span class="toc-list-text">二、编辑器使用</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E5%AE%89%E8%A3%85%E7%BC%96%E8%BE%91%E5%99%A8"><span class="toc-list-text">1. 安装编辑器</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-list-text">2. 创建项目</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-%E7%BC%96%E8%BE%91%E5%99%A8%E7%95%8C%E9%9D%A2"><span class="toc-list-text">3. 编辑器界面</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#4-%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="toc-list-text">4. 基础操作</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6"><span class="toc-list-text">三、核心组件</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E5%9F%BA%E6%9C%AC%E7%BB%84%E4%BB%B6"><span class="toc-list-text">1. 基本组件</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E6%8C%89%E9%92%AE%E7%BB%84%E4%BB%B6"><span class="toc-list-text">2. 按钮组件</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-%E5%AE%B9%E5%99%A8%E7%BB%84%E4%BB%B6"><span class="toc-list-text">3. 容器组件</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#4-%E5%BC%B9%E7%AA%97%E4%B8%8E%E5%AF%B9%E8%AF%9D%E6%A1%86"><span class="toc-list-text">4. 弹窗与对话框</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E5%B8%83%E5%B1%80%E7%B3%BB%E7%BB%9F"><span class="toc-list-text">四、布局系统</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E5%9F%BA%E7%A1%80%E5%B8%83%E5%B1%80"><span class="toc-list-text">1. 基础布局</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E5%BC%B9%E6%80%A7%E5%B8%83%E5%B1%80"><span class="toc-list-text">2. 弹性布局</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-%E7%9B%B8%E5%AF%B9%E5%AE%9A%E4%BD%8D"><span class="toc-list-text">3. 相对定位</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E5%8A%A8%E7%94%BB%E7%B3%BB%E7%BB%9F"><span class="toc-list-text">五、动画系统</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E7%BC%96%E8%BE%91%E5%99%A8%E5%8A%A8%E7%94%BB"><span class="toc-list-text">1. 编辑器动画</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E4%BB%A3%E7%A0%81%E6%92%AD%E6%94%BE%E5%8A%A8%E7%94%BB"><span class="toc-list-text">2. 代码播放动画</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-%E8%BF%87%E6%B8%A1%E6%95%88%E6%9E%9C%EF%BC%88Transition%EF%BC%89"><span class="toc-list-text">3. 过渡效果（Transition）</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E4%BA%A4%E4%BA%92%E7%B3%BB%E7%BB%9F"><span class="toc-list-text">六、交互系统</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-list-text">1. 事件系统</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E6%89%8B%E5%8A%BF%E8%AF%86%E5%88%AB"><span class="toc-list-text">2. 手势识别</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%83%E3%80%81%E5%9C%A8-Unity-%E4%B8%AD%E4%BD%BF%E7%94%A8"><span class="toc-list-text">七、在 Unity 中使用</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E5%AE%89%E8%A3%85-FairyGUI-for-Unity"><span class="toc-list-text">1. 安装 FairyGUI for Unity</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E5%88%9B%E5%BB%BA-UI"><span class="toc-list-text">2. 创建 UI</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-%E4%BB%A3%E7%A0%81%E4%BA%A4%E4%BA%92"><span class="toc-list-text">3. 代码交互</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#4-%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86"><span class="toc-list-text">4. 资源管理</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AB%E3%80%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-list-text">八、性能优化</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96"><span class="toc-list-text">1. 渲染优化</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96"><span class="toc-list-text">2. 内存优化</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-%E8%84%9A%E6%9C%AC%E4%BC%98%E5%8C%96"><span class="toc-list-text">3. 脚本优化</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B9%9D%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-list-text">九、常见问题</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E6%96%87%E5%AD%97%E6%98%BE%E7%A4%BA%E6%A8%A1%E7%B3%8A"><span class="toc-list-text">1. 文字显示模糊</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E4%BA%8B%E4%BB%B6%E7%A9%BF%E9%80%8F"><span class="toc-list-text">2. 事件穿透</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-%E9%80%82%E9%85%8D%E9%97%AE%E9%A2%98"><span class="toc-list-text">3. 适配问题</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8D%81%E3%80%81%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-list-text">十、最佳实践</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-list-text">1. 项目结构</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="toc-list-text">2. 命名规范</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-list-text">3. 工作流</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-list-text">总结</span></a></li></ol>
+              </div>
+            </div>
+          </div>
+        </aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        © 2025-2026 宁尚义. All rights reserved.
+      
+      &copy; 2026 宁尚义<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      
+        <br>
+        <span id="busuanzi_container_site_pv">
+          总访问量: <span id="busuanzi_value_site_pv">0</span>
+        </span>
+      
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/busuanzi/2.3/busuanzi.pure.min.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4281d5d8ea7e4e9d8d336c9230dfff9a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/hexo/" class="mobile-nav-link">首页</a>
+  
+    <a href="/hexo/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/hexo/portfolio" class="mobile-nav-link">作品集</a>
+  
+    <a href="/hexo/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/hexo/js/jquery-3.6.4.min.js"></script>
+
+
+
+<script src="/hexo/js/search.js"></script>
+
+
+
+  
+<script src="/hexo/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/hexo/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "KXoxur5yqjJ4BMJkcRNl87rVX20K9hfe18JlOr9meD2VafQsaA8L4NxLTnCNwFLo",
+        appKey: "cn-n1",
+        placeholder: "欢迎留言交流！",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>

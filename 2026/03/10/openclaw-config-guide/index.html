@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html class="post">
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>OpenClaw 配置指南 | 宁尚义的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="OpenClaw 是一个强大的 AI 助手框架，支持多种大语言模型接入。本文详细介绍如何在 Windows WSL 环境下安装配置 OpenClaw，并接入 minimax 大模型。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenClaw 配置指南">
+<meta property="og:url" content="https://nsyqqq.github.io/hexo/2026/03/10/openclaw-config-guide/index.html">
+<meta property="og:site_name" content="宁尚义的个人博客">
+<meta property="og:description" content="OpenClaw 是一个强大的 AI 助手框架，支持多种大语言模型接入。本文详细介绍如何在 Windows WSL 环境下安装配置 OpenClaw，并接入 minimax 大模型。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-10T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-25T09:43:39.011Z">
+<meta property="article:author" content="宁尚义">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="OpenClaw">
+<meta property="article:tag" content="minimax">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/hexo/atom.xml" title="宁尚义的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/hexo/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/hexo/css/style.css">
+
+  
+<link rel="stylesheet" href="/hexo/css/custom.css">
+
+  
+    
+<link rel="stylesheet" href="/hexo/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="search-results-container"></div>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/hexo/" id="logo">宁尚义的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/hexo/">首页</a>
+        
+          <a class="main-nav-link" href="/hexo/archives">归档</a>
+        
+          <a class="main-nav-link" href="/hexo/portfolio">作品集</a>
+        
+          <a class="main-nav-link" href="/hexo/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://github.com/NsyQQQ" title="GitHub"><span class="fa fa-github"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://blog.csdn.net/NingQQQ" title="CSDN"><span class="fa fa-book"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://www.zhihu.com/people/ningq-31" title="知乎"><span class="fa fa-user"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/432403089" title="bilibili"><span class="fa fa-bilibili"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/hexo/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://nsyqqq.github.io/hexo"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-openclaw-config-guide" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <time class="dt-published article-date" datetime="2026-03-10T02:00:00.000Z" itemprop="datePublished">2026-03-10</time>
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo/categories/AI/">AI</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      OpenClaw 配置指南
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>OpenClaw 是一个强大的 AI 助手框架，支持多种大语言模型接入。本文详细介绍如何在 Windows WSL 环境下安装配置 OpenClaw，并接入 minimax 大模型。</p>
+<span id="more"></span>
+
+<h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h2><h3 id="1-1-Windows-WSL-安装"><a href="#1-1-Windows-WSL-安装" class="headerlink" title="1.1 Windows WSL 安装"></a>1.1 Windows WSL 安装</h3><p>首先需要在 Windows 上安装 WSL（Windows Subsystem for Linux）：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以管理员身份打开 PowerShell，运行以下命令</span></span><br><span class="line">wsl <span class="literal">--install</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启电脑后，选择 Ubuntu 发行版</span></span><br></pre></td></tr></table></figure>
+
+<p>或者手动安装：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启用 WSL 功能</span></span><br><span class="line">dism.exe /online /<span class="built_in">enable-feature</span> /featurename:Microsoft<span class="literal">-Windows-Subsystem-Linux</span> /all /norestart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用虚拟机功能</span></span><br><span class="line">dism.exe /online /<span class="built_in">enable-feature</span> /featurename:VirtualMachinePlatform /all /norestart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 WSL 默认版本</span></span><br><span class="line">wsl <span class="literal">--set-default-version</span> <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 Ubuntu</span></span><br><span class="line">wsl <span class="literal">--install</span> <span class="literal">-d</span> Ubuntu<span class="literal">-22</span>.<span class="number">04</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-Ubuntu-环境配置"><a href="#1-2-Ubuntu-环境配置" class="headerlink" title="1.2 Ubuntu 环境配置"></a>1.2 Ubuntu 环境配置</h3><p>安装完成后，进入 Ubuntu：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新系统</span></span><br><span class="line"><span class="built_in">sudo</span> apt update &amp;&amp; <span class="built_in">sudo</span> apt upgrade -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装必要依赖</span></span><br><span class="line"><span class="built_in">sudo</span> apt install -y curl wget git unzip build-essential</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="二、OpenClaw-安装"><a href="#二、OpenClaw-安装" class="headerlink" title="二、OpenClaw 安装"></a>二、OpenClaw 安装</h2><h3 id="2-1-安装-Node-js"><a href="#2-1-安装-Node-js" class="headerlink" title="2.1 安装 Node.js"></a>2.1 安装 Node.js</h3><p>OpenClaw 需要 Node.js 环境：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 Node.js 18.x</span></span><br><span class="line">curl -fsSL https://deb.nodesource.com/setup_18.x | <span class="built_in">sudo</span> -E bash -</span><br><span class="line"><span class="built_in">sudo</span> apt install -y nodejs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证安装</span></span><br><span class="line">node --version</span><br><span class="line">npm --version</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-安装-OpenClaw"><a href="#2-2-安装-OpenClaw" class="headerlink" title="2.2 安装 OpenClaw"></a>2.2 安装 OpenClaw</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 克隆 OpenClaw 仓库</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/openclaw/openclaw.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> openclaw</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看目录结构</span></span><br><span class="line"><span class="built_in">ls</span> -la</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="三、minimax-模型配置"><a href="#三、minimax-模型配置" class="headerlink" title="三、minimax 模型配置"></a>三、minimax 模型配置</h2><h3 id="3-1-注册-minimax-账号"><a href="#3-1-注册-minimax-账号" class="headerlink" title="3.1 注册 minimax 账号"></a>3.1 注册 minimax 账号</h3><ol>
+<li>访问 <a target="_blank" rel="noopener" href="https://platform.minimaxi.com/">minimax 开放平台</a></li>
+<li>注册账号并完成认证</li>
+<li>创建 API Key</li>
+</ol>
+<h3 id="3-2-配置环境变量"><a href="#3-2-配置环境变量" class="headerlink" title="3.2 配置环境变量"></a>3.2 配置环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编辑环境变量文件</span></span><br><span class="line"><span class="built_in">cp</span> .env.example .<span class="built_in">env</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑 .env 文件</span></span><br><span class="line">nano .<span class="built_in">env</span></span><br></pre></td></tr></table></figure>
+
+<p>在 <code>.env</code> 中添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># minimax 配置</span><br><span class="line">MINIMAX_API_KEY=your_api_key_here</span><br><span class="line">MINIMAX_BASE_URL=https://api.minimaxi.com/v1</span><br><span class="line"></span><br><span class="line"># 默认模型</span><br><span class="line">DEFAULT_MODEL=abab6.5-sse</span><br><span class="line"></span><br><span class="line"># 助手配置</span><br><span class="line">AGENT_NAME=小义</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="四、配置文件详解"><a href="#四、配置文件详解" class="headerlink" title="四、配置文件详解"></a>四、配置文件详解</h2><h3 id="4-1-基础配置"><a href="#4-1-基础配置" class="headerlink" title="4.1 基础配置"></a>4.1 基础配置</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config.yaml</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">host:</span> <span class="string">&quot;0.0.0.0&quot;</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line">  <span class="attr">baseUrl:</span> <span class="string">&quot;/&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">agent:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">&quot;小义&quot;</span></span><br><span class="line">  <span class="attr">model:</span> <span class="string">&quot;minimax-portal/MiniMax-M2.5&quot;</span></span><br><span class="line">  </span><br><span class="line"><span class="attr">models:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;minimax-portal/MiniMax-M2.5&quot;</span></span><br><span class="line">    <span class="attr">provider:</span> <span class="string">&quot;minimax&quot;</span></span><br><span class="line">    <span class="attr">apiKey:</span> <span class="string">&quot;$&#123;MINIMAX_API_KEY&#125;&quot;</span></span><br><span class="line">    <span class="attr">baseUrl:</span> <span class="string">&quot;$&#123;MINIMAX_BASE_URL&#125;&quot;</span></span><br><span class="line">    </span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;minimax-portal/MiniMax-M2.5-highspeed&quot;</span></span><br><span class="line">    <span class="attr">provider:</span> <span class="string">&quot;minimax&quot;</span></span><br><span class="line">    </span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&quot;qwen-portal/coder-model&quot;</span></span><br><span class="line">    <span class="attr">provider:</span> <span class="string">&quot;qwen&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-高级配置"><a href="#4-2-高级配置" class="headerlink" title="4.2 高级配置"></a>4.2 高级配置</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对话配置</span></span><br><span class="line"><span class="attr">conversation:</span></span><br><span class="line">  <span class="attr">maxTokens:</span> <span class="number">8192</span></span><br><span class="line">  <span class="attr">temperature:</span> <span class="number">0.7</span></span><br><span class="line">  <span class="attr">topP:</span> <span class="number">0.9</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 上下文配置</span></span><br><span class="line"><span class="attr">context:</span></span><br><span class="line">  <span class="attr">maxMessages:</span> <span class="number">50</span></span><br><span class="line">  <span class="attr">summaryEnabled:</span> <span class="literal">true</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># 插件配置</span></span><br><span class="line"><span class="attr">plugins:</span></span><br><span class="line">  <span class="attr">enabled:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">web_search</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">web_fetch</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">browser</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">memory</span></span><br><span class="line">    </span><br><span class="line">  <span class="attr">web_search:</span></span><br><span class="line">    <span class="attr">apiKey:</span> <span class="string">&quot;$&#123;BRAVE_API_KEY&#125;&quot;</span></span><br><span class="line">    </span><br><span class="line">  <span class="attr">memory:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">&quot;file&quot;</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">&quot;./memory&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="五、启动与访问"><a href="#五、启动与访问" class="headerlink" title="五、启动与访问"></a>五、启动与访问</h2><h3 id="5-1-启动-OpenClaw"><a href="#5-1-启动-OpenClaw" class="headerlink" title="5.1 启动 OpenClaw"></a>5.1 启动 OpenClaw</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开发模式启动</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或生产模式启动</span></span><br><span class="line">npm run build</span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-访问界面"><a href="#5-2-访问界面" class="headerlink" title="5.2 访问界面"></a>5.2 访问界面</h3><p>启动成功后，打开浏览器访问：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080</span><br></pre></td></tr></table></figure>
+
+<p>或通过 WSL 访问 Windows IP：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 Windows IP</span></span><br><span class="line">ip route show | grep -i default | awk <span class="string">&#x27;&#123;print $3&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问示例</span></span><br><span class="line">http://192.168.x.x:8080</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="六、常用命令"><a href="#六、常用命令" class="headerlink" title="六、常用命令"></a>六、常用命令</h2><h3 id="6-1-管理命令"><a href="#6-1-管理命令" class="headerlink" title="6.1 管理命令"></a>6.1 管理命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看状态</span></span><br><span class="line">openclaw status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启服务</span></span><br><span class="line">openclaw restart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看日志</span></span><br><span class="line">openclaw logs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新版本</span></span><br><span class="line">openclaw update</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-配置管理"><a href="#6-2-配置管理" class="headerlink" title="6.2 配置管理"></a>6.2 配置管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验证配置</span></span><br><span class="line">openclaw config validate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前配置</span></span><br><span class="line">openclaw config show</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="七、常见问题"><a href="#七、常见问题" class="headerlink" title="七、常见问题"></a>七、常见问题</h2><h3 id="7-1-连接问题"><a href="#7-1-连接问题" class="headerlink" title="7.1 连接问题"></a>7.1 连接问题</h3><p>如果无法连接 minimax API：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检查网络</span></span><br><span class="line">curl -I https://api.minimaxi.com/v1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查 API Key</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$MINIMAX_API_KEY</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-2-模型选择"><a href="#7-2-模型选择" class="headerlink" title="7.2 模型选择"></a>7.2 模型选择</h3><p>不同模型的对比：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MiniMax-M2.5</td>
+<td>平衡能力强</td>
+<td>日常对话</td>
+</tr>
+<tr>
+<td>MiniMax-M2.5-HighSpeed</td>
+<td>响应快</td>
+<td>实时对话</td>
+</tr>
+<tr>
+<td>Qwen-Coder</td>
+<td>编程能力强</td>
+<td>代码生成</td>
+</tr>
+</tbody></table>
+<h3 id="7-3-性能优化"><a href="#7-3-性能优化" class="headerlink" title="7.3 性能优化"></a>7.3 性能优化</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 优化配置</span></span><br><span class="line"><span class="attr">performance:</span></span><br><span class="line">  <span class="attr">cache:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">ttl:</span> <span class="number">3600</span></span><br><span class="line">    </span><br><span class="line">  <span class="attr">streaming:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">    </span><br><span class="line">  <span class="attr">connectionPool:</span></span><br><span class="line">    <span class="attr">max:</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="八、进阶功能"><a href="#八、进阶功能" class="headerlink" title="八、进阶功能"></a>八、进阶功能</h2><h3 id="8-1-插件开发"><a href="#8-1-插件开发" class="headerlink" title="8.1 插件开发"></a>8.1 插件开发</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// plugins/my-plugin/index.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;my-plugin&#x27;</span>,</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">onMessage</span>(<span class="params">context</span>) &#123;</span><br><span class="line">    <span class="comment">// 处理消息</span></span><br><span class="line">    <span class="keyword">return</span> context;</span><br><span class="line">  &#125;,</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">onResponse</span>(<span class="params">context</span>) &#123;</span><br><span class="line">    <span class="comment">// 处理响应</span></span><br><span class="line">    <span class="keyword">return</span> context;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-2-自定义助手"><a href="#8-2-自定义助手" class="headerlink" title="8.2 自定义助手"></a>8.2 自定义助手</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># custom-agent.yaml</span></span><br><span class="line"><span class="attr">agent:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">&quot;编程助手&quot;</span></span><br><span class="line">  <span class="attr">model:</span> <span class="string">&quot;qwen-portal/coder-model&quot;</span></span><br><span class="line">  </span><br><span class="line">  <span class="attr">prompts:</span></span><br><span class="line">    <span class="attr">system:</span> <span class="string">|</span></span><br><span class="line"><span class="string">      你是一个专业的编程助手...</span></span><br><span class="line"><span class="string"></span>      </span><br><span class="line">  <span class="attr">plugins:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">code_executor</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">file_manager</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文详细介绍了在 Windows WSL 环境下安装配置 OpenClaw 并接入 minimax 大模型的完整流程。通过本文，你应该能够：</p>
+<ul>
+<li>在 WSL 中搭建 OpenClaw 环境</li>
+<li>配置 minimax API</li>
+<li>启动服务并访问</li>
+<li>解决常见问题</li>
+</ul>
+<p>希望这篇教程能帮助你快速上手 OpenClaw！</p>
+<p>Happy Coding! 🚀</p>
+<hr>
+<p><em>有问题欢迎评论区留言～</em></p>
+
+      
+    </div>
+    <footer class="article-footer" style="overflow: hidden;">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/OpenClaw/" rel="tag">OpenClaw</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/minimax/" rel="tag">minimax</a></li></ul>
+
+      <span style="float: right;">
+        <a data-url="/hexo/2026/03/10/openclaw-config-guide/" data-id="cuid9CMcP-X2IXxacxHNqCnOl" data-title="OpenClaw 配置指南" class="article-share-link"><span class="fa fa-share">分享</span></a>
+        
+        
+          <a href="/hexo/2026/03/10/openclaw-config-guide/#comments" class="article-comment-link" style="margin-left: 20px; display: inline-flex; align-items: center; gap: 5px;">
+            <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/hexo/2026/03/10/openclaw-config-guide/" itemprop="commentCount"></span>
+            <span>留言</span>
+          </a>
+        
+      </span>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/hexo/2026/03/15/%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8BCoding-Plan%E5%AF%B9%E6%AF%94/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          常用大模型Coding Plan对比
+        
+      </div>
+    </a>
+  
+  
+    <a href="/hexo/2026/01/20/Docker%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Docker 入门与实践</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+
+
+
+
+<!-- 文章目录已移至 layout.ejs 中的正确位置 -->
+
+</section>
+        
+        <aside id="sidebar" class="toc-sidebar" style="position: sticky; top: 0;">
+          <div class="widget-wrap" style="max-height: calc(100vh - 100px); overflow-y: auto;">
+            <h3 class="widget-title">文章目录</h3>
+            <div class="widget">
+              <div class="toc-article">
+                <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-list-text">一、环境准备</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-1-Windows-WSL-%E5%AE%89%E8%A3%85"><span class="toc-list-text">1.1 Windows WSL 安装</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-2-Ubuntu-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-list-text">1.2 Ubuntu 环境配置</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81OpenClaw-%E5%AE%89%E8%A3%85"><span class="toc-list-text">二、OpenClaw 安装</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-1-%E5%AE%89%E8%A3%85-Node-js"><span class="toc-list-text">2.1 安装 Node.js</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-2-%E5%AE%89%E8%A3%85-OpenClaw"><span class="toc-list-text">2.2 安装 OpenClaw</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81minimax-%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE"><span class="toc-list-text">三、minimax 模型配置</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-1-%E6%B3%A8%E5%86%8C-minimax-%E8%B4%A6%E5%8F%B7"><span class="toc-list-text">3.1 注册 minimax 账号</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-2-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-list-text">3.2 配置环境变量</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3"><span class="toc-list-text">四、配置文件详解</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#4-1-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="toc-list-text">4.1 基础配置</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#4-2-%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE"><span class="toc-list-text">4.2 高级配置</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E5%90%AF%E5%8A%A8%E4%B8%8E%E8%AE%BF%E9%97%AE"><span class="toc-list-text">五、启动与访问</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#5-1-%E5%90%AF%E5%8A%A8-OpenClaw"><span class="toc-list-text">5.1 启动 OpenClaw</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#5-2-%E8%AE%BF%E9%97%AE%E7%95%8C%E9%9D%A2"><span class="toc-list-text">5.2 访问界面</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-list-text">六、常用命令</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#6-1-%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-list-text">6.1 管理命令</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#6-2-%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86"><span class="toc-list-text">6.2 配置管理</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%83%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-list-text">七、常见问题</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#7-1-%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98"><span class="toc-list-text">7.1 连接问题</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#7-2-%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9"><span class="toc-list-text">7.2 模型选择</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#7-3-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-list-text">7.3 性能优化</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AB%E3%80%81%E8%BF%9B%E9%98%B6%E5%8A%9F%E8%83%BD"><span class="toc-list-text">八、进阶功能</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#8-1-%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91"><span class="toc-list-text">8.1 插件开发</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#8-2-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8A%A9%E6%89%8B"><span class="toc-list-text">8.2 自定义助手</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-list-text">总结</span></a></li></ol>
+              </div>
+            </div>
+          </div>
+        </aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        © 2025-2026 宁尚义. All rights reserved.
+      
+      &copy; 2026 宁尚义<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      
+        <br>
+        <span id="busuanzi_container_site_pv">
+          总访问量: <span id="busuanzi_value_site_pv">0</span>
+        </span>
+      
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/busuanzi/2.3/busuanzi.pure.min.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4281d5d8ea7e4e9d8d336c9230dfff9a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/hexo/" class="mobile-nav-link">首页</a>
+  
+    <a href="/hexo/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/hexo/portfolio" class="mobile-nav-link">作品集</a>
+  
+    <a href="/hexo/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/hexo/js/jquery-3.6.4.min.js"></script>
+
+
+
+<script src="/hexo/js/search.js"></script>
+
+
+
+  
+<script src="/hexo/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/hexo/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "KXoxur5yqjJ4BMJkcRNl87rVX20K9hfe18JlOr9meD2VafQsaA8L4NxLTnCNwFLo",
+        appKey: "cn-n1",
+        placeholder: "欢迎留言交流！",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>

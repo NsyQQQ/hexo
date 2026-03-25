@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html class="post">
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Linux 基础入门指南 | 宁尚义的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Linux 是一种开源的操作系统，广泛应用于服务器、嵌入式设备和超级计算机等领域。本文将介绍 Linux 的基础知识和常用命令，帮助初学者快速入门。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 基础入门指南">
+<meta property="og:url" content="https://nsyqqq.github.io/hexo/2026/01/05/Linux%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="宁尚义的个人博客">
+<meta property="og:description" content="Linux 是一种开源的操作系统，广泛应用于服务器、嵌入式设备和超级计算机等领域。本文将介绍 Linux 的基础知识和常用命令，帮助初学者快速入门。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-05T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-25T09:37:52.200Z">
+<meta property="article:author" content="宁尚义">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="命令行">
+<meta property="article:tag" content="运维">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/hexo/atom.xml" title="宁尚义的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/hexo/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/hexo/css/style.css">
+
+  
+<link rel="stylesheet" href="/hexo/css/custom.css">
+
+  
+    
+<link rel="stylesheet" href="/hexo/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="search-results-container"></div>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/hexo/" id="logo">宁尚义的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/hexo/">首页</a>
+        
+          <a class="main-nav-link" href="/hexo/archives">归档</a>
+        
+          <a class="main-nav-link" href="/hexo/portfolio">作品集</a>
+        
+          <a class="main-nav-link" href="/hexo/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://github.com/NsyQQQ" title="GitHub"><span class="fa fa-github"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://blog.csdn.net/NingQQQ" title="CSDN"><span class="fa fa-book"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://www.zhihu.com/people/ningq-31" title="知乎"><span class="fa fa-user"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/432403089" title="bilibili"><span class="fa fa-bilibili"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/hexo/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://nsyqqq.github.io/hexo"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Linux基础入门指南" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <time class="dt-published article-date" datetime="2026-01-05T02:00:00.000Z" itemprop="datePublished">2026-01-05</time>
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a>►<a class="article-category-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Linux 基础入门指南
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>Linux 是一种开源的操作系统，广泛应用于服务器、嵌入式设备和超级计算机等领域。本文将介绍 Linux 的基础知识和常用命令，帮助初学者快速入门。</p>
+<span id="more"></span>
+
+<h2 id="一、什么是-Linux"><a href="#一、什么是-Linux" class="headerlink" title="一、什么是 Linux"></a>一、什么是 Linux</h2><p>Linux 是一种自由和开源的类 Unix 操作系统，由 Linus Torvalds 于 1991 年首次发布。它以稳定性、安全性和灵活性著称，是现代互联网基础设施的基石。</p>
+<h3 id="Linux-的特点"><a href="#Linux-的特点" class="headerlink" title="Linux 的特点"></a>Linux 的特点</h3><ul>
+<li><strong>开源免费</strong>：任何人都可以免费使用和修改</li>
+<li><strong>多用户多任务</strong>：支持多个用户同时使用系统</li>
+<li><strong>稳定性高</strong>：长时间运行不需重启</li>
+<li><strong>安全性强</strong>：完善的权限管理机制</li>
+<li><strong>硬件支持广泛</strong>：从嵌入式设备到超级计算机</li>
+</ul>
+<h2 id="二、Linux-目录结构"><a href="#二、Linux-目录结构" class="headerlink" title="二、Linux 目录结构"></a>二、Linux 目录结构</h2><p>Linux 采用树形目录结构，所有文件和目录都从根目录（&#x2F;）开始。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/</span><br><span class="line">├── /bin      # 系统二进制文件</span><br><span class="line">├── /boot    # 启动文件</span><br><span class="line">├── /dev     # 设备文件</span><br><span class="line">├── /etc     # 配置文件</span><br><span class="line">├── /home    # 用户主目录</span><br><span class="line">├── /lib     # 系统库文件</span><br><span class="line">├── /media   # 可移动媒体挂载点</span><br><span class="line">├── /mnt     # 临时挂载点</span><br><span class="line">├── /opt     # 可选软件</span><br><span class="line">├── /proc    # 进程信息</span><br><span class="line">├── /root    # 根用户主目录</span><br><span class="line">├── /run     # 运行时数据</span><br><span class="line">├── /sbin    # 系统二进制文件</span><br><span class="line">├── /srv     # 服务数据</span><br><span class="line">├── /sys     # 系统信息</span><br><span class="line">├── /tmp     # 临时文件</span><br><span class="line">├── /usr     # 用户程序</span><br><span class="line">└── /var     # 可变数据</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、常用命令"><a href="#三、常用命令" class="headerlink" title="三、常用命令"></a>三、常用命令</h2><h3 id="文件操作命令"><a href="#文件操作命令" class="headerlink" title="文件操作命令"></a>文件操作命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前目录</span></span><br><span class="line"><span class="built_in">pwd</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出文件</span></span><br><span class="line"><span class="built_in">ls</span> -la</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换目录</span></span><br><span class="line"><span class="built_in">cd</span> /path/to/directory</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建目录</span></span><br><span class="line"><span class="built_in">mkdir</span> <span class="built_in">dirname</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建文件</span></span><br><span class="line"><span class="built_in">touch</span> filename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制文件</span></span><br><span class="line"><span class="built_in">cp</span> <span class="built_in">source</span> destination</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移动/重命名文件</span></span><br><span class="line"><span class="built_in">mv</span> <span class="built_in">source</span> destination</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除文件</span></span><br><span class="line"><span class="built_in">rm</span> filename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除目录</span></span><br><span class="line"><span class="built_in">rm</span> -rf <span class="built_in">dirname</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="文件内容查看"><a href="#文件内容查看" class="headerlink" title="文件内容查看"></a>文件内容查看</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看文件内容</span></span><br><span class="line"><span class="built_in">cat</span> filename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分页查看文件</span></span><br><span class="line">more filename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分页查看（可上下翻页）</span></span><br><span class="line">less filename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看文件头部</span></span><br><span class="line"><span class="built_in">head</span> -n 10 filename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看文件尾部</span></span><br><span class="line"><span class="built_in">tail</span> -n 10 filename</span><br></pre></td></tr></table></figure>
+
+<h3 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看文件权限</span></span><br><span class="line"><span class="built_in">ls</span> -l filename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改文件权限</span></span><br><span class="line"><span class="built_in">chmod</span> 755 filename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改文件所有者</span></span><br><span class="line"><span class="built_in">chown</span> user:group filename</span><br></pre></td></tr></table></figure>
+
+<h3 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看进程</span></span><br><span class="line">ps aux</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实时查看进程</span></span><br><span class="line">top</span><br><span class="line"></span><br><span class="line"><span class="comment"># 杀死进程</span></span><br><span class="line"><span class="built_in">kill</span> PID</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘使用情况</span></span><br><span class="line"><span class="built_in">df</span> -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看内存使用情况</span></span><br><span class="line">free -h</span><br></pre></td></tr></table></figure>
+
+<h3 id="网络命令"><a href="#网络命令" class="headerlink" title="网络命令"></a>网络命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 IP 地址</span></span><br><span class="line">ip addr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试网络连接</span></span><br><span class="line">ping host</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看网络连接状态</span></span><br><span class="line">netstat -tuln</span><br><span class="line"></span><br><span class="line"><span class="comment"># 远程登录</span></span><br><span class="line">ssh user@host</span><br><span class="line"></span><br><span class="line"><span class="comment"># 传输文件</span></span><br><span class="line">scp <span class="built_in">source</span> user@host:destination</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、Vim-编辑器基础"><a href="#四、Vim-编辑器基础" class="headerlink" title="四、Vim 编辑器基础"></a>四、Vim 编辑器基础</h2><p>Vim 是 Linux 中最常用的文本编辑器之一。</p>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打开文件</span></span><br><span class="line">vim filename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入编辑模式</span></span><br><span class="line">i</span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出编辑模式</span></span><br><span class="line">Esc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存并退出</span></span><br><span class="line">:wq</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不保存退出</span></span><br><span class="line">:q!</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索</span></span><br><span class="line">/keyword</span><br><span class="line"></span><br><span class="line"><span class="comment"># 替换</span></span><br><span class="line">:%s/old/new/g</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、软件包管理"><a href="#五、软件包管理" class="headerlink" title="五、软件包管理"></a>五、软件包管理</h2><h3 id="Debian-Ubuntu-APT"><a href="#Debian-Ubuntu-APT" class="headerlink" title="Debian&#x2F;Ubuntu (APT)"></a>Debian&#x2F;Ubuntu (APT)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新软件源</span></span><br><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装软件</span></span><br><span class="line"><span class="built_in">sudo</span> apt install package_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载软件</span></span><br><span class="line"><span class="built_in">sudo</span> apt remove package_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 升级软件</span></span><br><span class="line"><span class="built_in">sudo</span> apt upgrade</span><br></pre></td></tr></table></figure>
+
+<h3 id="CentOS-RHEL-YUM-DNF"><a href="#CentOS-RHEL-YUM-DNF" class="headerlink" title="CentOS&#x2F;RHEL (YUM&#x2F;DNF)"></a>CentOS&#x2F;RHEL (YUM&#x2F;DNF)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装软件</span></span><br><span class="line"><span class="built_in">sudo</span> yum install package_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载软件</span></span><br><span class="line"><span class="built_in">sudo</span> yum remove package_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 升级软件</span></span><br><span class="line"><span class="built_in">sudo</span> yum update</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、用户和权限"><a href="#六、用户和权限" class="headerlink" title="六、用户和权限"></a>六、用户和权限</h2><h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建用户</span></span><br><span class="line"><span class="built_in">sudo</span> useradd username</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除用户</span></span><br><span class="line"><span class="built_in">sudo</span> userdel username</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改用户密码</span></span><br><span class="line"><span class="built_in">sudo</span> passwd username</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换用户</span></span><br><span class="line">su username</span><br></pre></td></tr></table></figure>
+
+<h3 id="权限说明"><a href="#权限说明" class="headerlink" title="权限说明"></a>权限说明</h3><p>Linux 文件权限由三个部分组成：所有者、组、其他用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rwx r-x r-x</span><br><span class="line">|  |  |</span><br><span class="line">|  |  └── 其他用户权限</span><br><span class="line">|  └----- 组权限</span><br><span class="line">└-------- 所有者权限</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>r：读取权限（4）</li>
+<li>w：写入权限（2）</li>
+<li>x：执行权限（1）</li>
+</ul>
+<h2 id="七、常用快捷键"><a href="#七、常用快捷键" class="headerlink" title="七、常用快捷键"></a>七、常用快捷键</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + C</td>
+<td>终止当前命令</td>
+</tr>
+<tr>
+<td>Ctrl + Z</td>
+<td>暂停当前命令</td>
+</tr>
+<tr>
+<td>Ctrl + L</td>
+<td>清屏</td>
+</tr>
+<tr>
+<td>Ctrl + A</td>
+<td>光标移到行首</td>
+</tr>
+<tr>
+<td>Ctrl + E</td>
+<td>光标移到行尾</td>
+</tr>
+<tr>
+<td>Ctrl + U</td>
+<td>删除光标前的字符</td>
+</tr>
+<tr>
+<td>Ctrl + K</td>
+<td>删除光标后的字符</td>
+</tr>
+<tr>
+<td>Tab</td>
+<td>命令补全</td>
+</tr>
+<tr>
+<td>↑&#x2F;↓</td>
+<td>历史命令</td>
+</tr>
+</tbody></table>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文介绍了 Linux 的基础知识和常用命令，掌握这些内容可以帮助你更好地使用 Linux 系统。Linux 学习是一个长期的过程，建议多加练习，逐步深入学习Shell脚本、系统管理、网络配置等进阶内容。</p>
+<hr>
+<blockquote>
+<p>更多 Linux 相关文章正在整理中，敬请期待！</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer" style="overflow: hidden;">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" rel="tag">命令行</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a></li></ul>
+
+      <span style="float: right;">
+        <a data-url="/hexo/2026/01/05/Linux%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" data-id="cuiddwqe6ur3AKuA5rU25yyq8" data-title="Linux 基础入门指南" class="article-share-link"><span class="fa fa-share">分享</span></a>
+        
+        
+          <a href="/hexo/2026/01/05/Linux%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/#comments" class="article-comment-link" style="margin-left: 20px; display: inline-flex; align-items: center; gap: 5px;">
+            <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/hexo/2026/01/05/Linux%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
+            <span>留言</span>
+          </a>
+        
+      </span>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/hexo/2026/01/06/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Linux 常用命令汇总
+        
+      </div>
+    </a>
+  
+  
+    <a href="/hexo/2026/01/01/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E8%AF%A6%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">计算机网络基础</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+
+
+
+
+<!-- 文章目录已移至 layout.ejs 中的正确位置 -->
+
+</section>
+        
+        <aside id="sidebar" class="toc-sidebar" style="position: sticky; top: 0;">
+          <div class="widget-wrap" style="max-height: calc(100vh - 100px); overflow-y: auto;">
+            <h3 class="widget-title">文章目录</h3>
+            <div class="widget">
+              <div class="toc-article">
+                <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-Linux"><span class="toc-list-text">一、什么是 Linux</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#Linux-%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-list-text">Linux 的特点</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81Linux-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-list-text">二、Linux 目录结构</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-list-text">三、常用命令</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-list-text">文件操作命令</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%9F%A5%E7%9C%8B"><span class="toc-list-text">文件内容查看</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-list-text">权限管理</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86"><span class="toc-list-text">系统管理</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4"><span class="toc-list-text">网络命令</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81Vim-%E7%BC%96%E8%BE%91%E5%99%A8%E5%9F%BA%E7%A1%80"><span class="toc-list-text">四、Vim 编辑器基础</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-list-text">基本操作</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86"><span class="toc-list-text">五、软件包管理</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#Debian-Ubuntu-APT"><span class="toc-list-text">Debian&#x2F;Ubuntu (APT)</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#CentOS-RHEL-YUM-DNF"><span class="toc-list-text">CentOS&#x2F;RHEL (YUM&#x2F;DNF)</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E7%94%A8%E6%88%B7%E5%92%8C%E6%9D%83%E9%99%90"><span class="toc-list-text">六、用户和权限</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-list-text">用户管理</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%9D%83%E9%99%90%E8%AF%B4%E6%98%8E"><span class="toc-list-text">权限说明</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%83%E3%80%81%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-list-text">七、常用快捷键</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-list-text">总结</span></a></li></ol>
+              </div>
+            </div>
+          </div>
+        </aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        © 2025-2026 宁尚义. All rights reserved.
+      
+      &copy; 2026 宁尚义<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      
+        <br>
+        <span id="busuanzi_container_site_pv">
+          总访问量: <span id="busuanzi_value_site_pv">0</span>
+        </span>
+      
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/busuanzi/2.3/busuanzi.pure.min.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4281d5d8ea7e4e9d8d336c9230dfff9a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/hexo/" class="mobile-nav-link">首页</a>
+  
+    <a href="/hexo/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/hexo/portfolio" class="mobile-nav-link">作品集</a>
+  
+    <a href="/hexo/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/hexo/js/jquery-3.6.4.min.js"></script>
+
+
+
+<script src="/hexo/js/search.js"></script>
+
+
+
+  
+<script src="/hexo/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/hexo/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "KXoxur5yqjJ4BMJkcRNl87rVX20K9hfe18JlOr9meD2VafQsaA8L4NxLTnCNwFLo",
+        appKey: "cn-n1",
+        placeholder: "欢迎留言交流！",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>

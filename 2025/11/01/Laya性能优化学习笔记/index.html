@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html class="post">
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Laya 性能优化指南 | 宁尚义的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="游戏性能优化是开发过程中非常重要的一环。本文将介绍Laya2D和Laya3D开发中的各种性能优化技巧，帮助你打造更流畅的游戏体验。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Laya 性能优化指南">
+<meta property="og:url" content="https://nsyqqq.github.io/hexo/2025/11/01/Laya%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="宁尚义的个人博客">
+<meta property="og:description" content="游戏性能优化是开发过程中非常重要的一环。本文将介绍Laya2D和Laya3D开发中的各种性能优化技巧，帮助你打造更流畅的游戏体验。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-10-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-24T06:17:43.714Z">
+<meta property="article:author" content="宁尚义">
+<meta property="article:tag" content="Laya">
+<meta property="article:tag" content="性能优化">
+<meta property="article:tag" content="游戏开发">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/hexo/atom.xml" title="宁尚义的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/hexo/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/hexo/css/style.css">
+
+  
+<link rel="stylesheet" href="/hexo/css/custom.css">
+
+  
+    
+<link rel="stylesheet" href="/hexo/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="search-results-container"></div>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/hexo/" id="logo">宁尚义的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/hexo/">首页</a>
+        
+          <a class="main-nav-link" href="/hexo/archives">归档</a>
+        
+          <a class="main-nav-link" href="/hexo/portfolio">作品集</a>
+        
+          <a class="main-nav-link" href="/hexo/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://github.com/NsyQQQ" title="GitHub"><span class="fa fa-github"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://blog.csdn.net/NingQQQ" title="CSDN"><span class="fa fa-book"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://www.zhihu.com/people/ningq-31" title="知乎"><span class="fa fa-user"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/432403089" title="bilibili"><span class="fa fa-bilibili"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/hexo/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://nsyqqq.github.io/hexo"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Laya性能优化学习笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <time class="dt-published article-date" datetime="2025-10-31T16:00:00.000Z" itemprop="datePublished">2025-11-01</time>
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Laya 性能优化指南
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>游戏性能优化是开发过程中非常重要的一环。本文将介绍Laya2D和Laya3D开发中的各种性能优化技巧，帮助你打造更流畅的游戏体验。</p>
+<span id="more"></span>
+
+<h2 id="一、渲染优化"><a href="#一、渲染优化" class="headerlink" title="一、渲染优化"></a>一、渲染优化</h2><h3 id="1-1-对象池技术"><a href="#1-1-对象池技术" class="headerlink" title="1.1 对象池技术"></a>1.1 对象池技术</h3><p>对象池是游戏开发中最重要的优化技术之一，可以有效减少垃圾回收（GC）带来的性能开销。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Pool</span> <span class="keyword">from</span> <span class="string">&#x27;laya/utils/Pool&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建子弹对象池</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BulletPool</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="attr">pool</span>: <span class="built_in">any</span> = &#123;&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 获取对象</span></span><br><span class="line">    <span class="keyword">static</span> <span class="title function_">getBullet</span>(): <span class="title class_">Bullet</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> bullet = <span class="title class_">Pool</span>.<span class="title function_">getItemByClass</span>(<span class="string">&#x27;bullet&#x27;</span>, <span class="title class_">Bullet</span>);</span><br><span class="line">        bullet.<span class="title function_">init</span>();</span><br><span class="line">        <span class="keyword">return</span> bullet;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 回收对象</span></span><br><span class="line">    <span class="keyword">static</span> <span class="title function_">recoverBullet</span>(<span class="attr">bullet</span>: <span class="title class_">Bullet</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">        bullet.<span class="title function_">reset</span>();</span><br><span class="line">        <span class="title class_">Pool</span>.<span class="title function_">recover</span>(<span class="string">&#x27;bullet&#x27;</span>, bullet);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用示例</span></span><br><span class="line"><span class="keyword">let</span> bullet = <span class="title class_">BulletPool</span>.<span class="title function_">getBullet</span>();</span><br><span class="line"><span class="comment">// 使用完毕</span></span><br><span class="line"><span class="title class_">BulletPool</span>.<span class="title function_">recoverBullet</span>(bullet);</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-减少DrawCall"><a href="#1-2-减少DrawCall" class="headerlink" title="1.2 减少DrawCall"></a>1.2 减少DrawCall</h3><p><strong>批量渲染：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用同一种材质的对象尽量放在一起渲染</span></span><br><span class="line"><span class="comment">// 避免频繁切换材质</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 坏的写法</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> sprite = <span class="keyword">new</span> <span class="title class_">Sprite</span>();</span><br><span class="line">    sprite.<span class="property">graphics</span>.<span class="title function_">drawTexture</span>(textures[i]);  <span class="comment">// 每帧都切换材质</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 好的写法</span></span><br><span class="line"><span class="comment">// 使用图集，将多个小图片合并成一张大图</span></span><br><span class="line"><span class="keyword">let</span> atlas = <span class="title class_">Loader</span>.<span class="title function_">getRes</span>(<span class="string">&#x27;res/atlas/game.json&#x27;</span>);</span><br><span class="line"><span class="comment">// 渲染时使用图集中的图片</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用Graphics批量绘制：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一次绘制多个图形</span></span><br><span class="line"><span class="keyword">let</span> g = <span class="variable language_">this</span>.<span class="property">graphics</span>;</span><br><span class="line">g.<span class="title function_">beginFill</span>(<span class="number">0xff0000</span>);</span><br><span class="line">g.<span class="title function_">drawRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">g.<span class="title function_">drawRect</span>(<span class="number">100</span>, <span class="number">100</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">g.<span class="title function_">endFill</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-可见区域裁剪"><a href="#1-3-可见区域裁剪" class="headerlink" title="1.3 可见区域裁剪"></a>1.3 可见区域裁剪</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用scrollRect限制渲染区域</span></span><br><span class="line">sprite.<span class="property">scrollRect</span> = <span class="keyword">new</span> <span class="title class_">Rectangle</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">800</span>, <span class="number">600</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对于屏幕外的对象，不进行渲染</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="title function_">isInScreen</span>(sprite)) &#123;</span><br><span class="line">    sprite.<span class="property">visible</span> = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="二、内存优化"><a href="#二、内存优化" class="headerlink" title="二、内存优化"></a>二、内存优化</h2><h3 id="2-1-资源释放"><a href="#2-1-资源释放" class="headerlink" title="2.1 资源释放"></a>2.1 资源释放</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Loader</span> <span class="keyword">from</span> <span class="string">&#x27;laya/net/Loader&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 卸载不需要的资源</span></span><br><span class="line"><span class="title class_">Loader</span>.<span class="title function_">clearRes</span>(<span class="string">&#x27;res/image/bg.jpg&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 彻底销毁资源</span></span><br><span class="line"><span class="title class_">Loader</span>.<span class="title function_">clearTextureRes</span>(<span class="string">&#x27;res/image/bg.jpg&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 场景切换时清理</span></span><br><span class="line">scene.<span class="title function_">destroy</span>(<span class="literal">true</span>);  <span class="comment">// true表示清理子节点</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-合理使用数据类型"><a href="#2-2-合理使用数据类型" class="headerlink" title="2.2 合理使用数据类型"></a>2.2 合理使用数据类型</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 避免频繁创建对象</span></span><br><span class="line"><span class="comment">// 坏的写法</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> point = &#123; <span class="attr">x</span>: i, <span class="attr">y</span>: i &#125;;  <span class="comment">// 每帧创建新对象</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 好的写法：复用对象</span></span><br><span class="line"><span class="keyword">let</span> point = &#123; <span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">0</span> &#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">    point.<span class="property">x</span> = i;</span><br><span class="line">    point.<span class="property">y</span> = i;</span><br><span class="line">    <span class="comment">// 使用point</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-减少闭包使用"><a href="#2-3-减少闭包使用" class="headerlink" title="2.3 减少闭包使用"></a>2.3 减少闭包使用</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 避免在循环中创建闭包</span></span><br><span class="line"><span class="comment">// 坏的写法</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">    sprite.<span class="title function_">on</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;  <span class="comment">// 每次创建新函数</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 好的写法：使用bind或缓存函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">onClick</span>(<span class="params"><span class="attr">index</span>: <span class="built_in">number</span></span>): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(index);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">    sprite.<span class="title function_">on</span>(<span class="string">&#x27;click&#x27;</span>, onClick, <span class="variable language_">this</span>, <span class="literal">false</span>, [i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="三、Laya2D专项优化"><a href="#三、Laya2D专项优化" class="headerlink" title="三、Laya2D专项优化"></a>三、Laya2D专项优化</h2><h3 id="3-1-图片优化"><a href="#3-1-图片优化" class="headerlink" title="3.1 图片优化"></a>3.1 图片优化</h3><p><strong>使用图集：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将小图片合并成图集</span></span><br><span class="line"><span class="comment">// 可以减少DrawCall，提升渲染性能</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 加载图集</span></span><br><span class="line"><span class="title class_">Loader</span>.<span class="title function_">loadAtlas</span>(<span class="string">&#x27;res/atlas/game.json&#x27;</span>, <span class="title class_">Handler</span>.<span class="title function_">create</span>(<span class="variable language_">this</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> texture = <span class="title class_">Loader</span>.<span class="title function_">getRes</span>(<span class="string">&#x27;res/atlas/game/player.png&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> sprite = <span class="keyword">new</span> <span class="title class_">Sprite</span>();</span><br><span class="line">    sprite.<span class="property">graphics</span>.<span class="title function_">drawTexture</span>(texture);</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+
+<p><strong>控制图片尺寸：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 图片尺寸尽量是2的幂次方</span></span><br><span class="line"><span class="comment">// 如：512x512, 1024x1024</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 大小不要超过2048x2048（部分设备不支持）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>压缩纹理格式：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用压缩纹理（WebGL支持时）</span></span><br><span class="line"><span class="comment">// DXT5 / ASTC 等格式可以减少显存占用</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-动画优化"><a href="#3-2-动画优化" class="headerlink" title="3.2 动画优化"></a>3.2 动画优化</h3><p><strong>控制帧率：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据需要调整动画帧率</span></span><br><span class="line"><span class="comment">// 不需要高帧率的动画降低帧率</span></span><br><span class="line">animation.<span class="property">interval</span> = <span class="number">100</span>;  <span class="comment">// 10fps</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用骨骼动画：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 相比于帧动画，骨骼动画更省内存</span></span><br><span class="line"><span class="comment">// 一个骨骼动画可以控制多个部位</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-文本优化"><a href="#3-3-文本优化" class="headerlink" title="3.3 文本优化"></a>3.3 文本优化</h3><p><strong>使用位图字体：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 大量重复使用的文字使用位图字体</span></span><br><span class="line"><span class="comment">// 减少Text对象的创建开销</span></span><br><span class="line"><span class="keyword">let</span> bitmapFont = <span class="keyword">new</span> <span class="title class_">BitmapFont</span>();</span><br><span class="line">bitmapFont.<span class="title function_">loadFont</span>(<span class="string">&#x27;res/font/number.fnt&#x27;</span>);</span><br><span class="line"><span class="title class_">Text</span>.<span class="title function_">registerBitmapFont</span>(<span class="string">&#x27;numberFont&#x27;</span>, bitmapFont);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="keyword">let</span> text = <span class="keyword">new</span> <span class="title class_">Text</span>();</span><br><span class="line">text.<span class="property">bitmapFont</span> = <span class="string">&#x27;numberFont&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="四、Laya3D专项优化"><a href="#四、Laya3D专项优化" class="headerlink" title="四、Laya3D专项优化"></a>四、Laya3D专项优化</h2><h3 id="4-1-模型优化"><a href="#4-1-模型优化" class="headerlink" title="4.1 模型优化"></a>4.1 模型优化</h3><p><strong>减少多边形数量：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用LOD（Level of Detail）技术</span></span><br><span class="line"><span class="comment">// 距离摄像机近时显示高精度模型</span></span><br><span class="line"><span class="comment">// 距离远时显示低精度模型</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出模型时注意：</span></span><br><span class="line"><span class="comment">// 1. 合并共享材质</span></span><br><span class="line"><span class="comment">// 2. 删除不可见面</span></span><br><span class="line"><span class="comment">// 3. 简化不重要的细节</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用实例化渲染：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对于大量相同物体，使用InstanceMesh</span></span><br><span class="line"><span class="keyword">let</span> mesh = meshSprite3D.<span class="property">meshFilter</span>.<span class="property">sharedMesh</span>;</span><br><span class="line"><span class="keyword">let</span> instanceCount = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">let</span> instanceMesh = <span class="keyword">new</span> <span class="title class_">InstanceMesh</span>(<span class="string">&#x27;instance&#x27;</span>, mesh, instanceCount);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置实例化数据</span></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-光照优化"><a href="#4-2-光照优化" class="headerlink" title="4.2 光照优化"></a>4.2 光照优化</h3><p><strong>减少实时灯光数量：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 场景中尽量减少实时灯光</span></span><br><span class="line"><span class="comment">// 推荐：1-2个方向光 + 少量点光源</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用光照贴图代替实时光照</span></span><br><span class="line"><span class="comment">// 烘焙静态光照到纹理</span></span><br><span class="line">scene.<span class="property">lightmaps</span> = [lightmapTexture];</span><br></pre></td></tr></table></figure>
+
+<p><strong>合理设置阴影：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只对重要物体开启阴影</span></span><br><span class="line">light.<span class="property">shadow</span> = <span class="literal">true</span>;</span><br><span class="line">light.<span class="property">shadowDistance</span> = <span class="number">50</span>;  <span class="comment">// 减小阴影渲染距离</span></span><br><span class="line">light.<span class="property">shadowResolution</span> = <span class="number">1024</span>;  <span class="comment">// 降低阴影分辨率</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-材质优化"><a href="#4-3-材质优化" class="headerlink" title="4.3 材质优化"></a>4.3 材质优化</h3><p><strong>使用简单材质：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 优先使用BasicMaterial</span></span><br><span class="line"><span class="comment">// 其次BlinnPhongMaterial</span></span><br><span class="line"><span class="comment">// 复杂效果使用PBRMaterial</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 避免透明材质</span></span><br><span class="line"><span class="comment">// 透明物体会导致渲染顺序问题，性能开销大</span></span><br><span class="line">material.<span class="property">transparency</span> = <span class="number">1</span>;  <span class="comment">// 尽量不透明</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>减少Shader复杂度：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义Shader时注意：</span></span><br><span class="line"><span class="comment">// 1. 减少纹理采样次数</span></span><br><span class="line"><span class="comment">// 2. 避免复杂的数学运算</span></span><br><span class="line"><span class="comment">// 3. 使用低精度数据类型</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="五、网络优化"><a href="#五、网络优化" class="headerlink" title="五、网络优化"></a>五、网络优化</h2><h3 id="5-1-减少网络请求"><a href="#5-1-减少网络请求" class="headerlink" title="5.1 减少网络请求"></a>5.1 减少网络请求</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 合并小资源为一个大包</span></span><br><span class="line"><span class="comment">// 使用配置表减少离散数据</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 坏：每个图片单独请求</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">    <span class="title class_">Loader</span>.<span class="title function_">load</span>(<span class="string">`res/image/item_<span class="subst">$&#123;i&#125;</span>.png`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 好：使用图集一次加载</span></span><br><span class="line"><span class="title class_">Loader</span>.<span class="title function_">loadAtlas</span>(<span class="string">&#x27;res/atlas/items.json&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-数据压缩"><a href="#5-2-数据压缩" class="headerlink" title="5.2 数据压缩"></a>5.2 数据压缩</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用二进制格式传输数据</span></span><br><span class="line"><span class="comment">// 减少JSON解析开销</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 协议缓冲区（Protocol Buffers）</span></span><br><span class="line"><span class="comment">// MessagePack等高效序列化格式</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-缓存策略"><a href="#5-3-缓存策略" class="headerlink" title="5.3 缓存策略"></a>5.3 缓存策略</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地缓存常用数据</span></span><br><span class="line"><span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(<span class="string">&#x27;playerData&#x27;</span>, <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(playerData));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用内存缓存</span></span><br><span class="line"><span class="keyword">let</span> cache = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getData</span>(<span class="params"><span class="attr">key</span>: <span class="built_in">string</span></span>): <span class="built_in">any</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (cache.<span class="title function_">has</span>(key)) &#123;</span><br><span class="line">        <span class="keyword">return</span> cache.<span class="title function_">get</span>(key);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> data = <span class="title function_">loadFromDisk</span>(key);</span><br><span class="line">    cache.<span class="title function_">set</span>(key, data);</span><br><span class="line">    <span class="keyword">return</span> data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="六、代码优化"><a href="#六、代码优化" class="headerlink" title="六、代码优化"></a>六、代码优化</h2><h3 id="6-1-循环优化"><a href="#6-1-循环优化" class="headerlink" title="6.1 循环优化"></a>6.1 循环优化</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用for循环代替forEach（性能更好）</span></span><br><span class="line"><span class="comment">// 坏的写法</span></span><br><span class="line">items.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">process</span>(item);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 好的写法</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, len = items.<span class="property">length</span>; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="title function_">process</span>(items[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 缓存长度</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; items.<span class="property">length</span>; i++)  <span class="comment">// 每次都计算长度</span></span><br><span class="line"><span class="comment">// 改为</span></span><br><span class="line"><span class="keyword">let</span> len = items.<span class="property">length</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-避免过深的递归"><a href="#6-2-避免过深的递归" class="headerlink" title="6.2 避免过深的递归"></a>6.2 避免过深的递归</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 递归会占用大量栈空间</span></span><br><span class="line"><span class="comment">// 使用迭代代替递归</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 坏的写法</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fibonacci</span>(<span class="params"><span class="attr">n</span>: <span class="built_in">number</span></span>): <span class="built_in">number</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">fibonacci</span>(n - <span class="number">1</span>) + <span class="title function_">fibonacci</span>(n - <span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 好的写法</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fibonacci</span>(<span class="params"><span class="attr">n</span>: <span class="built_in">number</span></span>): <span class="built_in">number</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">0</span>, b = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> temp = a + b;</span><br><span class="line">        a = b;</span><br><span class="line">        b = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-3-使用位运算"><a href="#6-3-使用位运算" class="headerlink" title="6.3 使用位运算"></a>6.3 使用位运算</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 位运算比算术运算快</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断奇偶</span></span><br><span class="line"><span class="keyword">if</span> (n &amp; <span class="number">1</span>)  <span class="comment">// 比 n % 2 快</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 乘除2的幂次</span></span><br><span class="line">n &lt;&lt; <span class="number">1</span>  <span class="comment">// n * 2</span></span><br><span class="line">n &gt;&gt; <span class="number">1</span>  <span class="comment">// n / 2</span></span><br><span class="line">n &gt;&gt;&gt; <span class="number">1</span> <span class="comment">// 无符号右移</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 取整</span></span><br><span class="line">~~n     <span class="comment">// 比 Math.floor 快</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="七、调试与监控"><a href="#七、调试与监控" class="headerlink" title="七、调试与监控"></a>七、调试与监控</h2><h3 id="7-1-性能分析"><a href="#7-1-性能分析" class="headerlink" title="7.1 性能分析"></a>7.1 性能分析</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用Stat查看性能数据</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Stat</span> <span class="keyword">from</span> <span class="string">&#x27;laya/utils/Stat&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示性能面板</span></span><br><span class="line"><span class="title class_">Stat</span>.<span class="title function_">show</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义统计</span></span><br><span class="line"><span class="title class_">Stat</span>.<span class="property">customStat</span>[<span class="string">&#x27;drawCall&#x27;</span>] = &#123; </span><br><span class="line">    <span class="attr">value</span>: <span class="number">0</span>, </span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;DrawCall&#x27;</span>,</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">Stat</span>.<span class="property">FRAME</span> </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在渲染循环中更新</span></span><br><span class="line"><span class="title class_">Stat</span>.<span class="title function_">update</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-2-内存监控"><a href="#7-2-内存监控" class="headerlink" title="7.2 内存监控"></a>7.2 内存监控</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监控内存使用</span></span><br><span class="line"><span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> memory = <span class="title class_">Laya</span>.<span class="property">browser</span>.<span class="title function_">getPerformanceInfo</span>();</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Memory:&#x27;</span>, memory.<span class="property">jsMemoryUsedSize</span>);</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检测内存泄漏</span></span><br><span class="line"><span class="comment">// 观察内存是否持续增长</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-3-FPS监控"><a href="#7-3-FPS监控" class="headerlink" title="7.3 FPS监控"></a>7.3 FPS监控</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简单FPS计数器</span></span><br><span class="line"><span class="keyword">let</span> lastTime = <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br><span class="line"><span class="keyword">let</span> frameCount = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">let</span> fps = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Laya</span>.<span class="property">timer</span>.<span class="title function_">frameLoop</span>(<span class="number">1</span>, <span class="variable language_">this</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    frameCount++;</span><br><span class="line">    <span class="keyword">let</span> now = <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br><span class="line">    <span class="keyword">if</span> (now - lastTime &gt;= <span class="number">1000</span>) &#123;</span><br><span class="line">        fps = frameCount;</span><br><span class="line">        frameCount = <span class="number">0</span>;</span><br><span class="line">        lastTime = now;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;FPS:&#x27;</span>, fps);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="八、常用优化策略"><a href="#八、常用优化策略" class="headerlink" title="八、常用优化策略"></a>八、常用优化策略</h2><h3 id="8-1-分帧处理"><a href="#8-1-分帧处理" class="headerlink" title="8.1 分帧处理"></a>8.1 分帧处理</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将大量计算分到多帧执行</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FrameScheduler</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">tasks</span>: <span class="title class_">Array</span>&lt;<span class="function">() =&gt;</span> <span class="built_in">void</span>&gt; = [];</span><br><span class="line">    <span class="keyword">private</span> maxPerFrame = <span class="number">10</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">addTask</span>(<span class="attr">task</span>: <span class="function">() =&gt;</span> <span class="built_in">void</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">tasks</span>.<span class="title function_">push</span>(task);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">update</span>(): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="variable language_">this</span>.<span class="property">tasks</span>.<span class="property">length</span> &gt; <span class="number">0</span> &amp;&amp; count &lt; <span class="variable language_">this</span>.<span class="property">maxPerFrame</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> task = <span class="variable language_">this</span>.<span class="property">tasks</span>.<span class="title function_">shift</span>();</span><br><span class="line">            <span class="title function_">task</span>();</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-2-预加载与懒加载"><a href="#8-2-预加载与懒加载" class="headerlink" title="8.2 预加载与懒加载"></a>8.2 预加载与懒加载</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 预加载关键资源</span></span><br><span class="line"><span class="title class_">Loader</span>.<span class="title function_">load</span>([<span class="string">&#x27;res/image/bg.jpg&#x27;</span>, <span class="string">&#x27;res/atlas/main.json&#x27;</span>], </span><br><span class="line">    <span class="title class_">Handler</span>.<span class="title function_">create</span>(<span class="variable language_">this</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 开始游戏</span></span><br><span class="line">    &#125;), </span><br><span class="line">    <span class="title class_">Handler</span>.<span class="title function_">create</span>(<span class="variable language_">this</span>, <span class="function">(<span class="params">progress</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 显示加载进度</span></span><br><span class="line">    &#125;));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 懒加载：按需加载</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">showDetail</span>(<span class="params"></span>): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="title class_">Loader</span>.<span class="title function_">load</span>(<span class="string">&#x27;res/image/detail.png&#x27;</span>, <span class="title class_">Handler</span>.<span class="title function_">create</span>(<span class="variable language_">this</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 显示详情</span></span><br><span class="line">    &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-3-屏幕适配优化"><a href="#8-3-屏幕适配优化" class="headerlink" title="8.3 屏幕适配优化"></a>8.3 屏幕适配优化</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 选择合适的缩放模式</span></span><br><span class="line"><span class="title class_">Laya</span>.<span class="property">stage</span>.<span class="property">scaleMode</span> = <span class="title class_">Laya</span>.<span class="property">Stage</span>.<span class="property">SCALE_SHOWALL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 固定设计分辨率，减少缩放计算</span></span><br><span class="line"><span class="title class_">Config</span>.<span class="property">designWidth</span> = <span class="number">750</span>;</span><br><span class="line"><span class="title class_">Config</span>.<span class="property">designHeight</span> = <span class="number">1334</span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="九、发布优化"><a href="#九、发布优化" class="headerlink" title="九、发布优化"></a>九、发布优化</h2><h3 id="9-1-代码压缩"><a href="#9-1-代码压缩" class="headerlink" title="9.1 代码压缩"></a>9.1 代码压缩</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用Terser或UglifyJS压缩代码</span></span><br><span class="line"><span class="comment">// 配置package.json</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;build&quot;</span>: <span class="string">&quot;layaair build --minify&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-2-资源压缩"><a href="#9-2-资源压缩" class="headerlink" title="9.2 资源压缩"></a>9.2 资源压缩</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 图片使用tinypng等工具压缩</span></span><br><span class="line"><span class="comment">// 使用WebP格式（需考虑兼容性）</span></span><br><span class="line"><span class="comment">// 音频使用AAC/MP3格式</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="9-3-代码分割"><a href="#9-3-代码分割" class="headerlink" title="9.3 代码分割"></a>9.3 代码分割</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 按需加载非首屏资源</span></span><br><span class="line"><span class="comment">// 游戏内不同关卡使用不同资源包</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="十、总结"><a href="#十、总结" class="headerlink" title="十、总结"></a>十、总结</h2><p>性能优化是一个持续的过程，需要注意以下几点：</p>
+<ol>
+<li><strong>先 profiling 再优化</strong> - 使用工具找出性能瓶颈</li>
+<li><strong>权衡利弊</strong> - 优化不一定总是好的，要考虑维护成本</li>
+<li><strong>持续监控</strong> - 上线后也要持续关注性能指标</li>
+<li><strong>用户体验优先</strong> - 60FPS &gt; 120FPS但流畅</li>
+</ol>
+<p>常见优化优先级：</p>
+<ul>
+<li><strong>高</strong>：对象池、DrawCall优化、资源释放</li>
+<li><strong>中</strong>：算法优化、内存管理、缓存策略</li>
+<li><strong>低</strong>：代码压缩、细节调整</li>
+</ul>
+<p>祝你做出高质量的游戏！🎮</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer" style="overflow: hidden;">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/Laya/" rel="tag">Laya</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" rel="tag">游戏开发</a></li></ul>
+
+      <span style="float: right;">
+        <a data-url="/hexo/2025/11/01/Laya%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="cuidLux4RFjjlyPCh9Y9g5k92" data-title="Laya 性能优化指南" class="article-share-link"><span class="fa fa-share">分享</span></a>
+        
+        
+          <a href="/hexo/2025/11/01/Laya%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#comments" class="article-comment-link" style="margin-left: 20px; display: inline-flex; align-items: center; gap: 5px;">
+            <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/hexo/2025/11/01/Laya%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+            <span>留言</span>
+          </a>
+        
+      </span>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/hexo/2025/11/05/LayaAir%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85%E4%B8%8E%E5%8F%91%E5%B8%83/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          LayaAir 项目打包与发布
+        
+      </div>
+    </a>
+  
+  
+    <a href="/hexo/2025/09/12/python-automation-libraries/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Python 自动化库</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+
+
+
+
+<!-- 文章目录已移至 layout.ejs 中的正确位置 -->
+
+</section>
+        
+        <aside id="sidebar" class="toc-sidebar" style="position: sticky; top: 0;">
+          <div class="widget-wrap" style="max-height: calc(100vh - 100px); overflow-y: auto;">
+            <h3 class="widget-title">文章目录</h3>
+            <div class="widget">
+              <div class="toc-article">
+                <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96"><span class="toc-list-text">一、渲染优化</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-1-%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%8A%80%E6%9C%AF"><span class="toc-list-text">1.1 对象池技术</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-2-%E5%87%8F%E5%B0%91DrawCall"><span class="toc-list-text">1.2 减少DrawCall</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-3-%E5%8F%AF%E8%A7%81%E5%8C%BA%E5%9F%9F%E8%A3%81%E5%89%AA"><span class="toc-list-text">1.3 可见区域裁剪</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96"><span class="toc-list-text">二、内存优化</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-1-%E8%B5%84%E6%BA%90%E9%87%8A%E6%94%BE"><span class="toc-list-text">2.1 资源释放</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-2-%E5%90%88%E7%90%86%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-list-text">2.2 合理使用数据类型</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-3-%E5%87%8F%E5%B0%91%E9%97%AD%E5%8C%85%E4%BD%BF%E7%94%A8"><span class="toc-list-text">2.3 减少闭包使用</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81Laya2D%E4%B8%93%E9%A1%B9%E4%BC%98%E5%8C%96"><span class="toc-list-text">三、Laya2D专项优化</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-1-%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96"><span class="toc-list-text">3.1 图片优化</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-2-%E5%8A%A8%E7%94%BB%E4%BC%98%E5%8C%96"><span class="toc-list-text">3.2 动画优化</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-3-%E6%96%87%E6%9C%AC%E4%BC%98%E5%8C%96"><span class="toc-list-text">3.3 文本优化</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81Laya3D%E4%B8%93%E9%A1%B9%E4%BC%98%E5%8C%96"><span class="toc-list-text">四、Laya3D专项优化</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#4-1-%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96"><span class="toc-list-text">4.1 模型优化</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#4-2-%E5%85%89%E7%85%A7%E4%BC%98%E5%8C%96"><span class="toc-list-text">4.2 光照优化</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#4-3-%E6%9D%90%E8%B4%A8%E4%BC%98%E5%8C%96"><span class="toc-list-text">4.3 材质优化</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96"><span class="toc-list-text">五、网络优化</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#5-1-%E5%87%8F%E5%B0%91%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82"><span class="toc-list-text">5.1 减少网络请求</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#5-2-%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9"><span class="toc-list-text">5.2 数据压缩</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#5-3-%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5"><span class="toc-list-text">5.3 缓存策略</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96"><span class="toc-list-text">六、代码优化</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#6-1-%E5%BE%AA%E7%8E%AF%E4%BC%98%E5%8C%96"><span class="toc-list-text">6.1 循环优化</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#6-2-%E9%81%BF%E5%85%8D%E8%BF%87%E6%B7%B1%E7%9A%84%E9%80%92%E5%BD%92"><span class="toc-list-text">6.2 避免过深的递归</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#6-3-%E4%BD%BF%E7%94%A8%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="toc-list-text">6.3 使用位运算</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%83%E3%80%81%E8%B0%83%E8%AF%95%E4%B8%8E%E7%9B%91%E6%8E%A7"><span class="toc-list-text">七、调试与监控</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#7-1-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-list-text">7.1 性能分析</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#7-2-%E5%86%85%E5%AD%98%E7%9B%91%E6%8E%A7"><span class="toc-list-text">7.2 内存监控</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#7-3-FPS%E7%9B%91%E6%8E%A7"><span class="toc-list-text">7.3 FPS监控</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AB%E3%80%81%E5%B8%B8%E7%94%A8%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5"><span class="toc-list-text">八、常用优化策略</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#8-1-%E5%88%86%E5%B8%A7%E5%A4%84%E7%90%86"><span class="toc-list-text">8.1 分帧处理</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#8-2-%E9%A2%84%E5%8A%A0%E8%BD%BD%E4%B8%8E%E6%87%92%E5%8A%A0%E8%BD%BD"><span class="toc-list-text">8.2 预加载与懒加载</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#8-3-%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D%E4%BC%98%E5%8C%96"><span class="toc-list-text">8.3 屏幕适配优化</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B9%9D%E3%80%81%E5%8F%91%E5%B8%83%E4%BC%98%E5%8C%96"><span class="toc-list-text">九、发布优化</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#9-1-%E4%BB%A3%E7%A0%81%E5%8E%8B%E7%BC%A9"><span class="toc-list-text">9.1 代码压缩</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#9-2-%E8%B5%84%E6%BA%90%E5%8E%8B%E7%BC%A9"><span class="toc-list-text">9.2 资源压缩</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#9-3-%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2"><span class="toc-list-text">9.3 代码分割</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8D%81%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-list-text">十、总结</span></a></li></ol>
+              </div>
+            </div>
+          </div>
+        </aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        © 2025-2026 宁尚义. All rights reserved.
+      
+      &copy; 2026 宁尚义<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      
+        <br>
+        <span id="busuanzi_container_site_pv">
+          总访问量: <span id="busuanzi_value_site_pv">0</span>
+        </span>
+      
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/busuanzi/2.3/busuanzi.pure.min.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4281d5d8ea7e4e9d8d336c9230dfff9a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/hexo/" class="mobile-nav-link">首页</a>
+  
+    <a href="/hexo/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/hexo/portfolio" class="mobile-nav-link">作品集</a>
+  
+    <a href="/hexo/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/hexo/js/jquery-3.6.4.min.js"></script>
+
+
+
+<script src="/hexo/js/search.js"></script>
+
+
+
+  
+<script src="/hexo/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/hexo/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "KXoxur5yqjJ4BMJkcRNl87rVX20K9hfe18JlOr9meD2VafQsaA8L4NxLTnCNwFLo",
+        appKey: "cn-n1",
+        placeholder: "欢迎留言交流！",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html class="post">
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Nginx 练习题 | 宁尚义的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本文包含 Nginx 第 1-3 周的练习题，涵盖 Nginx 基础，反向代理与负载均衡，HTTPS 与优化等内容，并附带参考答案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx 练习题">
+<meta property="og:url" content="https://nsyqqq.github.io/hexo/2026/01/16/Nginx%E7%BB%83%E4%B9%A0%E9%A2%98/index.html">
+<meta property="og:site_name" content="宁尚义的个人博客">
+<meta property="og:description" content="本文包含 Nginx 第 1-3 周的练习题，涵盖 Nginx 基础，反向代理与负载均衡，HTTPS 与优化等内容，并附带参考答案。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-16T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-24T14:10:06.980Z">
+<meta property="article:author" content="宁尚义">
+<meta property="article:tag" content="Nginx">
+<meta property="article:tag" content="练习题">
+<meta property="article:tag" content="运维">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/hexo/atom.xml" title="宁尚义的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/hexo/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/hexo/css/style.css">
+
+  
+<link rel="stylesheet" href="/hexo/css/custom.css">
+
+  
+    
+<link rel="stylesheet" href="/hexo/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="search-results-container"></div>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/hexo/" id="logo">宁尚义的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/hexo/">首页</a>
+        
+          <a class="main-nav-link" href="/hexo/archives">归档</a>
+        
+          <a class="main-nav-link" href="/hexo/portfolio">作品集</a>
+        
+          <a class="main-nav-link" href="/hexo/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://github.com/NsyQQQ" title="GitHub"><span class="fa fa-github"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://blog.csdn.net/NingQQQ" title="CSDN"><span class="fa fa-book"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://www.zhihu.com/people/ningq-31" title="知乎"><span class="fa fa-user"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/432403089" title="bilibili"><span class="fa fa-bilibili"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/hexo/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://nsyqqq.github.io/hexo"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Nginx练习题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <time class="dt-published article-date" datetime="2026-01-16T02:00:00.000Z" itemprop="datePublished">2026-01-16</time>
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a>►<a class="article-category-link" href="/hexo/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Nginx 练习题
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本文包含 Nginx 第 1-3 周的练习题，涵盖 Nginx 基础，反向代理与负载均衡，HTTPS 与优化等内容，并附带参考答案。</p>
+<span id="more"></span>
+
+<h2 id="第-1-周：Nginx-基础"><a href="#第-1-周：Nginx-基础" class="headerlink" title="第 1 周：Nginx 基础"></a>第 1 周：Nginx 基础</h2><h3 id="一、选择题"><a href="#一、选择题" class="headerlink" title="一、选择题"></a>一、选择题</h3><ol>
+<li><p>Nginx 默认的配置文件路径是？(A)</p>
+<ul>
+<li>A. &#x2F;etc&#x2F;nginx&#x2F;nginx.conf</li>
+<li>B. &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</li>
+<li>C. &#x2F;etc&#x2F;nginx&#x2F;conf&#x2F;default.conf</li>
+<li>D. &#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default</li>
+</ul>
+</li>
+<li><p>下列哪个命令可以测试 Nginx 配置语法是否正确？(A)</p>
+<ul>
+<li>A. nginx -t</li>
+<li>B. nginx -s reload</li>
+<li>C. nginx -v</li>
+<li>D. nginx -c</li>
+</ul>
+</li>
+<li><p>Nginx 配置中，用于定义虚拟主机的块是？(B)</p>
+<ul>
+<li>A. http</li>
+<li>B. server</li>
+<li>C. location</li>
+<li>D. upstream</li>
+</ul>
+</li>
+<li><p>下面哪个指令用于设置 worker 进程的数量？(A)</p>
+<ul>
+<li>A. worker_processes</li>
+<li>B. worker_connections</li>
+<li>C. worker_rlimit_nofile</li>
+<li>D. use epoll</li>
+</ul>
+</li>
+<li><p>Nginx 处理静态文件的指令是？(D)</p>
+<ul>
+<li>A. proxy_pass</li>
+<li>B. root</li>
+<li>C. alias</li>
+<li>D. B 和 C 都对</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="二、填空题"><a href="#二、填空题" class="headerlink" title="二、填空题"></a>二、填空题</h3><ol>
+<li><p>Nginx 默认监听端口是______。<strong>答案：80</strong></p>
+</li>
+<li><p>用来指定错误日志路径的指令是______。<strong>答案：error_log</strong></p>
+</li>
+<li><p>配置负载均衡时，使用______块定义后端服务器。<strong>答案：upstream</strong></p>
+</li>
+<li><p>Nginx 支持的负载均衡算法有：轮询、<strong><strong><strong>、</strong></strong></strong>、______。<strong>答案：ip_hash、least_conn、fair</strong></p>
+</li>
+<li><p>静态文件缓存可通过______指令设置缓存时间。<strong>答案：expires</strong></p>
+</li>
+</ol>
+<hr>
+<h3 id="三、简答题"><a href="#三、简答题" class="headerlink" title="三、简答题"></a>三、简答题</h3><ol>
+<li><p>请简述 Nginx 的架构特点（多进程模式）。<br><strong>答案：Nginx 采用 Master-Worker 多进程模式：Master 进程负责读取配置，管理 Worker；Worker 进程处理请求，默认等于 CPU 核心数。采用 epoll 等高效事件模型，单线程非阻塞 I&#x2F;O，高并发低内存。</strong></p>
+</li>
+<li><p>请解释 server 块和 location 块的关系。<br><strong>答案：server 块定义一个虚拟主机（网站），location 块定义该网站下的 URL 路径规则。一个 http 可包含多个 server，一个 server 可包含多个 location。</strong></p>
+</li>
+<li><p>如何查看 Nginx 的运行状态？<br><strong>答案：1) ps aux | grep nginx 查看进程；2) netstat -tlnp | grep 80 查看端口；3) 配置 stub_status 后 curl 127.0.0.1&#x2F;nginx_status 查看详细状态。</strong></p>
+</li>
+</ol>
+<hr>
+<h2 id="第-2-周：反向代理与负载均衡"><a href="#第-2-周：反向代理与负载均衡" class="headerlink" title="第 2 周：反向代理与负载均衡"></a>第 2 周：反向代理与负载均衡</h2><h3 id="一、选择题-1"><a href="#一、选择题-1" class="headerlink" title="一、选择题"></a>一、选择题</h3><ol>
+<li><p>反向代理的配置指令是？(A)</p>
+<ul>
+<li>A. proxy_pass</li>
+<li>B. upstream</li>
+<li>C. server</li>
+<li>D. root</li>
+</ul>
+</li>
+<li><p>下列哪个不是 Nginx 负载均衡算法？(D)</p>
+<ul>
+<li>A. round-robin</li>
+<li>B. ip_hash</li>
+<li>C. least_conn</li>
+<li>D. random</li>
+</ul>
+</li>
+<li><p>upstream 块中，用于标记后端服务器状态的指令是？(D)</p>
+<ul>
+<li>A. status</li>
+<li>B. down</li>
+<li>C. backup</li>
+<li>D. B 和 C</li>
+</ul>
+</li>
+<li><p>Nginx 健康检查默认是？(B)</p>
+<ul>
+<li>A. 主动健康检查</li>
+<li>B. 被动健康检查</li>
+<li>C. 不健康检查</li>
+<li>D. 定时健康检查</li>
+</ul>
+</li>
+<li><p>下列哪个指令用于传递真实 IP 给后端？(D)</p>
+<ul>
+<li>A. proxy_set_header Host</li>
+<li>B. proxy_set_header X-Real-IP</li>
+<li>C. proxy_set_header X-Forwarded-For</li>
+<li>D. B 和 C</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="二、填空题-1"><a href="#二、填空题-1" class="headerlink" title="二、填空题"></a>二、填空题</h3><ol>
+<li><p>配置反向代理时，必须配置的指令是______。<strong>答案：proxy_pass</strong></p>
+</li>
+<li><p>在 upstream 块中，将服务器标记为备用服务器的指令是______。<strong>答案：backup</strong></p>
+</li>
+<li><p>用于设置连接后端服务器超时的指令是______。<strong>答案：proxy_connect_timeout</strong></p>
+</li>
+<li><p>ip_hash 算法基于______进行哈希分配。<strong>答案：客户端IP</strong></p>
+</li>
+<li><p>least_conn 算法会将请求分配到______的服务器。<strong>答案：连接数最少</strong></p>
+</li>
+</ol>
+<hr>
+<h3 id="三、配置题"><a href="#三、配置题" class="headerlink" title="三、配置题"></a>三、配置题</h3><ol>
+<li><p>请写出将请求反向代理到 <a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a> 的配置。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://localhost:8080;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>请配置 upstream，包含 3 台后端服务器，使用 least_conn 算法。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">upstream</span> backend &#123;</span><br><span class="line">    least_conn;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">192.168.1.1:8080</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">192.168.1.2:8080</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">192.168.1.3:8080</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>请配置 Nginx 传递 X-Forwarded-For 头信息。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://backend;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h2 id="第-3-周：HTTPS-与优化"><a href="#第-3-周：HTTPS-与优化" class="headerlink" title="第 3 周：HTTPS 与优化"></a>第 3 周：HTTPS 与优化</h2><h3 id="一、选择题-2"><a href="#一、选择题-2" class="headerlink" title="一、选择题"></a>一、选择题</h3><ol>
+<li><p>HTTPS 使用的协议是？(D)</p>
+<ul>
+<li>A. SSL</li>
+<li>B. TLS</li>
+<li>C. HTTP + SSL</li>
+<li>D. HTTP over TLS</li>
+</ul>
+</li>
+<li><p>Nginx 中配置 SSL 证书的指令是？(A)</p>
+<ul>
+<li>A. ssl_certificate</li>
+<li>B. ssl_cert</li>
+<li>C. ssl on</li>
+<li>D. ssl_enable</li>
+</ul>
+</li>
+<li><p>下列哪个指令用于开启 Gzip 压缩？(A)</p>
+<ul>
+<li>A. gzip on</li>
+<li>B. gzip_enable</li>
+<li>C. http_gzip</li>
+<li>D. compression on</li>
+</ul>
+</li>
+<li><p>浏览器缓存过期时间通过哪个指令设置？(A)</p>
+<ul>
+<li>A. expires</li>
+<li>B. cache_expire</li>
+<li>C. cache_valid</li>
+<li>D. browser_cache</li>
+</ul>
+</li>
+<li><p>Nginx 性能优化中，提高 worker_connections 的作用是？(A)</p>
+<ul>
+<li>A. 增加并发连接数</li>
+<li>B. 增加进程数</li>
+<li>C. 减少内存使用</li>
+<li>D. 加快响应速度</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="二、填空题-2"><a href="#二、填空题-2" class="headerlink" title="二、填空题"></a>二、填空题</h3><ol>
+<li><p>SSL 证书私钥文件的配置指令是______。<strong>答案：ssl_certificate_key</strong></p>
+</li>
+<li><p>强制使用 HTTPS 的配置是______。<strong>答案：return 301 https:&#x2F;&#x2F;$server_name$request_uri;</strong></p>
+</li>
+<li><p>Gzip 压缩级别可配置，范围是______。<strong>答案：1-9</strong></p>
+</li>
+<li><p>用于设置静态资源缓存时间的指令是______。<strong>答案：expires</strong></p>
+</li>
+<li><p>Nginx 常用的事件处理模型有：select、poll、<strong><strong><strong>、</strong></strong></strong>。<strong>答案：epoll、kqueue</strong></p>
+</li>
+</ol>
+<hr>
+<h3 id="三、简答题-1"><a href="#三、简答题-1" class="headerlink" title="三、简答题"></a>三、简答题</h3><ol>
+<li><p>请简述如何申请并配置 SSL 证书。<br><strong>答案：1) 申请证书（Let’s Encrypt 免费或付费证书）；2) 获取证书文件（.crt）和私钥文件（.key）；3) 在 server 块中配置 ssl_certificate 和 ssl_certificate_key；4) 重启 Nginx。</strong></p>
+</li>
+<li><p>请解释浏览器缓存的实现原理。<br><strong>答案：通过 expires 或 Cache-Control 头告诉浏览器资源过期时间，在过期前浏览器直接从本地缓存读取，无需再次请求服务器，从而提升加载速度。</strong></p>
+</li>
+<li><p>请列出至少 5 条 Nginx 性能优化建议。<br><strong>答案：1) worker_processes 设置为 CPU 核心数；2) worker_connections 提高并发连接数；3) 开启 Gzip 压缩；4) 开启静态资源缓存；5) 使用高效事件处理模型（epoll）；6) 配置上游连接复用；7) 关闭不必要的日志。</strong></p>
+</li>
+</ol>
+<hr>
+<h2 id="四，综合实战题"><a href="#四，综合实战题" class="headerlink" title="四，综合实战题"></a>四，综合实战题</h2><h3 id="题目-1：搭建静态网站"><a href="#题目-1：搭建静态网站" class="headerlink" title="题目 1：搭建静态网站"></a>题目 1：搭建静态网站</h3><p><strong>要求</strong>：</p>
+<ul>
+<li>安装 Nginx</li>
+<li>配置域名为 example.com</li>
+<li>静态文件放在 &#x2F;var&#x2F;www&#x2F;html</li>
+<li>配置访问日志和错误日志</li>
+</ul>
+<p><strong>参考答案</strong>：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> example.com;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">root</span> /var/www/html;</span><br><span class="line">    <span class="attribute">index</span> index.html;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">access_log</span> /var/log/nginx/example_access.log;</span><br><span class="line">    <span class="attribute">error_log</span> /var/log/nginx/example_error.log;</span><br><span class="line">    </span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ =<span class="number">404</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="题目-2：配置反向代理"><a href="#题目-2：配置反向代理" class="headerlink" title="题目 2：配置反向代理"></a>题目 2：配置反向代理</h3><p><strong>要求</strong>：</p>
+<ul>
+<li>将所有请求代理到后端 127.0.0.1:8080</li>
+<li>传递 X-Real-IP 和 X-Forwarded-For</li>
+<li>设置代理超时时间为 60 秒</li>
+</ul>
+<p><strong>参考答案</strong>：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://127.0.0.1:8080;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">    <span class="attribute">proxy_connect_timeout</span> <span class="number">60s</span>;</span><br><span class="line">    <span class="attribute">proxy_send_timeout</span> <span class="number">60s</span>;</span><br><span class="line">    <span class="attribute">proxy_read_timeout</span> <span class="number">60s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="题目-3：配置负载均衡"><a href="#题目-3：配置负载均衡" class="headerlink" title="题目 3：配置负载均衡"></a>题目 3：配置负载均衡</h3><p><strong>要求</strong>：</p>
+<ul>
+<li>upstream 包含 3 台服务器</li>
+<li>使用 least_conn 算法</li>
+<li>设置 max_fails&#x3D;3，fail_timeout&#x3D;30s</li>
+</ul>
+<p><strong>参考答案</strong>：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">upstream</span> backend &#123;</span><br><span class="line">    least_conn;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">server</span> <span class="number">192.168.1.1:8080</span> max_fails=<span class="number">3</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">192.168.1.2:8080</span> max_fails=<span class="number">3</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">192.168.1.3:8080</span> max_fails=<span class="number">3</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://backend;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="题目-4：配置-HTTPS"><a href="#题目-4：配置-HTTPS" class="headerlink" title="题目 4：配置 HTTPS"></a>题目 4：配置 HTTPS</h3><p><strong>要求</strong>：</p>
+<ul>
+<li>申请免费 SSL 证书（Let’s Encrypt）</li>
+<li>配置 HTTP 跳转到 HTTPS</li>
+<li>开启 Gzip 压缩</li>
+<li>配置静态资源缓存 30 天</li>
+</ul>
+<p><strong>参考答案</strong>：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># HTTP 转 HTTPS</span></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> example.com;</span><br><span class="line">    <span class="attribute">return</span> <span class="number">301</span> https://<span class="variable">$server_name</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># HTTPS 配置</span></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">443</span> ssl;</span><br><span class="line">    <span class="attribute">server_name</span> example.com;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">ssl_certificate</span> /etc/nginx/ssl/example.crt;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /etc/nginx/ssl/example.key;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Gzip 压缩</span></span><br><span class="line">    <span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">gzip_types</span> text/plain text/css application/json application/javascript;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">root</span> /var/www/html;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 静态资源缓存 30 天</span></span><br><span class="line">    <span class="section">location</span> <span class="regexp">~* \.(jpg|jpeg|png|gif|ico|css|js)$</span> &#123;</span><br><span class="line">        <span class="attribute">expires</span> <span class="number">30d</span>;</span><br><span class="line">        <span class="attribute">add_header</span> Cache-Control <span class="string">&quot;public, no-transform&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    <footer class="article-footer" style="overflow: hidden;">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/Nginx/" rel="tag">Nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/%E7%BB%83%E4%B9%A0%E9%A2%98/" rel="tag">练习题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a></li></ul>
+
+      <span style="float: right;">
+        <a data-url="/hexo/2026/01/16/Nginx%E7%BB%83%E4%B9%A0%E9%A2%98/" data-id="cuidZdhNGdNPsvpHbQp95wIPN" data-title="Nginx 练习题" class="article-share-link"><span class="fa fa-share">分享</span></a>
+        
+        
+          <a href="/hexo/2026/01/16/Nginx%E7%BB%83%E4%B9%A0%E9%A2%98/#comments" class="article-comment-link" style="margin-left: 20px; display: inline-flex; align-items: center; gap: 5px;">
+            <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/hexo/2026/01/16/Nginx%E7%BB%83%E4%B9%A0%E9%A2%98/" itemprop="commentCount"></span>
+            <span>留言</span>
+          </a>
+        
+      </span>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/hexo/2026/01/20/Docker%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Docker 入门与实践
+        
+      </div>
+    </a>
+  
+  
+    <a href="/hexo/2026/01/15/Nginx%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Nginx 入门与实战</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+
+
+
+
+<!-- 文章目录已移至 layout.ejs 中的正确位置 -->
+
+</section>
+        
+        <aside id="sidebar" class="toc-sidebar" style="position: sticky; top: 0;">
+          <div class="widget-wrap" style="max-height: calc(100vh - 100px); overflow-y: auto;">
+            <h3 class="widget-title">文章目录</h3>
+            <div class="widget">
+              <div class="toc-article">
+                <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC-1-%E5%91%A8%EF%BC%9ANginx-%E5%9F%BA%E7%A1%80"><span class="toc-list-text">第 1 周：Nginx 基础</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E9%80%89%E6%8B%A9%E9%A2%98"><span class="toc-list-text">一、选择题</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E5%A1%AB%E7%A9%BA%E9%A2%98"><span class="toc-list-text">二、填空题</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E7%AE%80%E7%AD%94%E9%A2%98"><span class="toc-list-text">三、简答题</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC-2-%E5%91%A8%EF%BC%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-list-text">第 2 周：反向代理与负载均衡</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E9%80%89%E6%8B%A9%E9%A2%98-1"><span class="toc-list-text">一、选择题</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E5%A1%AB%E7%A9%BA%E9%A2%98-1"><span class="toc-list-text">二、填空题</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E9%85%8D%E7%BD%AE%E9%A2%98"><span class="toc-list-text">三、配置题</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC-3-%E5%91%A8%EF%BC%9AHTTPS-%E4%B8%8E%E4%BC%98%E5%8C%96"><span class="toc-list-text">第 3 周：HTTPS 与优化</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E9%80%89%E6%8B%A9%E9%A2%98-2"><span class="toc-list-text">一、选择题</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E5%A1%AB%E7%A9%BA%E9%A2%98-2"><span class="toc-list-text">二、填空题</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E7%AE%80%E7%AD%94%E9%A2%98-1"><span class="toc-list-text">三、简答题</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%EF%BC%8C%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98%E9%A2%98"><span class="toc-list-text">四，综合实战题</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E9%A2%98%E7%9B%AE-1%EF%BC%9A%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99"><span class="toc-list-text">题目 1：搭建静态网站</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E9%A2%98%E7%9B%AE-2%EF%BC%9A%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="toc-list-text">题目 2：配置反向代理</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E9%A2%98%E7%9B%AE-3%EF%BC%9A%E9%85%8D%E7%BD%AE%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-list-text">题目 3：配置负载均衡</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E9%A2%98%E7%9B%AE-4%EF%BC%9A%E9%85%8D%E7%BD%AE-HTTPS"><span class="toc-list-text">题目 4：配置 HTTPS</span></a></li></ol></li></ol>
+              </div>
+            </div>
+          </div>
+        </aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        © 2025-2026 宁尚义. All rights reserved.
+      
+      &copy; 2026 宁尚义<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      
+        <br>
+        <span id="busuanzi_container_site_pv">
+          总访问量: <span id="busuanzi_value_site_pv">0</span>
+        </span>
+      
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/busuanzi/2.3/busuanzi.pure.min.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4281d5d8ea7e4e9d8d336c9230dfff9a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/hexo/" class="mobile-nav-link">首页</a>
+  
+    <a href="/hexo/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/hexo/portfolio" class="mobile-nav-link">作品集</a>
+  
+    <a href="/hexo/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/hexo/js/jquery-3.6.4.min.js"></script>
+
+
+
+<script src="/hexo/js/search.js"></script>
+
+
+
+  
+<script src="/hexo/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/hexo/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "KXoxur5yqjJ4BMJkcRNl87rVX20K9hfe18JlOr9meD2VafQsaA8L4NxLTnCNwFLo",
+        appKey: "cn-n1",
+        placeholder: "欢迎留言交流！",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>

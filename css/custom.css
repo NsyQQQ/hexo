@@ -1,0 +1,269 @@
+/* 头部高度改成100px */
+#header {
+    height: 100px !important;
+}
+
+/* 推荐文章样式 */
+.featured-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.featured-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+.featured-list li:last-child {
+    border-bottom: none;
+}
+.featured-list a {
+    color: #555;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.featured-list a:hover {
+    color: #00A1D6;
+}
+
+/* 目录样式 - 确保在文章页显示 */
+.toc-widget {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+.toc-widget.hidden {
+    display: none !important;
+}
+.toc-article {
+    /* max-height: 500px; 移除固定高度 */
+    overflow-y: auto;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+.toc-list {
+    list-style: none;
+    padding-left: 15px;
+    margin: 0;
+}
+.toc-list li {
+    padding: 5px 0;
+}
+.toc-list a {
+    color: #555;
+    text-decoration: none;
+    font-size: 14px;
+}
+.toc-list a:hover {
+    color: #00A1D6;
+}
+.toc-child {
+    padding-left: 15px;
+}
+
+/* 文章目录侧边栏 - 和分类侧边栏位置一样 */
+#sidebar.toc-sidebar {
+    display: inline !important;
+    float: right !important;
+    width: 23.333333333333332% !important;
+    margin: 0 0.833333333333333% !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* 首页隐藏文章目录 */
+html:not(.post) #sidebar.toc-sidebar {
+    display: none !important;
+}
+
+/* 文章页隐藏普通侧边栏 */
+html.post #sidebar:not(.toc-sidebar) {
+    display: none !important;
+}
+
+#main {
+    position: relative !important;
+}
+
+#banner {
+    display: block !important;
+}
+
+#header-inner {
+    height: 100px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+    background: transparent !important;
+}
+
+/* 确保logo可以点击 */
+#logo-wrap {
+    display: block !important;
+}
+
+#logo {
+    display: inline-block !important;
+    cursor: pointer !important;
+}
+
+/* 关于页面标题字体大小 */
+.article-content h1 {
+    font-size: 1em !important;
+    font-weight: normal !important;
+}
+
+/* 导航链接可点击 */
+.main-nav-link {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 1000 !important;
+}
+
+/* 搜索按钮可点击 */
+.nav-search-btn {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 1000 !important;
+}
+
+/* 导航栏图标颜色 */
+.nav-icon {
+    opacity: 1 !important;
+}
+
+#search-form-wrap {
+    z-index: 1001 !important;
+}
+
+/* 搜索结果样式 */
+#search-results-container {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1002;
+    padding: 10px;
+}
+
+.search-result-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item a {
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.search-result-item a:hover {
+    color: #007bff;
+}
+
+.search-result-item p {
+    color: #666;
+    font-size: 12px;
+    margin: 5px 0 0 0;
+}
+
+/* B站图标 - 蓝色电视框，中间2小蓝点 */
+.fa-bilibili {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='4' width='20' height='14' rx='2' fill='none' stroke='%2300A1D6' stroke-width='2'/%3E%3Ccircle cx='8' cy='11' r='1.5' fill='%2300A1D6'/%3E%3Ccircle cx='16' cy='11' r='1.5' fill='%2300A1D6'/%3E%3Crect x='7' y='18' width='10' height='2' fill='%2300A1D6'/%3E%3Crect x='4' y='20' width='3' height='2' fill='%2300A1D6'/%3E%3Crect x='17' y='20' width='3' height='2' fill='%2300A1D6'/%3E%3C/svg%3E");
+    background-size: cover;
+    display: inline-block;
+    width: 1.3em;
+    height: 1.3em;
+}
+.fa-bilibili:before {
+    content: none !important;
+}
+
+/* CSDN图标 */
+.fa-book {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23F72B2B'/%3E%3Ctext x='12' y='16' text-anchor='middle' fill='white' font-size='10' font-weight='bold'%3EC%3C/text%3E%3C/svg%3E");
+    background-size: cover;
+    display: inline-block;
+    width: 1.3em;
+    height: 1.3em;
+}
+.fa-book:before {
+    content: none !important;
+}
+
+/* 知乎图标 - 蓝色方框+知字 */
+a[title="知乎"] .fa-user {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='3' fill='%230086FE'/%3E%3Ctext x='12' y='17' text-anchor='middle' fill='white' font-size='14' font-weight='bold'%3E%E7%9F%A5%3C/text%3E%3C/svg%3E") !important;
+    background-size: cover !important;
+    display: inline-block !important;
+    width: 1.3em !important;
+    height: 1.3em !important;
+}
+a[title="知乎"] .fa-user:before {
+    content: none !important;
+}
+
+/* 微博图标 - 红色圆圈 */
+.fa-weibo {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23e6162d'/%3E%3Ctext x='12' y='16' text-anchor='middle' fill='white' font-size='10' font-weight='bold'%3E%E5%BE%AE%3C/text%3E%3C/svg%3E");
+    background-size: cover;
+    display: inline-block;
+    width: 1.3em;
+    height: 1.3em;
+}
+.fa-weibo:before {
+    content: none !important;
+}
+
+/* GitHub图标 - 白底 */
+.fa-github {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='white' stroke='%23333' stroke-width='1'/%3E%3Cpath fill='%23333' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E");
+    background-size: cover;
+    display: inline-block;
+    width: 1.3em;
+    height: 1.3em;
+}
+.fa-github:before {
+    content: none !important;
+}
+
+/* 归档页面 - 横向排列 */
+.archives {
+    display: block !important;
+    column-count: unset !important;
+}
+
+.archive-article {
+    display: inline-block !important;
+    vertical-align: top !important;
+    width: 23% !important;
+    min-width: 150px !important;
+    max-width: none !important;
+    break-inside: unset !important;
+    box-sizing: border-box !important;
+    margin-right: 1% !important;
+    margin-bottom: 15px !important;
+}
+
+.archive-article:nth-child(4n) {
+    margin-right: 0 !important;
+}
+
+.archive-article-inner {
+    margin-bottom: 0 !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+}

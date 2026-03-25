@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html class="post">
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>常用大模型Coding Plan对比 | 宁尚义的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本文对比了 GLM（智谱）、MiniMax、Kimi（月之暗面）、豆包（字节跳动）、通义千问（阿里） 五大国产模型的 Coding Plan，从价格、编程能力、写作能力、优势等多个维度进行分析，帮助开发者选择最适合的编程套餐。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用大模型Coding Plan对比">
+<meta property="og:url" content="https://nsyqqq.github.io/hexo/2026/03/15/%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8BCoding-Plan%E5%AF%B9%E6%AF%94/index.html">
+<meta property="og:site_name" content="宁尚义的个人博客">
+<meta property="og:description" content="本文对比了 GLM（智谱）、MiniMax、Kimi（月之暗面）、豆包（字节跳动）、通义千问（阿里） 五大国产模型的 Coding Plan，从价格、编程能力、写作能力、优势等多个维度进行分析，帮助开发者选择最适合的编程套餐。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-15T04:11:23.000Z">
+<meta property="article:modified_time" content="2026-03-25T13:17:28.667Z">
+<meta property="article:author" content="宁尚义">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="大模型">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/hexo/atom.xml" title="宁尚义的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/hexo/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/hexo/css/style.css">
+
+  
+<link rel="stylesheet" href="/hexo/css/custom.css">
+
+  
+    
+<link rel="stylesheet" href="/hexo/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="search-results-container"></div>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/hexo/" id="logo">宁尚义的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/hexo/">首页</a>
+        
+          <a class="main-nav-link" href="/hexo/archives">归档</a>
+        
+          <a class="main-nav-link" href="/hexo/portfolio">作品集</a>
+        
+          <a class="main-nav-link" href="/hexo/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://github.com/NsyQQQ" title="GitHub"><span class="fa fa-github"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://blog.csdn.net/NingQQQ" title="CSDN"><span class="fa fa-book"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://www.zhihu.com/people/ningq-31" title="知乎"><span class="fa fa-user"></span></a>
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/432403089" title="bilibili"><span class="fa fa-bilibili"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/hexo/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://nsyqqq.github.io/hexo"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-国产大模型Coding-Plan对比" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <time class="dt-published article-date" datetime="2026-03-15T04:11:23.000Z" itemprop="datePublished">2026-03-15</time>
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo/categories/AI/">AI</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      常用大模型Coding Plan对比
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本文对比了 <strong>GLM（智谱）、MiniMax、Kimi（月之暗面）、豆包（字节跳动）、通义千问（阿里）</strong> 五大国产模型的 Coding Plan，从价格、编程能力、写作能力、优势等多个维度进行分析，帮助开发者选择最适合的编程套餐。</p>
+<span id="more"></span>
+
+<h2 id="一、各平台-Coding-Plan-概览"><a href="#一、各平台-Coding-Plan-概览" class="headerlink" title="一、各平台 Coding Plan 概览"></a>一、各平台 Coding Plan 概览</h2><h3 id="1-MiniMax-Coding-Plan"><a href="#1-MiniMax-Coding-Plan" class="headerlink" title="1. MiniMax Coding Plan"></a>1. MiniMax Coding Plan</h3><p>MiniMax 推出了 <strong>“专为开发者定制的超高性价比编程套餐”</strong>。</p>
+<p><strong>特点：</strong></p>
+<ul>
+<li>基于 MiniMax M2.5 模型，具备更强的代码能力</li>
+<li>专为编程场景优化</li>
+<li>性价比突出</li>
+</ul>
+<p><strong>优势：</strong></p>
+<ul>
+<li>代码生成质量高</li>
+<li>支持长上下文处理</li>
+<li>多模态能力（文本、语音、视频、图像、音乐）</li>
+<li>超长上下文处理能力</li>
+</ul>
+<p><strong>适用场景：</strong> 代码补全、代码生成、技术文档编写</p>
+<hr>
+<h3 id="2-豆包-火山方舟-Coding-Plan"><a href="#2-豆包-火山方舟-Coding-Plan" class="headerlink" title="2. 豆包 &#x2F; 火山方舟 Coding Plan"></a>2. 豆包 &#x2F; 火山方舟 Coding Plan</h3><p>字节跳动旗下的火山引擎推出了 <strong>Coding Plan 套餐</strong>，集成在火山方舟平台中。</p>
+<p><strong>特点：</strong></p>
+<ul>
+<li>依托字节跳动强大的技术生态</li>
+<li>与抖音、飞书等产品深度集成</li>
+<li>支持多种主流模型接入</li>
+</ul>
+<p><strong>优势：</strong></p>
+<ul>
+<li>企业级服务保障</li>
+<li>与字节系产品无缝对接</li>
+<li>丰富的 AI 编程工具接入</li>
+<li>完善的附加权益</li>
+</ul>
+<p><strong>适用场景：</strong> 企业开发、团队协作、IDE 集成</p>
+<hr>
+<h3 id="3-通义千问-Qwen-Coder（阿里云百炼）"><a href="#3-通义千问-Qwen-Coder（阿里云百炼）" class="headerlink" title="3. 通义千问 Qwen-Coder（阿里云百炼）"></a>3. 通义千问 Qwen-Coder（阿里云百炼）</h3><p>阿里云百炼平台提供了完整的 <strong>Qwen-Coder 系列</strong>模型，专为代码生成优化。</p>
+<p><strong>定价（中国内地）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>模型名称</th>
+<th>输入单价（元&#x2F;百万Token）</th>
+<th>输出单价（元&#x2F;百万Token）</th>
+<th>免费额度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>qwen3-coder-plus</td>
+<td>4~20（阶梯计价）</td>
+<td>16~200（阶梯计价）</td>
+<td>各100万Token</td>
+</tr>
+<tr>
+<td>qwen3-coder-flash</td>
+<td>1~5（阶梯计价）</td>
+<td>4~25（阶梯计价）</td>
+<td>-</td>
+</tr>
+<tr>
+<td>qwen-coder-plus</td>
+<td>3.5</td>
+<td>7</td>
+<td>各100万Token</td>
+</tr>
+<tr>
+<td>qwen-coder-turbo</td>
+<td>2</td>
+<td>6</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<p><strong>优势：</strong></p>
+<ul>
+<li>与阿里云生态深度整合</li>
+<li>支持 Batch 调用（50%折扣）</li>
+<li>支持上下文缓存</li>
+<li>开源版本可私有化部署</li>
+</ul>
+<p><strong>适用场景：</strong> 企业级开发、云原生应用、阿里云用户</p>
+<hr>
+<h3 id="4-GLM（智谱-AI）"><a href="#4-GLM（智谱-AI）" class="headerlink" title="4. GLM（智谱 AI）"></a>4. GLM（智谱 AI）</h3><p>智谱 AI 提供 GLM 系列模型，包括 GLM-4、GLM-5 等，在编程领域表现优秀。</p>
+<p><strong>特点：</strong></p>
+<ul>
+<li>国产领先的大语言模型</li>
+<li>支持 CodeGeeX 等编程专用模型</li>
+<li>开源版本丰富</li>
+</ul>
+<p><strong>优势：</strong></p>
+<ul>
+<li>编程能力强，支持多种语言</li>
+<li>中文理解能力出色</li>
+<li>开源版本活跃</li>
+<li>CodeGeeX 插件生态完善</li>
+</ul>
+<p><strong>适用场景：</strong> 代码补全、代码解释、IDE 插件集成</p>
+<hr>
+<h3 id="5-Kimi（月之暗面）"><a href="#5-Kimi（月之暗面）" class="headerlink" title="5. Kimi（月之暗面）"></a>5. Kimi（月之暗面）</h3><p>月之暗面推出的 Kimi 模型，以超长上下文著称。</p>
+<p><strong>定价（阿里云百炼平台）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>模型名称</th>
+<th>输入单价（元&#x2F;百万Token）</th>
+<th>输出单价（元&#x2F;百万Token）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>kimi-k2.5</td>
+<td>4</td>
+<td>21</td>
+</tr>
+<tr>
+<td>kimi-k2-thinking</td>
+<td>4</td>
+<td>16</td>
+</tr>
+<tr>
+<td>Moonshot-Kimi-K2-Instruct</td>
+<td>4</td>
+<td>16</td>
+</tr>
+</tbody></table>
+<p><strong>优势：</strong></p>
+<ul>
+<li>超长上下文支持（200万+ Token）</li>
+<li>文档理解和分析能力强</li>
+<li>适合大型项目代码分析</li>
+</ul>
+<p><strong>适用场景：</strong> 大型项目分析、长文档处理、代码审查</p>
+<hr>
+<h2 id="二、综合对比表"><a href="#二、综合对比表" class="headerlink" title="二、综合对比表"></a>二、综合对比表</h2><table>
+<thead>
+<tr>
+<th>平台</th>
+<th>编程能力</th>
+<th>价格竞争力</th>
+<th>写作能力</th>
+<th>上下文长度</th>
+<th>企业支持</th>
+<th>开源生态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>MiniMax</strong></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td><strong>豆包&#x2F;火山方舟</strong></td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td><strong>通义千问</strong></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><strong>GLM&#x2F;智谱</strong></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><strong>Kimi&#x2F;月之暗面</strong></td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="三、编程能力对比"><a href="#三、编程能力对比" class="headerlink" title="三、编程能力对比"></a>三、编程能力对比</h2><h3 id="代码生成质量"><a href="#代码生成质量" class="headerlink" title="代码生成质量"></a>代码生成质量</h3><ol>
+<li><strong>通义千问 Qwen-Coder</strong>：专门优化的代码模型，在 HumanEval、MBPP 等基准测试中表现优异</li>
+<li><strong>GLM&#x2F;智谱</strong>：CodeGeeX 系列专注编程，VS Code 插件体验良好</li>
+<li><strong>MiniMax M2.5</strong>：代码能力全面升级，支持多语言</li>
+<li><strong>豆包</strong>：适合企业级开发场景</li>
+<li><strong>Kimi</strong>：适合代码审查和大型项目分析</li>
+</ol>
+<h3 id="支持的编程语言"><a href="#支持的编程语言" class="headerlink" title="支持的编程语言"></a>支持的编程语言</h3><p>所有平台均支持主流编程语言：Python、JavaScript、Java、C++、Go、Rust 等。</p>
+<h3 id="IDE-集成"><a href="#IDE-集成" class="headerlink" title="IDE 集成"></a>IDE 集成</h3><table>
+<thead>
+<tr>
+<th>平台</th>
+<th>VS Code</th>
+<th>JetBrains</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GLM</td>
+<td>CodeGeeX ✅</td>
+<td>✅</td>
+<td>-</td>
+</tr>
+<tr>
+<td>通义千问</td>
+<td>通义灵码 ✅</td>
+<td>✅</td>
+<td>-</td>
+</tr>
+<tr>
+<td>豆包</td>
+<td>豆包MarsCode ✅</td>
+<td>✅</td>
+<td>-</td>
+</tr>
+<tr>
+<td>MiniMax</td>
+<td>API 集成</td>
+<td>API 集成</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Kimi</td>
+<td>API 集成</td>
+<td>API 集成</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="四、写作能力对比"><a href="#四、写作能力对比" class="headerlink" title="四、写作能力对比"></a>四、写作能力对比</h2><table>
+<thead>
+<tr>
+<th>平台</th>
+<th>技术文档</th>
+<th>博客文章</th>
+<th>代码注释</th>
+<th>API文档</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Kimi</strong></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><strong>GLM</strong></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><strong>通义千问</strong></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><strong>MiniMax</strong></td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><strong>豆包</strong></td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="五、选型建议"><a href="#五、选型建议" class="headerlink" title="五、选型建议"></a>五、选型建议</h2><h3 id="个人开发者"><a href="#个人开发者" class="headerlink" title="个人开发者"></a>个人开发者</h3><p>推荐：<strong>MiniMax Coding Plan</strong> 或 <strong>GLM CodeGeeX</strong></p>
+<ul>
+<li>性价比高</li>
+<li>免费额度充足</li>
+<li>插件生态完善</li>
+</ul>
+<h3 id="中小团队"><a href="#中小团队" class="headerlink" title="中小团队"></a>中小团队</h3><p>推荐：<strong>通义千问 Qwen-Coder</strong></p>
+<ul>
+<li>完善的企业支持</li>
+<li>开源版本可私有化</li>
+<li>阿里云生态整合</li>
+</ul>
+<h3 id="大型企业"><a href="#大型企业" class="headerlink" title="大型企业"></a>大型企业</h3><p>推荐：<strong>豆包&#x2F;火山方舟</strong> 或 <strong>通义千问</strong></p>
+<ul>
+<li>企业级服务保障</li>
+<li>合规性强</li>
+<li>定制化能力</li>
+</ul>
+<h3 id="大型项目分析"><a href="#大型项目分析" class="headerlink" title="大型项目分析"></a>大型项目分析</h3><p>推荐：<strong>Kimi</strong></p>
+<ul>
+<li>超长上下文</li>
+<li>适合代码审查</li>
+<li>文档理解能力强</li>
+</ul>
+<hr>
+<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>选择 Coding Plan 需要综合考虑：</p>
+<ol>
+<li><strong>预算</strong>：MiniMax 和通义千问性价比突出</li>
+<li><strong>编程需求</strong>：Qwen-Coder 和 CodeGeeX 专注代码</li>
+<li><strong>上下文长度</strong>：Kimi 超长上下文适合大型项目</li>
+<li><strong>企业支持</strong>：火山方舟和阿里云提供完善的企业服务</li>
+<li><strong>开源生态</strong>：GLM 和通义千问开源版本活跃</li>
+</ol>
+<p>建议开发者根据自身需求和预算，选择最适合的 Coding Plan。同时可以关注各平台的优惠活动，充分利用免费额度进行测试。</p>
+<hr>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://open.bigmodel.cn/">智谱 AI 开放平台</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.minimaxi.com/">MiniMax 开放平台</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.volcengine.com/">火山方舟</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.aliyun.com/product/bailian">阿里云百炼</a></li>
+<li><a target="_blank" rel="noopener" href="https://platform.moonshot.cn/">月之暗面</a></li>
+</ul>
+<hr>
+<p><em>本文更新于 2026年3月，价格信息可能随时变动，请以官方最新公告为准。</em></p>
+
+      
+    </div>
+    <footer class="article-footer" style="overflow: hidden;">
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag">大模型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li></ul>
+
+      <span style="float: right;">
+        <a data-url="/hexo/2026/03/15/%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8BCoding-Plan%E5%AF%B9%E6%AF%94/" data-id="cuidXgBtYstBB_zP-lzSOgHI8" data-title="常用大模型Coding Plan对比" class="article-share-link"><span class="fa fa-share">分享</span></a>
+        
+        
+          <a href="/hexo/2026/03/15/%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8BCoding-Plan%E5%AF%B9%E6%AF%94/#comments" class="article-comment-link" style="margin-left: 20px; display: inline-flex; align-items: center; gap: 5px;">
+            <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/hexo/2026/03/15/%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8BCoding-Plan%E5%AF%B9%E6%AF%94/" itemprop="commentCount"></span>
+            <span>留言</span>
+          </a>
+        
+      </span>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/hexo/2026/03/20/Claude-Code-for-VS-Code/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Claude Code for VS Code
+        
+      </div>
+    </a>
+  
+  
+    <a href="/hexo/2026/03/10/openclaw-config-guide/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">OpenClaw 配置指南</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+
+
+
+
+<!-- 文章目录已移至 layout.ejs 中的正确位置 -->
+
+</section>
+        
+        <aside id="sidebar" class="toc-sidebar" style="position: sticky; top: 0;">
+          <div class="widget-wrap" style="max-height: calc(100vh - 100px); overflow-y: auto;">
+            <h3 class="widget-title">文章目录</h3>
+            <div class="widget">
+              <div class="toc-article">
+                <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E5%90%84%E5%B9%B3%E5%8F%B0-Coding-Plan-%E6%A6%82%E8%A7%88"><span class="toc-list-text">一、各平台 Coding Plan 概览</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#1-MiniMax-Coding-Plan"><span class="toc-list-text">1. MiniMax Coding Plan</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-%E8%B1%86%E5%8C%85-%E7%81%AB%E5%B1%B1%E6%96%B9%E8%88%9F-Coding-Plan"><span class="toc-list-text">2. 豆包 &#x2F; 火山方舟 Coding Plan</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-%E9%80%9A%E4%B9%89%E5%8D%83%E9%97%AE-Qwen-Coder%EF%BC%88%E9%98%BF%E9%87%8C%E4%BA%91%E7%99%BE%E7%82%BC%EF%BC%89"><span class="toc-list-text">3. 通义千问 Qwen-Coder（阿里云百炼）</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#4-GLM%EF%BC%88%E6%99%BA%E8%B0%B1-AI%EF%BC%89"><span class="toc-list-text">4. GLM（智谱 AI）</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#5-Kimi%EF%BC%88%E6%9C%88%E4%B9%8B%E6%9A%97%E9%9D%A2%EF%BC%89"><span class="toc-list-text">5. Kimi（月之暗面）</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E7%BB%BC%E5%90%88%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="toc-list-text">二、综合对比表</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%AF%B9%E6%AF%94"><span class="toc-list-text">三、编程能力对比</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E8%B4%A8%E9%87%8F"><span class="toc-list-text">代码生成质量</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%94%AF%E6%8C%81%E7%9A%84%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80"><span class="toc-list-text">支持的编程语言</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#IDE-%E9%9B%86%E6%88%90"><span class="toc-list-text">IDE 集成</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E5%86%99%E4%BD%9C%E8%83%BD%E5%8A%9B%E5%AF%B9%E6%AF%94"><span class="toc-list-text">四、写作能力对比</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E9%80%89%E5%9E%8B%E5%BB%BA%E8%AE%AE"><span class="toc-list-text">五、选型建议</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E4%B8%AA%E4%BA%BA%E5%BC%80%E5%8F%91%E8%80%85"><span class="toc-list-text">个人开发者</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E4%B8%AD%E5%B0%8F%E5%9B%A2%E9%98%9F"><span class="toc-list-text">中小团队</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E5%A4%A7%E5%9E%8B%E4%BC%81%E4%B8%9A"><span class="toc-list-text">大型企业</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E5%A4%A7%E5%9E%8B%E9%A1%B9%E7%9B%AE%E5%88%86%E6%9E%90"><span class="toc-list-text">大型项目分析</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-list-text">六、总结</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-list-text">参考链接</span></a></li></ol>
+              </div>
+            </div>
+          </div>
+        </aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        © 2025-2026 宁尚义. All rights reserved.
+      
+      &copy; 2026 宁尚义<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+      
+        <br>
+        <span id="busuanzi_container_site_pv">
+          总访问量: <span id="busuanzi_value_site_pv">0</span>
+        </span>
+      
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/busuanzi/2.3/busuanzi.pure.min.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4281d5d8ea7e4e9d8d336c9230dfff9a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/hexo/" class="mobile-nav-link">首页</a>
+  
+    <a href="/hexo/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/hexo/portfolio" class="mobile-nav-link">作品集</a>
+  
+    <a href="/hexo/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/hexo/js/jquery-3.6.4.min.js"></script>
+
+
+
+<script src="/hexo/js/search.js"></script>
+
+
+
+  
+<script src="/hexo/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/hexo/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "KXoxur5yqjJ4BMJkcRNl87rVX20K9hfe18JlOr9meD2VafQsaA8L4NxLTnCNwFLo",
+        appKey: "cn-n1",
+        placeholder: "欢迎留言交流！",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>
